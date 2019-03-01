@@ -18,12 +18,11 @@ git clone https://github.com/niiknow/grapesjs-components-farmer
 cd grapesjs-components-farmer
 npm install
 ```
-                                                                                 
-or in one command:                                                               
-                                                                                 
-```                                                                              
+
+or in one command:                                                                                 
+```                                                                         
 npm install git+https://github.com/niiknow/grapesjs-components-farmer.git                
-```                                                                              
+```
 
 To run locally (automatically launch firefox):
 ```
@@ -38,6 +37,7 @@ npm run build
 This library is available on NPM, to install:
 ```
 npm install grapesjs-components-farmer
+```
 
 ## Planning
 - [ ] Build generic form field components
