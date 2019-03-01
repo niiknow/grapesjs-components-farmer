@@ -40,6 +40,10 @@ const config = {
 
 mix.webpackConfig(config).sourceMaps();
 
+mix.sass(`sass/bootstrap4.scss`, `example/`, {
+  outputStyle: mix.inProduction() ? 'compact' : 'expanded'
+});
+
 if (mix.inProduction()) {
   mix.js(`src/index.js`, `${ public }`);
   mix.version();

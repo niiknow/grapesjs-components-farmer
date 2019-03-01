@@ -1,0 +1,23 @@
+.components-farmer {
+  @import "~bootstrap/scss/bootstrap";
+}
+
+body {
+  padding: 10px;
+}
+
+comp_row,
+comp_col {
+  min-height: 2rem !important;
+}
+
+comp_row {
+  display: block;
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+comp_col {
+  min-width: 100px;
+}

@@ -1,29 +1,117 @@
+import doT from 'dot'
+import $ from 'jquery'
+
 export default (editor, opts = {}) => {
-  const opt = {
+  const commands = editor.Commands
+  const pn       = editor.Panels
 
-    categoryLabel: '',
+  const opts_labels     = opts.labels || {}
+  const opts_comps      = opts.comps || {}
 
-    // Column padding (this way it's easier select columns)
-    columnsPadding: '10px 0',
+  delete opts['labels']
+  delete opts['comps']
 
-    ...opts,
-  };
+  const default_comps = {
+    'comp_input': {
+      classes: 'form-group',
+      template: `
+        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
+        <input {{= it.required_attr ? 'required ' : '' }}type="{{=it.type_attr}}" class="form-control" name="{{=it.name_attr}}" placeholder="{{=it.placeholder_attr || ''}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
+      `
+    },
+    'comp_select': {
+      classes: 'form-group',
+      template: `
+        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
+        <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}class="form-control" name="{{=it.name_attr}}">
+          <option selected>-- Please select an option -- </option>
+          {{~ (it.option_attr + "").trim().split("\\n") :option }}
+          {{ var msgProps = option.split('::');
+          }} <option value="{{= msgProps[0]}}">{{= msgProps[1] || msgProps[0] }}</option>{{~}}
+        </select>
+      `
+    },
+    'comp_textarea': {
+      classes: 'form-group',
+      template: `
+        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
+        <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' }}{{= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' }}class="form-control" name="{{=it.name_attr}}" placeholder="{{=it.placeholder_attr || ''}}">{{= it.value_attr || '' }}</textarea>
+      `
+    },
+    'comp_checkbox': {
+      classes: 'form-check',
+      template: `
+        <label for="{{=it.name_attr}}" class="form-check-label">
+          <input {{= it.required_attr ? 'required ' : '' }}type="checkbox" name="{{=it.name_attr}}" class="form-check-input" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
+          {{=it.label_attr}}
+        </label>
+      `
+    },
+    'comp_hidden': {
+      template: `
+        <input {{= it.required_attr ? 'required ' : '' }}type="hidden" name="{{=it.name_attr}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
+      `
+    },
+    'comp_submit': {
+      classes: 'btn btn-primary btn-block',
+      tagName: 'button',
+      template: '{{= it.label_attr }}'
+    },
+    'comp_row': {
+      classes: 'row'
+    },
+    'comp_col': {
+      classes: 'col'
+    }
+  }
 
-  let config = editor.getConfig();
+  const default_labels = {
+    // FORMS
+    'comp_input': 'Input',
+    'comp_submit': 'Submit',
+    'comp_textarea': 'Textarea',
+    'comp_select': 'Select',
+    'comp_checkbox': 'Checkbox',
+    'comp_hidden': 'Hidden Input',
+    'comp_row': 'Row',
+    'comp_col': 'Column',
+    'comp_col1': '1 Column',
+    'comp_col2': '2 Columns',
+    'comp_col3': '3 Columns'
+  }
 
-  // I need to prevent forced class creation as classes aren't working
-  // at the moment
-  config.forceClass = 0;
+  const options = {
+    labels: Object.assign(default_labels, opts_labels),
+    comps: Object.assign(default_comps, opts_comps),
+    formFieldsPrefix: opts.formFieldsPrefix || 'Field'
+    , ...opts
+  }
 
-  // Don't need to create css rules with media
-  config.devicePreviewMode = 1;
+  options.formNextId = options.formNextId || 1
+  options.categoryLabel = options.categoryLabel || 'Basic'
 
-  // Add Blocks
-  require('./blocks').default(editor, opt);
+  commands.add('compile-templates', () => {
+    Object.keys(options.comps).forEach(k => {
+      const t = options.comps[k]
 
-  // Add Components
-  require('./components').default(editor, opt);
+      if (t && typeof(t.template) === 'string') {
+        t.template = doT.template(t.template)
+      }
+    })
+  })
 
-  // Add Buttons
-  require('./buttons').default(editor, opt);
-};
+  // Add plugins
+  require('./traits').default(editor, options)
+  require('./blocks').default(editor, options)
+  if (opts.panel) {
+    require('./panels').default(editor, options)
+  }
+
+  editor.on('load', () => {
+    editor.runCommand('compile-templates', options)
+    setTimeout(() => {
+      const body = editor.getWrapper().view.$el.parent('body')
+      body.addClass('components-farmer')
+    }, 1000)
+  })
+}
