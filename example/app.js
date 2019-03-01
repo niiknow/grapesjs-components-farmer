@@ -20,7 +20,7 @@ const opts = {
   fromElement: 1,
   canvas: {
     styles: [
-      '/example/bootstrap4.css'
+      'example/bootstrap4.css'
     ],
     scripts: [
       'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'
