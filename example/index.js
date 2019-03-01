@@ -55098,6 +55098,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }]
     }
   }, allBlocks));
+  bm.add('comp_submit', _objectSpread({
+    label: "\n      <div style=\"color: #fff;\n    background-color: #007bff;\n    border-color: #007bff;\n    display: inline-block;\n    text-align: center;\n    white-space: nowrap;\n    vertical-align: middle;\n    border: 1px solid transparent;\n    padding-left: 5px;\n    padding-right: 5px;\n    font-size: 1rem;\n    line-height: 1.5;\n    border-radius: .25rem;\n    margin-top: 12px;\n    margin-bottom: 16px;\n    width: 50px;\">&nbsp;</div>\n      <div class=\"gjs-block-label\">".concat(c.labels.comp_submit, "</div>\n    "),
+    content: {
+      type: 'comp_submit'
+    }
+  }, allBlocks));
   bm.add('comp_input', _objectSpread({
     label: "\n    <svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z\"></path>\n      <polygon class=\"gjs-block-svg-path\" points=\"4 10 5 10 5 14 4 14\"></polygon>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.labels.comp_input, "</div>"),
     content: {
@@ -55114,12 +55120,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     label: "\n    <svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z\" fill-rule=\"nonzero\"></path>\n      <polygon class=\"gjs-block-svg-path\" transform=\"translate(18.500000, 12.000000) scale(1, -1) translate(-18.500000, -12.000000) \" points=\"18.5 11 20 13 17 13\"></polygon>\n      <rect class=\"gjs-block-svg-path\" x=\"4\" y=\"11.5\" width=\"11\" height=\"1\"></rect>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.labels.comp_select, "</div>"),
     content: {
       type: 'comp_select'
-    }
-  }, allBlocks));
-  bm.add('comp_submit', _objectSpread({
-    label: "\n      <div class=\"tb-submit\">&nbsp;</div>\n      <div class=\"gjs-block-label\">".concat(c.labels.comp_submit, "</div>\n    "),
-    content: {
-      type: 'comp_submit'
     }
   }, allBlocks));
   bm.add('comp_checkbox', _objectSpread({
@@ -55237,12 +55237,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   var options = _objectSpread({
     labels: Object.assign(default_labels, opts_labels),
-    comps: Object.assign(default_comps, opts_comps),
-    formFieldsPrefix: opts.formFieldsPrefix || 'Field'
+    comps: Object.assign(default_comps, opts_comps)
   }, opts);
 
-  options.formNextId = options.formNextId || 1;
-  options.categoryLabel = options.categoryLabel || 'Basic';
+  console.log(options);
+  options.formNextId = opts.formNextId || 1;
+  options.categoryLabel = opts.categoryLabel || 'Basic';
+  options.formFieldsPrefix = opts.formFieldsPrefix || 'Field';
   commands.add('compile-templates', function () {
     Object.keys(options.comps).forEach(function (k) {
       var t = options.comps[k];

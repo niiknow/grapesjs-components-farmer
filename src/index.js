@@ -82,13 +82,14 @@ export default (editor, opts = {}) => {
 
   const options = {
     labels: Object.assign(default_labels, opts_labels),
-    comps: Object.assign(default_comps, opts_comps),
-    formFieldsPrefix: opts.formFieldsPrefix || 'Field'
+    comps: Object.assign(default_comps, opts_comps)
     , ...opts
   }
 
-  options.formNextId = options.formNextId || 1
-  options.categoryLabel = options.categoryLabel || 'Basic'
+  console.log(options)
+  options.formNextId = opts.formNextId || 1
+  options.categoryLabel = opts.categoryLabel || 'Basic'
+  options.formFieldsPrefix = opts.formFieldsPrefix || 'Field'
 
   commands.add('compile-templates', () => {
     Object.keys(options.comps).forEach(k => {

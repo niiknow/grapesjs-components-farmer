@@ -52,6 +52,32 @@ export default (editor, opt = {}) => {
     ...allBlocks
   })
 
+  bm.add('comp_submit', {
+    label: `
+      <div style="color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding-left: 5px;
+    padding-right: 5px;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    margin-top: 12px;
+    margin-bottom: 16px;
+    width: 50px;">&nbsp;</div>
+      <div class="gjs-block-label">${c.labels.comp_submit}</div>
+    `,
+    content: {
+      type: 'comp_submit'
+    },
+    ...allBlocks
+  })
+
   bm.add('comp_input', {
     label: `
     <svg class="gjs-block-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -91,17 +117,6 @@ export default (editor, opt = {}) => {
     <div class="gjs-block-label">${c.labels.comp_select}</div>`,
     content: {
       type: 'comp_select'
-    },
-    ...allBlocks
-  })
-
-  bm.add('comp_submit', {
-    label: `
-      <div class="tb-submit">&nbsp;</div>
-      <div class="gjs-block-label">${c.labels.comp_submit}</div>
-    `,
-    content: {
-      type: 'comp_submit'
     },
     ...allBlocks
   })
