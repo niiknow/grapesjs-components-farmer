@@ -1,7 +1,11 @@
-# grapesjs-plugin-formfields
-> grapesjs plugin to build form aka GrapesJs FormBuilder plugin
+# grapesjs-components-farmer
+> grapesjs plugin to build components for different css framework
 
-The primary goal of this plugin is to allow for building of Generic form field components that provide the same trait/behavior on the GrapeJS editor but render different output for different CSS frameworks. The base design is similar to the GrapesJs MJML plugin. The initial CSS framework is bootstrap4.
+The primary objective of this plugin is to build Form Components.  Component-farmer is playing on the word farmer/former.  We grow/produce components here yall!
+
+## The Secret Sauce
+- [x] Automatically generate form field name.
+- [x] Ability to template components for different CSS framework - initially demonstrate/default with Bootstrap4.
 
 ## Development
 This library uses the NodeJS library `laravel-mix` to simplify build and packaging.
@@ -10,15 +14,15 @@ Requirement: Install NodeJS, NPM
 
 Then:
 ```
-git clone https://github.com/niiknow/grapesjs-plugin-formfields
-cd vue-datatables-net
+git clone https://github.com/niiknow/grapesjs-components-farmer
+cd grapesjs-components-farmer
 npm install
 ```
                                                                                  
 or in one command:                                                               
                                                                                  
 ```                                                                              
-npm install git+https://github.com/niiknow/grapesjs-plugin-formfields.git                
+npm install git+https://github.com/niiknow/grapesjs-components-farmer.git                
 ```                                                                              
 
 To run locally (automatically launch firefox):
@@ -33,12 +37,17 @@ npm run build
 
 This library is available on NPM, to install:
 ```
-npm install grapesjs-plugin-formfields
-```
+npm install grapesjs-components-farmer
 
 ## Planning
 - [ ] Build generic form field components
 - [ ] Demo how to get components json and html
+
+## Why GrapesJS?
+We like the fact that grapesjs can provide/separate output for components json, xml code, and html.  This allow us to build HTML visually, while saving the code and generating the actual HTML for the user (e.g. in case the browser HTML get injected by browser, some bad extensions, or by a password manager).  
+
+## Point of Interest
+* [SurveyJS](https://surveyjs.io/)
 
 ## License
 

@@ -27,7 +27,7 @@ const config = {
   output: {
     path: path.resolve(public),
     filename: 'index.js',
-    library: 'grapesjs-plugin-formfields',
+    library: 'grapesjs-components-farmer',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

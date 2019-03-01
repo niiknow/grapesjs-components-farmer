@@ -1,5 +1,5 @@
 {
-  "name": "grapesjs-plugin-formfields",
+  "name": "grapesjs-components-farmer",
   "description": "grapesjs plugin to build form aka GrapesJs FormBuilder plugin",
   "version": "0.1.0",
   "author": "friends@niiknow.org",
@@ -10,7 +10,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/niiknow/grapesjs-plugin-formfields.git"
+    "url": "https://github.com/niiknow/grapesjs-components-farmer.git"
   },
   "scripts": {
     "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
