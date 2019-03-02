@@ -1,12 +1,12 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("jQuery"), require("dot"), require("grapesjs"));
+		module.exports = factory(require("jQuery"), require("doT"), require("grapesjs"));
 	else if(typeof define === 'function' && define.amd)
-		define("grapesjs-components-farmer", ["jQuery", "dot", "grapesjs"], factory);
+		define("grapesjs-components-farmer", ["jQuery", "doT", "grapesjs"], factory);
 	else if(typeof exports === 'object')
-		exports["grapesjs-components-farmer"] = factory(require("jQuery"), require("dot"), require("grapesjs"));
+		exports["grapesjs-components-farmer"] = factory(require("jQuery"), require("doT"), require("grapesjs"));
 	else
-		root["grapesjs-components-farmer"] = factory(root["jQuery"], root["dot"], root["grapesjs"]);
+		root["grapesjs-components-farmer"] = factory(root["jQuery"], root["doT"], root["grapesjs"]);
 })(window, function(__WEBPACK_EXTERNAL_MODULE_jquery__, __WEBPACK_EXTERNAL_MODULE_dot__, __WEBPACK_EXTERNAL_MODULE_grapesjs__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -1135,7 +1135,7 @@ module.exports = __webpack_require__(/*! /Users/tomn/Desktop/work/brickinc/grape
 
 /***/ "dot":
 /*!**********************!*\
-  !*** external "dot" ***!
+  !*** external "doT" ***!
   \**********************/
 /*! no static exports found */
 /***/ (function(module, exports) {

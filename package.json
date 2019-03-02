@@ -23,13 +23,13 @@
     "lint-fix": "eslint --fix --ext .js,.jsx src/ example/app.*",
     "check-outdated": "npm outdated"
   },
-  "dependencies": {},
   "browserslist": [
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
   ],
   "peerDependencies": {
+    "dot": "^1.1.2",
     "grapesjs": ">=0.14.52",
     "jquery": ">=1.7"
   },

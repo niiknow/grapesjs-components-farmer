@@ -8,7 +8,7 @@ const config = {
   externals: {
     'jquery': 'jQuery',
     'grapesjs': 'grapesjs',
-    'dot': 'dot'
+    'dot': 'doT'
   },
   module: {
     rules: [
