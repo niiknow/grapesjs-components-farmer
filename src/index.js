@@ -2,25 +2,24 @@ import doT from 'dot'
 import $ from 'jquery'
 
 export default (editor, opts = {}) => {
-  const commands = editor.Commands
-  const pn       = editor.Panels
-
-  const opts_labels     = opts.labels || {}
-  const opts_comps      = opts.comps || {}
-
-  delete opts['labels']
-  delete opts['comps']
+  const commands   = editor.Commands
+  const pn         = editor.Panels
+  const opts_comps = opts.comps || {}
 
   const default_comps = {
     'comp_input': {
+      label: 'Input',
       classes: 'form-group',
+      useTag: 'div',
       template: `
         <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
         <input {{= it.required_attr ? 'required ' : '' }}type="{{=it.type_attr}}" class="form-control" name="{{=it.name_attr}}" placeholder="{{=it.placeholder_attr || ''}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
       `
     },
     'comp_select': {
+      label: 'Select',
       classes: 'form-group',
+      useTag: 'div',
       template: `
         <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
         <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}class="form-control" name="{{=it.name_attr}}">
@@ -32,14 +31,18 @@ export default (editor, opts = {}) => {
       `
     },
     'comp_textarea': {
+      label: 'Textarea',
       classes: 'form-group',
+      useTag: 'div',
       template: `
         <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
         <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' }}{{= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' }}class="form-control" name="{{=it.name_attr}}" placeholder="{{=it.placeholder_attr || ''}}">{{= it.value_attr || '' }}</textarea>
       `
     },
     'comp_checkbox': {
+      label: 'Checkbox',
       classes: 'form-check',
+      useTag: 'div',
       template: `
         <label for="{{=it.name_attr}}" class="form-check-label">
           <input {{= it.required_attr ? 'required ' : '' }}type="checkbox" name="{{=it.name_attr}}" class="form-check-input" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
@@ -48,49 +51,65 @@ export default (editor, opts = {}) => {
       `
     },
     'comp_hidden': {
+      label: 'Hidden Input',
+      useTag: 'div',
       template: `
         <input {{= it.required_attr ? 'required ' : '' }}type="hidden" name="{{=it.name_attr}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
       `
     },
     'comp_submit': {
+      label: 'Submit Button',
       classes: 'btn btn-primary btn-block',
-      realTag: 'button',
+      useTag: 'button',
       template: '{{= it.label_attr }}'
     },
     'comp_row': {
+      label: 'Row',
+      useTag: 'div',
       classes: 'row'
     },
     'comp_col': {
+      label: 'Column',
+      useTag: 'div',
       classes: 'col'
+    },
+    'comp_col1': {
+      label: '1 Column',
+      useTag: 'div',
+    },
+    'comp_col2': {
+      label: '2 Columns',
+      useTag: 'div',
+    },
+    'comp_col3': {
+      label: '3 Columns',
+      useTag: 'div',
     }
   }
 
-  const default_labels = {
-    // FORMS
-    'comp_input': 'Input',
-    'comp_submit': 'Submit',
-    'comp_textarea': 'Textarea',
-    'comp_select': 'Select',
-    'comp_checkbox': 'Checkbox',
-    'comp_hidden': 'Hidden Input',
-    'comp_row': 'Row',
-    'comp_col': 'Column',
-    'comp_col1': '1 Column',
-    'comp_col2': '2 Columns',
-    'comp_col3': '3 Columns'
+  // provide defaults
+  for(let k in default_comps) {
+    const x = default_comps[k]
+    const y = opts_comps[k]
+    if (y) {
+      for(let j in y) {
+        y[j] = y[j] || x[j]
+      }
+    } else {
+      opts_comps[k] = x
+    }
   }
 
-  const options = {
-    labels: Object.assign(default_labels, opts_labels),
-    comps: Object.assign(default_comps, opts_comps)
-    , ...opts
-  }
+  const options = opts
 
-  options.formNextId = opts.formNextId || 1
-  options.categoryLabel = opts.categoryLabel || 'Basic'
+  options.comps            = options.comps || opts_comps
+  options.formNextId       = opts.formNextId || 1
+  options.categoryLabel    = opts.categoryLabel || 'Basic'
   options.formFieldsPrefix = opts.formFieldsPrefix || 'Field'
 
-  commands.add('compile-templates', () => {
+  console.log(options)
+
+  const compileTemplates = () => {
     Object.keys(options.comps).forEach(k => {
       const t = options.comps[k]
 
@@ -98,7 +117,7 @@ export default (editor, opts = {}) => {
         t.template = doT.template(t.template)
       }
     })
-  })
+  }
 
   commands.add('get-usable-html', {
     run() {
@@ -120,12 +139,14 @@ export default (editor, opts = {}) => {
   // Add plugins
   require('./traits').default(editor, options)
   require('./blocks').default(editor, options)
+
   if (opts.panel) {
     require('./panels').default(editor, options)
   }
 
   editor.on('load', () => {
-    editor.runCommand('compile-templates', options)
+    compileTemplates()
+
     setTimeout(() => {
       const body = editor.getWrapper().view.$el.parent('body')
       body.addClass('components-farmer')

@@ -1,6 +1,6 @@
 export default (editor, opt = {}) => {
   const bm     = editor.BlockManager
-  const c      = opt
+  const c      = opt.comps
   const blocks = c.blocks
   const cats   = c.blockCategories
 
@@ -14,7 +14,7 @@ export default (editor, opt = {}) => {
 
   // CORE BLOCKS
   bm.add('comp_col1').set({
-    label: c.labels.comp_col1,
+    label: c.comp_col1.label,
     attributes: { class: 'gjs-fonts gjs-f-b1' },
     content: {
       type: 'comp_row',
@@ -26,7 +26,7 @@ export default (editor, opt = {}) => {
   })
 
   bm.add('comp_col2').set({
-    label: c.labels.comp_col2,
+    label: c.comp_col2.label,
     attributes: { class: 'gjs-fonts gjs-f-b2' },
     content: {
       type: 'comp_row',
@@ -39,7 +39,7 @@ export default (editor, opt = {}) => {
   })
 
   bm.add('comp_col3').set({
-    label: c.labels.comp_col3,
+    label: c.comp_col3.label,
     attributes: { class: 'gjs-fonts gjs-f-b3' },
     content: {
       type: 'comp_row',
@@ -70,7 +70,7 @@ export default (editor, opt = {}) => {
     margin-top: 12px;
     margin-bottom: 16px;
     width: 50px;">&nbsp;</div>
-      <div class="gjs-block-label">${c.labels.comp_submit}</div>
+      <div class="gjs-block-label">${c.comp_submit.label}</div>
     `,
     content: {
       type: 'comp_submit'
@@ -84,7 +84,7 @@ export default (editor, opt = {}) => {
       <path class="gjs-block-svg-path" d="M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z"></path>
       <polygon class="gjs-block-svg-path" points="4 10 5 10 5 14 4 14"></polygon>
     </svg>
-    <div class="gjs-block-label">${c.labels.comp_input}</div>`,
+    <div class="gjs-block-label">${c.comp_input.label}</div>`,
     content: {
       type: 'comp_input'
     },
@@ -100,7 +100,7 @@ export default (editor, opt = {}) => {
       <polygon class="gjs-block-svg-path" points="20 8 21 8 21 9 20 9"></polygon>
       <polygon class="gjs-block-svg-path" points="20 15 21 15 21 16 20 16"></polygon>
     </svg>
-    <div class="gjs-block-label">${c.labels.comp_textarea}</div>`,
+    <div class="gjs-block-label">${c.comp_textarea.label}</div>`,
     content: {
       type: 'comp_textarea'
     },
@@ -114,7 +114,7 @@ export default (editor, opt = {}) => {
       <polygon class="gjs-block-svg-path" transform="translate(18.500000, 12.000000) scale(1, -1) translate(-18.500000, -12.000000) " points="18.5 11 20 13 17 13"></polygon>
       <rect class="gjs-block-svg-path" x="4" y="11.5" width="11" height="1"></rect>
     </svg>
-    <div class="gjs-block-label">${c.labels.comp_select}</div>`,
+    <div class="gjs-block-label">${c.comp_select.label}</div>`,
     content: {
       type: 'comp_select'
     },
@@ -122,7 +122,7 @@ export default (editor, opt = {}) => {
   })
 
   bm.add('comp_checkbox', {
-    label: c.labels.comp_checkbox,
+    label: c.comp_checkbox.label,
     attributes: { class: 'fa fa-check-square' },
     content: {
       type: 'comp_checkbox'
@@ -135,7 +135,7 @@ export default (editor, opt = {}) => {
       <path class="gjs-block-svg-path" d="M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z"></path>
       <polygon class="gjs-block-svg-path" points="4 10 5 10 5 14 4 14"></polygon>
     </svg>
-    <div class="gjs-block-label">Hidden</div>`,
+    <div class="gjs-block-label">${c.comp_hidden.label}</div>`,
     content: {
       type: 'comp_hidden'
     },

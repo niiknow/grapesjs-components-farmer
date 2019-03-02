@@ -55090,7 +55090,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
   var opt = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var bm = editor.BlockManager;
-  var c = opt;
+  var c = opt.comps;
   var blocks = c.blocks;
   var cats = c.blockCategories;
 
@@ -55103,7 +55103,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   };
   bm.add('comp_col1').set(_objectSpread({
-    label: c.labels.comp_col1,
+    label: c.comp_col1.label,
     attributes: {
       class: 'gjs-fonts gjs-f-b1'
     },
@@ -55115,7 +55115,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }, allBlocks));
   bm.add('comp_col2').set(_objectSpread({
-    label: c.labels.comp_col2,
+    label: c.comp_col2.label,
     attributes: {
       class: 'gjs-fonts gjs-f-b2'
     },
@@ -55129,7 +55129,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }, allBlocks));
   bm.add('comp_col3').set(_objectSpread({
-    label: c.labels.comp_col3,
+    label: c.comp_col3.label,
     attributes: {
       class: 'gjs-fonts gjs-f-b3'
     },
@@ -55145,31 +55145,31 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }, allBlocks));
   bm.add('comp_submit', _objectSpread({
-    label: "\n      <div style=\"color: #fff;\n    background-color: #007bff;\n    border-color: #007bff;\n    display: inline-block;\n    text-align: center;\n    white-space: nowrap;\n    vertical-align: middle;\n    border: 1px solid transparent;\n    padding-left: 5px;\n    padding-right: 5px;\n    font-size: 1rem;\n    line-height: 1.5;\n    border-radius: .25rem;\n    margin-top: 12px;\n    margin-bottom: 16px;\n    width: 50px;\">&nbsp;</div>\n      <div class=\"gjs-block-label\">".concat(c.labels.comp_submit, "</div>\n    "),
+    label: "\n      <div style=\"color: #fff;\n    background-color: #007bff;\n    border-color: #007bff;\n    display: inline-block;\n    text-align: center;\n    white-space: nowrap;\n    vertical-align: middle;\n    border: 1px solid transparent;\n    padding-left: 5px;\n    padding-right: 5px;\n    font-size: 1rem;\n    line-height: 1.5;\n    border-radius: .25rem;\n    margin-top: 12px;\n    margin-bottom: 16px;\n    width: 50px;\">&nbsp;</div>\n      <div class=\"gjs-block-label\">".concat(c.comp_submit.label, "</div>\n    "),
     content: {
       type: 'comp_submit'
     }
   }, allBlocks));
   bm.add('comp_input', _objectSpread({
-    label: "\n    <svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z\"></path>\n      <polygon class=\"gjs-block-svg-path\" points=\"4 10 5 10 5 14 4 14\"></polygon>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.labels.comp_input, "</div>"),
+    label: "\n    <svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z\"></path>\n      <polygon class=\"gjs-block-svg-path\" points=\"4 10 5 10 5 14 4 14\"></polygon>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.comp_input.label, "</div>"),
     content: {
       type: 'comp_input'
     }
   }, allBlocks));
   bm.add('comp_textarea', _objectSpread({
-    label: "\n    <svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,7.5 C22,6.6 21.5,6 20.75,6 L3.25,6 C2.5,6 2,6.6 2,7.5 L2,16.5 C2,17.4 2.5,18 3.25,18 L20.75,18 C21.5,18 22,17.4 22,16.5 L22,7.5 Z M21,17 L3,17 L3,7 L21,7 L21,17 Z\"></path>\n      <polygon class=\"gjs-block-svg-path\" points=\"4 8 5 8 5 12 4 12\"></polygon>\n      <polygon class=\"gjs-block-svg-path\" points=\"19 7 20 7 20 17 19 17\"></polygon>\n      <polygon class=\"gjs-block-svg-path\" points=\"20 8 21 8 21 9 20 9\"></polygon>\n      <polygon class=\"gjs-block-svg-path\" points=\"20 15 21 15 21 16 20 16\"></polygon>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.labels.comp_textarea, "</div>"),
+    label: "\n    <svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,7.5 C22,6.6 21.5,6 20.75,6 L3.25,6 C2.5,6 2,6.6 2,7.5 L2,16.5 C2,17.4 2.5,18 3.25,18 L20.75,18 C21.5,18 22,17.4 22,16.5 L22,7.5 Z M21,17 L3,17 L3,7 L21,7 L21,17 Z\"></path>\n      <polygon class=\"gjs-block-svg-path\" points=\"4 8 5 8 5 12 4 12\"></polygon>\n      <polygon class=\"gjs-block-svg-path\" points=\"19 7 20 7 20 17 19 17\"></polygon>\n      <polygon class=\"gjs-block-svg-path\" points=\"20 8 21 8 21 9 20 9\"></polygon>\n      <polygon class=\"gjs-block-svg-path\" points=\"20 15 21 15 21 16 20 16\"></polygon>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.comp_textarea.label, "</div>"),
     content: {
       type: 'comp_textarea'
     }
   }, allBlocks));
   bm.add('comp_select', _objectSpread({
-    label: "\n    <svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z\" fill-rule=\"nonzero\"></path>\n      <polygon class=\"gjs-block-svg-path\" transform=\"translate(18.500000, 12.000000) scale(1, -1) translate(-18.500000, -12.000000) \" points=\"18.5 11 20 13 17 13\"></polygon>\n      <rect class=\"gjs-block-svg-path\" x=\"4\" y=\"11.5\" width=\"11\" height=\"1\"></rect>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.labels.comp_select, "</div>"),
+    label: "\n    <svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z\" fill-rule=\"nonzero\"></path>\n      <polygon class=\"gjs-block-svg-path\" transform=\"translate(18.500000, 12.000000) scale(1, -1) translate(-18.500000, -12.000000) \" points=\"18.5 11 20 13 17 13\"></polygon>\n      <rect class=\"gjs-block-svg-path\" x=\"4\" y=\"11.5\" width=\"11\" height=\"1\"></rect>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.comp_select.label, "</div>"),
     content: {
       type: 'comp_select'
     }
   }, allBlocks));
   bm.add('comp_checkbox', _objectSpread({
-    label: c.labels.comp_checkbox,
+    label: c.comp_checkbox.label,
     attributes: {
       class: 'fa fa-check-square'
     },
@@ -55178,7 +55178,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }, allBlocks));
   bm.add('comp_hidden', _objectSpread({
-    label: "<svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z\"></path>\n      <polygon class=\"gjs-block-svg-path\" points=\"4 10 5 10 5 14 4 14\"></polygon>\n    </svg>\n    <div class=\"gjs-block-label\">Hidden</div>",
+    label: "<svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n      <path class=\"gjs-block-svg-path\" d=\"M22,9 C22,8.4 21.5,8 20.75,8 L3.25,8 C2.5,8 2,8.4 2,9 L2,15 C2,15.6 2.5,16 3.25,16 L20.75,16 C21.5,16 22,15.6 22,15 L22,9 Z M21,15 L3,15 L3,9 L21,9 L21,15 Z\"></path>\n      <polygon class=\"gjs-block-svg-path\" points=\"4 10 5 10 5 14 4 14\"></polygon>\n    </svg>\n    <div class=\"gjs-block-label\">".concat(c.comp_hidden.label, "</div>"),
     content: {
       type: 'comp_hidden'
     }
@@ -55220,76 +55220,95 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var dot__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dot__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var commands = editor.Commands;
   var pn = editor.Panels;
-  var opts_labels = opts.labels || {};
   var opts_comps = opts.comps || {};
-  delete opts['labels'];
-  delete opts['comps'];
   var default_comps = {
     'comp_input': {
+      label: 'Input',
       classes: 'form-group',
+      useTag: 'div',
       template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"{{=it.type_attr}}\" class=\"form-control\" name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n      "
     },
     'comp_select': {
+      label: 'Select',
       classes: 'form-group',
+      useTag: 'div',
       template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n        <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}class=\"form-control\" name=\"{{=it.name_attr}}\">\n          <option selected>-- Please select an option -- </option>\n          {{~ (it.option_attr + \"\").trim().split(\"\\n\") :option }}\n          {{ var msgProps = option.split('::');\n          }} <option value=\"{{= msgProps[0]}}\">{{= msgProps[1] || msgProps[0] }}</option>{{~}}\n        </select>\n      "
     },
     'comp_textarea': {
+      label: 'Textarea',
       classes: 'form-group',
+      useTag: 'div',
       template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n        <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' }}{{= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' }}class=\"form-control\" name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\">{{= it.value_attr || '' }}</textarea>\n      "
     },
     'comp_checkbox': {
+      label: 'Checkbox',
       classes: 'form-check',
+      useTag: 'div',
       template: "\n        <label for=\"{{=it.name_attr}}\" class=\"form-check-label\">\n          <input {{= it.required_attr ? 'required ' : '' }}type=\"checkbox\" name=\"{{=it.name_attr}}\" class=\"form-check-input\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n          {{=it.label_attr}}\n        </label>\n      "
     },
     'comp_hidden': {
+      label: 'Hidden Input',
+      useTag: 'div',
       template: "\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"hidden\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n      "
     },
     'comp_submit': {
+      label: 'Submit Button',
       classes: 'btn btn-primary btn-block',
-      realTag: 'button',
+      useTag: 'button',
       template: '{{= it.label_attr }}'
     },
     'comp_row': {
+      label: 'Row',
+      useTag: 'div',
       classes: 'row'
     },
     'comp_col': {
+      label: 'Column',
+      useTag: 'div',
       classes: 'col'
+    },
+    'comp_col1': {
+      label: '1 Column',
+      useTag: 'div'
+    },
+    'comp_col2': {
+      label: '2 Columns',
+      useTag: 'div'
+    },
+    'comp_col3': {
+      label: '3 Columns',
+      useTag: 'div'
+    } // provide defaults
+
+  };
+
+  for (var k in default_comps) {
+    var x = default_comps[k];
+    var y = opts_comps[k];
+
+    if (y) {
+      for (var j in y) {
+        y[j] = y[j] || x[j];
+      }
+    } else {
+      opts_comps[k] = x;
     }
-  };
-  var default_labels = {
-    // FORMS
-    'comp_input': 'Input',
-    'comp_submit': 'Submit',
-    'comp_textarea': 'Textarea',
-    'comp_select': 'Select',
-    'comp_checkbox': 'Checkbox',
-    'comp_hidden': 'Hidden Input',
-    'comp_row': 'Row',
-    'comp_col': 'Column',
-    'comp_col1': '1 Column',
-    'comp_col2': '2 Columns',
-    'comp_col3': '3 Columns'
-  };
+  }
 
-  var options = _objectSpread({
-    labels: Object.assign(default_labels, opts_labels),
-    comps: Object.assign(default_comps, opts_comps)
-  }, opts);
-
+  var options = opts;
+  options.comps = options.comps || opts_comps;
   options.formNextId = opts.formNextId || 1;
   options.categoryLabel = opts.categoryLabel || 'Basic';
   options.formFieldsPrefix = opts.formFieldsPrefix || 'Field';
-  commands.add('compile-templates', function () {
+  console.log(options);
+
+  var compileTemplates = function compileTemplates() {
     Object.keys(options.comps).forEach(function (k) {
       var t = options.comps[k];
 
@@ -55297,17 +55316,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         t.template = dot__WEBPACK_IMPORTED_MODULE_0___default.a.template(t.template);
       }
     });
-  });
+  };
+
   commands.add('get-usable-html', {
     run: function run() {
       // get the builder xml
       var html = editor.getHtml(); // convert into html
 
-      for (var k in options.comps) {
+      for (var _k in options.comps) {
         // default tag as div unless realTag value is provided
-        var tag = options.comps[k].realTag || 'div';
-        html = html.replace(new RegExp('<' + k, 'g'), '<' + tag);
-        html = html.replace(new RegExp('</' + k + '>', 'g'), '</' + tag + '>');
+        var tag = options.comps[_k].realTag || 'div';
+        html = html.replace(new RegExp('<' + _k, 'g'), '<' + tag);
+        html = html.replace(new RegExp('</' + _k + '>', 'g'), '</' + tag + '>');
       }
 
       return html;
@@ -55323,7 +55343,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }
 
   editor.on('load', function () {
-    editor.runCommand('compile-templates', options);
+    compileTemplates();
     setTimeout(function () {
       var body = editor.getWrapper().view.$el.parent('body');
       body.addClass('components-farmer');
