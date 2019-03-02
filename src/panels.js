@@ -172,7 +172,7 @@ export default (editor, config) => {
       '<div class="gjs-sm-properties" style="display: none;"></div></div>')
 
     const traitsProps = traitsSector.find('.gjs-sm-properties')
-    const myEditor = $(editor)
+    const myEditor = $(editor.getEl())
 
     // copy from settings tab into traits sector and then hide settings tab
     traitsProps.append(myEditor.find('.gjs-trt-traits'))

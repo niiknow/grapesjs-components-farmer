@@ -86,7 +86,6 @@ export default (editor, opts = {}) => {
     , ...opts
   }
 
-  console.log(options)
   options.formNextId = opts.formNextId || 1
   options.categoryLabel = opts.categoryLabel || 'Basic'
   options.formFieldsPrefix = opts.formFieldsPrefix || 'Field'

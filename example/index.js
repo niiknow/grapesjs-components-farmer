@@ -55449,7 +55449,7 @@ __webpack_require__.r(__webpack_exports__);
 
     var traitsSector = jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div class="gjs-sm-sector no-select">' + '<div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>' + '<div class="gjs-sm-properties" style="display: none;"></div></div>');
     var traitsProps = traitsSector.find('.gjs-sm-properties');
-    var myEditor = jquery__WEBPACK_IMPORTED_MODULE_1___default()(editor); // copy from settings tab into traits sector and then hide settings tab
+    var myEditor = jquery__WEBPACK_IMPORTED_MODULE_1___default()(editor.getEl()); // copy from settings tab into traits sector and then hide settings tab
 
     traitsProps.append(myEditor.find('.gjs-trt-traits'));
     myEditor.find('.gjs-sm-sectors').before(traitsSector);
