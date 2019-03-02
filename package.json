@@ -37,7 +37,6 @@
     "@babel/core": "^7.3.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "babel-eslint": "^10.0.1",
-    "bootstrap": "^4.3.1",
     "browser-sync": "^2.26.0",
     "browser-sync-webpack-plugin": "^2.0.1",
     "cross-env": "^5.1.6",
@@ -53,8 +52,6 @@
     "jquery": ">=1.7",
     "laravel-mix": "^4.0.14",
     "resolve-url-loader": "2.3.1",
-    "sass": "^1.17.2",
-    "sass-loader": "7.*",
     "vue-template-compiler": "^2.6.8"
   }
 }

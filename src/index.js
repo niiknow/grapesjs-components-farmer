@@ -154,8 +154,41 @@ export default (editor, opts = {}) => {
     compileTemplates()
 
     setTimeout(() => {
-      const body = editor.getWrapper().view.$el.parent('body')
-      body.addClass('components-farmer')
-    }, 1000)
+      const doc = editor.getWrapper().view.$el[0].ownerDocument
+      var css = `
+body {
+  padding: 10px;
+}
+
+comp_row,
+comp_col {
+  min-height: 2rem !important;
+}
+
+comp_row {
+  display: block;
+  width: 100%;
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
+comp_col {
+  min-width: 100px;
+}
+`
+
+      const head  = doc.head || doc.getElementsByTagName('head')[0]
+      const style = doc.createElement('style')
+
+      style.type = 'text/css';
+      if (style.styleSheet){
+        // This is required for IE8 and below.
+        style.styleSheet.cssText = css;
+      } else {
+        style.appendChild(doc.createTextNode(css));
+      }
+
+      head.appendChild(style);
+    }, 10)
   })
 }

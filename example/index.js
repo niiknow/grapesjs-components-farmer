@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("jQuery"), require("doT"), require("grapesjs"));
+		module.exports = factory(require("doT"), require("grapesjs"), require("jQuery"));
 	else if(typeof define === 'function' && define.amd)
-		define("grapesjs-components-farmer", ["jQuery", "doT", "grapesjs"], factory);
+		define("grapesjs-components-farmer", ["doT", "grapesjs", "jQuery"], factory);
 	else if(typeof exports === 'object')
-		exports["grapesjs-components-farmer"] = factory(require("jQuery"), require("doT"), require("grapesjs"));
+		exports["grapesjs-components-farmer"] = factory(require("doT"), require("grapesjs"), require("jQuery"));
 	else
-		root["grapesjs-components-farmer"] = factory(root["jQuery"], root["doT"], root["grapesjs"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE_jquery__, __WEBPACK_EXTERNAL_MODULE_dot__, __WEBPACK_EXTERNAL_MODULE_grapesjs__) {
+		root["grapesjs-components-farmer"] = factory(root["doT"], root["grapesjs"], root["jQuery"]);
+})(window, function(__WEBPACK_EXTERNAL_MODULE_dot__, __WEBPACK_EXTERNAL_MODULE_grapesjs__, __WEBPACK_EXTERNAL_MODULE_jquery__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -133,7 +133,7 @@ var opts = {
   },
   fromElement: 1,
   canvas: {
-    styles: ['example/bootstrap4.css'],
+    styles: ['https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'],
     scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js']
   },
   script: function script() {
@@ -195,17 +195,6 @@ pnm.addButton('options', [{
     title: 'Export usable HTML'
   }
 }]);
-
-/***/ }),
-
-/***/ "./sass/bootstrap4.scss":
-/*!******************************!*\
-  !*** ./sass/bootstrap4.scss ***!
-  \******************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ }),
 
@@ -488,9 +477,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   editor.on('load', function () {
     compileTemplates();
     setTimeout(function () {
-      var body = editor.getWrapper().view.$el.parent('body');
-      body.addClass('components-farmer');
-    }, 1000);
+      var doc = editor.getWrapper().view.$el[0].ownerDocument;
+      var css = "\nbody {\n  padding: 10px;\n}\n\ncomp_row,\ncomp_col {\n  min-height: 2rem !important;\n}\n\ncomp_row {\n  display: block;\n  width: 100%;\n  margin-left: 15px;\n  margin-right: 15px;\n}\n\ncomp_col {\n  min-width: 100px;\n}\n";
+      var head = doc.head || doc.getElementsByTagName('head')[0];
+      var style = doc.createElement('style');
+      style.type = 'text/css';
+
+      if (style.styleSheet) {
+        // This is required for IE8 and below.
+        style.styleSheet.cssText = css;
+      } else {
+        style.appendChild(doc.createTextNode(css));
+      }
+
+      head.appendChild(style);
+    }, 10);
   });
 });
 
@@ -1121,14 +1122,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /***/ }),
 
 /***/ 0:
-/*!*****************************************************!*\
-  !*** multi ./example/app.js ./sass/bootstrap4.scss ***!
-  \*****************************************************/
+/*!******************************!*\
+  !*** multi ./example/app.js ***!
+  \******************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/tomn/Desktop/work/brickinc/grapesjs-components-farmer/example/app.js */"./example/app.js");
-module.exports = __webpack_require__(/*! /Users/tomn/Desktop/work/brickinc/grapesjs-components-farmer/sass/bootstrap4.scss */"./sass/bootstrap4.scss");
+module.exports = __webpack_require__(/*! /Users/tomn/Desktop/work/brickinc/grapesjs-components-farmer/example/app.js */"./example/app.js");
 
 
 /***/ }),
