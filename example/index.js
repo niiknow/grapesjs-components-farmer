@@ -613,7 +613,6 @@ __webpack_require__.r(__webpack_exports__);
     buttons: [{
       id: osm,
       command: osm,
-      active: 1,
       className: 'fa fa-paint-brush',
       attributes: {
         title: 'Style Manager'
@@ -621,7 +620,6 @@ __webpack_require__.r(__webpack_exports__);
     }, {
       id: otm,
       command: otm,
-      active: 1,
       className: 'fa fa-cog',
       attributes: {
         title: 'Settings'
@@ -629,7 +627,6 @@ __webpack_require__.r(__webpack_exports__);
     }, {
       id: ola,
       command: ola,
-      active: 1,
       className: 'fa fa-bars',
       attributes: {
         title: 'Layers'
@@ -661,27 +658,22 @@ __webpack_require__.r(__webpack_exports__);
     id: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceMobile"],
     command: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceMobile"],
     className: 'fa fa-mobile'
-  }]); // On component change show the Style Manager
-
-  config.showStylesOnChange && editor.on('component:selected', function () {
-    var openSmBtn = pn.getButton('views', osm);
-    var openLayersBtn = pn.getButton('views', ola); // Don't switch when the Layer Manager is on or
-    // there is no selected component
-
-    if ((!openLayersBtn || !openLayersBtn.get('active')) && editor.getSelected()) {
-      openSmBtn && openSmBtn.set('active', 1);
-    }
-  });
+  }]);
   editor.on('load', function () {
     var pn = editor.Panels;
-    var editorEl = jquery__WEBPACK_IMPORTED_MODULE_1___default()(editor.getEl()); // Add Settings Sector
+    var editorEl = jquery__WEBPACK_IMPORTED_MODULE_1___default()(editor.getEl()); // Load and show settings and style manager
 
-    var traitsSector = jquery__WEBPACK_IMPORTED_MODULE_1___default()("<div class=\"gjs-sm-sector no-select\">\n<div class=\"gjs-sm-title\"><span class=\"icon-settings fa fa-cog\"></span> Settings</div>\n<div class=\"gjs-sm-properties\" style=\"display: none;\"></div></div>");
+    var openTmBtn = pn.getButton('views', 'open-tm');
+    openTmBtn && openTmBtn.set('active', 1);
+    var openSm = pn.getButton('views', 'open-sm');
+    openSm && openSm.set('active', 1); // Add Settings Sector
+
+    var traitsSector = jquery__WEBPACK_IMPORTED_MODULE_1___default()("<div class=\"gjs-sm-sector no-select\">\n<div class=\"gjs-sm-title\"><span class=\"icon-settings fa fa-cog\"></span> Settings</div>\n<div class=\"gjs-sm-properties\"></div></div>");
     var traitsProps = traitsSector.find('.gjs-sm-properties'); // copy from settings tab into traits sector and then hide settings tab
 
     traitsProps.append(editorEl.find('.gjs-trt-traits'));
-    editorEl.find('.gjs-sm-sectors').before(traitsSector);
     editorEl.find('.gjs-pn-views .fa-cog').hide();
+    editorEl.find('.gjs-sm-sectors').before(traitsSector);
     traitsSector.find('.gjs-sm-title').on('click', function () {
       var traitStyle = traitsProps.get(0).style;
       var hidden = traitStyle.display === 'none';
@@ -693,7 +685,17 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
     var openBl = pn.getButton('views', obl);
-    openBl && openBl.set('active', 1);
+    openBl && openBl.set('active', 1); // On component change show the Style Manager
+
+    config.showStylesOnChange && editor.on('component:selected', function () {
+      var openSmBtn = pn.getButton('views', osm);
+      var openLayersBtn = pn.getButton('views', ola); // Don't switch when the Layer Manager is on or
+      // there is no selected component
+
+      if ((!openLayersBtn || !openLayersBtn.get('active')) && editor.getSelected()) {
+        openSmBtn && openSmBtn.set('active', 1);
+      }
+    });
   });
 });
 

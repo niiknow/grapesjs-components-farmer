@@ -95,7 +95,6 @@ export default (editor, config) => {
     buttons  : [{
       id: osm,
       command: osm,
-      active: 1,
       className: 'fa fa-paint-brush',
       attributes: {
         title: 'Style Manager'
@@ -103,7 +102,6 @@ export default (editor, config) => {
     },{
       id: otm,
       command: otm,
-      active: 1,
       className: 'fa fa-cog',
       attributes: {
         title: 'Settings'
@@ -111,7 +109,6 @@ export default (editor, config) => {
     },{
       id: ola,
       command: ola,
-      active: 1,
       className: 'fa fa-bars',
       attributes: {
         title: 'Layers'
@@ -144,32 +141,27 @@ export default (editor, config) => {
     className: 'fa fa-mobile',
   }])
 
-  // On component change show the Style Manager
-  config.showStylesOnChange && editor.on('component:selected', () => {
-    const openSmBtn = pn.getButton('views', osm)
-    const openLayersBtn = pn.getButton('views', ola)
-
-    // Don't switch when the Layer Manager is on or
-    // there is no selected component
-    if ((!openLayersBtn || !openLayersBtn.get('active')) && editor.getSelected()) {
-      openSmBtn && openSmBtn.set('active', 1)
-    }
-  })
 
   editor.on('load', () => {
     const pn       = editor.Panels
     const editorEl = $(editor.getEl())
 
+    // Load and show settings and style manager
+    const openTmBtn = pn.getButton('views', 'open-tm')
+    openTmBtn && openTmBtn.set('active', 1)
+    const openSm = pn.getButton('views', 'open-sm')
+    openSm && openSm.set('active', 1)
+
     // Add Settings Sector
     const traitsSector = $(`<div class="gjs-sm-sector no-select">
 <div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>
-<div class="gjs-sm-properties" style="display: none;"></div></div>`)
+<div class="gjs-sm-properties"></div></div>`)
     const traitsProps  = traitsSector.find('.gjs-sm-properties')
 
     // copy from settings tab into traits sector and then hide settings tab
     traitsProps.append(editorEl.find('.gjs-trt-traits'))
-    editorEl.find('.gjs-sm-sectors').before(traitsSector)
     editorEl.find('.gjs-pn-views .fa-cog').hide()
+    editorEl.find('.gjs-sm-sectors').before(traitsSector)
 
     traitsSector.find('.gjs-sm-title').on('click', () => {
       const traitStyle = traitsProps.get(0).style
@@ -183,5 +175,17 @@ export default (editor, config) => {
 
     const openBl = pn.getButton('views', obl)
     openBl && openBl.set('active', 1)
+
+    // On component change show the Style Manager
+    config.showStylesOnChange && editor.on('component:selected', () => {
+      const openSmBtn = pn.getButton('views', osm)
+      const openLayersBtn = pn.getButton('views', ola)
+
+      // Don't switch when the Layer Manager is on or
+      // there is no selected component
+      if ((!openLayersBtn || !openLayersBtn.get('active')) && editor.getSelected()) {
+        openSmBtn && openSmBtn.set('active', 1)
+      }
+    })
   })
 }
