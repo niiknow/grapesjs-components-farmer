@@ -99,14 +99,15 @@ export default (editor, opts = {}) => {
     }
   }
 
-  const options = opts
+  const options = {
+    formNextId: 1,
+    categoryLabel: 'Basic',
+    formFieldsPrefix: 'Field',
+    showStylesOnChange: 1
+    , ...opts
+  }
 
-  options.comps            = options.comps || opts_comps
-  options.formNextId       = opts.formNextId || 1
-  options.categoryLabel    = opts.categoryLabel || 'Basic'
-  options.formFieldsPrefix = opts.formFieldsPrefix || 'Field'
-
-  console.log(options)
+  options.comps = options.comps || opts_comps
 
   const compileTemplates = () => {
     let doT = null

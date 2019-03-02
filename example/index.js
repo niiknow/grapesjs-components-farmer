@@ -55218,6 +55218,10 @@ var cmdDeviceDesktop = 'set-device-desktop',
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -55298,12 +55302,14 @@ __webpack_require__.r(__webpack_exports__);
     }
   }
 
-  var options = opts;
+  var options = _objectSpread({
+    formNextId: 1,
+    categoryLabel: 'Basic',
+    formFieldsPrefix: 'Field',
+    showStylesOnChange: 1
+  }, opts);
+
   options.comps = options.comps || opts_comps;
-  options.formNextId = opts.formNextId || 1;
-  options.categoryLabel = opts.categoryLabel || 'Basic';
-  options.formFieldsPrefix = opts.formFieldsPrefix || 'Field';
-  console.log(options);
 
   var compileTemplates = function compileTemplates() {
     var doT = null;
@@ -55406,42 +55412,64 @@ __webpack_require__.r(__webpack_exports__);
       id: swv,
       command: swv,
       context: swv,
-      className: 'fa fa-square-o'
+      active: 1,
+      className: 'fa fa-square-o',
+      attributes: {
+        title: 'Show Borders'
+      }
     }, {
       id: prv,
       context: prv,
       command: function command(e) {
         return e.runCommand(prv);
       },
-      className: 'fa fa-eye'
+      className: 'fa fa-eye',
+      attributes: {
+        title: 'Preview'
+      }
     }, {
       id: ful,
       command: ful,
       context: ful,
-      className: 'fa fa-arrows-alt'
+      className: 'fa fa-arrows-alt',
+      attributes: {
+        title: 'Fullscreen'
+      }
     }, {
       id: expt,
       className: 'fa fa-code',
       command: function command(e) {
         return e.runCommand(expt);
+      },
+      attributes: {
+        title: 'Show code'
       }
     }, {
       id: 'undo',
       className: 'fa fa-undo',
       command: function command(e) {
         return e.runCommand('core:undo');
+      },
+      attributes: {
+        title: 'Undo'
       }
     }, {
       id: 'redo',
       className: 'fa fa-repeat',
       command: function command(e) {
         return e.runCommand('core:redo');
+      },
+      attributes: {
+        title: 'Redo'
       }
     }, {
       id: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdClear"],
       className: 'fa fa-trash',
       command: function command(e) {
         return e.runCommand(_consts__WEBPACK_IMPORTED_MODULE_0__["cmdClear"]);
+      },
+      attributes: {
+        title: 'Clear canvas'
       }
     }]
   }, {
@@ -55449,20 +55477,35 @@ __webpack_require__.r(__webpack_exports__);
     buttons: [{
       id: osm,
       command: osm,
-      active: true,
-      className: 'fa fa-paint-brush'
+      active: 1,
+      className: 'fa fa-paint-brush',
+      attributes: {
+        title: 'Style Manager'
+      }
     }, {
       id: otm,
       command: otm,
-      className: 'fa fa-cog'
+      active: 1,
+      className: 'fa fa-cog',
+      attributes: {
+        title: 'Settings'
+      }
     }, {
       id: ola,
       command: ola,
-      className: 'fa fa-bars'
+      active: 1,
+      className: 'fa fa-bars',
+      attributes: {
+        title: 'Layers'
+      }
     }, {
       id: obl,
       command: obl,
-      className: 'fa fa-th-large'
+      className: 'fa fa-th-large',
+      active: 1,
+      attributes: {
+        title: 'Blocks'
+      }
     }]
   }]); // Add devices buttons
 
@@ -55482,9 +55525,7 @@ __webpack_require__.r(__webpack_exports__);
     id: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceMobile"],
     command: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceMobile"],
     className: 'fa fa-mobile'
-  }]); // const openBl = pn.getButton('views', obl)
-  // editor.on('load', () => openBl && openBl.set('active', 1))
-  // On component change show the Style Manager
+  }]); // On component change show the Style Manager
 
   config.showStylesOnChange && editor.on('component:selected', function () {
     var openSmBtn = pn.getButton('views', osm);
@@ -55494,48 +55535,17 @@ __webpack_require__.r(__webpack_exports__);
     if ((!openLayersBtn || !openLayersBtn.get('active')) && editor.getSelected()) {
       openSmBtn && openSmBtn.set('active', 1);
     }
-  }) // Add and beautify tooltips
-  [(['sw-visibility', 'Show Borders'], ['preview', 'Preview'], ['fullscreen', 'Fullscreen'], ['undo', 'Undo'], ['redo', 'Redo'], ['canvas-clear', 'Clear canvas'])].forEach(function (item) {
-    pn.getButton('options', item[0]).set('attributes', {
-      title: item[1],
-      'data-tooltip-pos': 'bottom'
-    });
-  })[(['open-sm', 'Style Manager'], ['open-layers', 'Layers'], ['open-blocks', 'Blocks'])].forEach(function (item) {
-    pn.getButton('views', item[0]).set('attributes', {
-      title: item[1],
-      'data-tooltip-pos': 'bottom'
-    });
   });
-  var titles = document.querySelectorAll('*[title]');
-
-  for (var i = 0; i < titles.length; i++) {
-    var el = titles[i];
-    var title = el.getAttribute('title');
-    title = title ? title.trim() : '';
-
-    if (!title) {
-      break;
-    }
-
-    el.setAttribute('data-tooltip', title);
-    el.setAttribute('title', '');
-  }
-
   editor.on('load', function () {
-    var pn = editor.Panels; // Load and show settings and style manager
+    var pn = editor.Panels;
+    var editorEl = jquery__WEBPACK_IMPORTED_MODULE_1___default()(editor.getEl()); // Add Settings Sector
 
-    var openTmBtn = pn.getButton('views', 'open-tm');
-    openTmBtn && openTmBtn.set('active', 1);
-    var openSm = pn.getButton('views', 'open-sm');
-    openSm && openSm.set('active', 1); // Add Settings Sector
+    var traitsSector = jquery__WEBPACK_IMPORTED_MODULE_1___default()("<div class=\"gjs-sm-sector no-select\">\n<div class=\"gjs-sm-title\"><span class=\"icon-settings fa fa-cog\"></span> Settings</div>\n<div class=\"gjs-sm-properties\" style=\"display: none;\"></div></div>");
+    var traitsProps = traitsSector.find('.gjs-sm-properties'); // copy from settings tab into traits sector and then hide settings tab
 
-    var traitsSector = jquery__WEBPACK_IMPORTED_MODULE_1___default()('<div class="gjs-sm-sector no-select">' + '<div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>' + '<div class="gjs-sm-properties" style="display: none;"></div></div>');
-    var traitsProps = traitsSector.find('.gjs-sm-properties');
-    var myEditor = jquery__WEBPACK_IMPORTED_MODULE_1___default()(editor.getEl()); // copy from settings tab into traits sector and then hide settings tab
-
-    traitsProps.append(myEditor.find('.gjs-trt-traits'));
-    myEditor.find('.gjs-sm-sectors').before(traitsSector);
-    myEditor.find('.gjs-pn-views .fa-cog').hide();
+    traitsProps.append(editorEl.find('.gjs-trt-traits'));
+    editorEl.find('.gjs-sm-sectors').before(traitsSector);
+    editorEl.find('.gjs-pn-views .fa-cog').hide();
     traitsSector.find('.gjs-sm-title').on('click', function () {
       var traitStyle = traitsProps.get(0).style;
       var hidden = traitStyle.display === 'none';
@@ -55545,11 +55555,9 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         traitStyle.display = 'none';
       }
-    }); // Open block manager
-
-    var openBlocksBtn = editor.Panels.getButton('views', 'open-blocks');
-    openBlocksBtn && openBlocksBtn.set('active', 1);
-    pn.getButton('options', 'sw-visibility').set('active', 1);
+    });
+    var openBl = pn.getButton('views', obl);
+    openBl && openBl.set('active', 1);
   });
 });
 

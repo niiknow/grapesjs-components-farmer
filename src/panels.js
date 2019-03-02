@@ -40,53 +40,90 @@ export default (editor, config) => {
       id: swv,
       command: swv,
       context: swv,
+      active: 1,
       className: 'fa fa-square-o',
+      attributes: {
+        title: 'Show Borders'
+      }
     },{
       id: prv,
       context: prv,
       command: e => e.runCommand(prv),
       className: 'fa fa-eye',
+      attributes: {
+        title: 'Preview'
+      }
     },{
       id: ful,
       command: ful,
       context: ful,
       className: 'fa fa-arrows-alt',
+      attributes: {
+        title: 'Fullscreen'
+      }
     },{
       id: expt,
       className: 'fa fa-code',
       command: e => e.runCommand(expt),
+      attributes: {
+        title: 'Show code'
+      }
     },{
       id: 'undo',
       className: 'fa fa-undo',
       command: e => e.runCommand('core:undo'),
+      attributes: {
+        title: 'Undo'
+      }
     },{
       id: 'redo',
       className: 'fa fa-repeat',
       command: e => e.runCommand('core:redo'),
+      attributes: {
+        title: 'Redo'
+      }
     },{
       id: cmdClear,
       className: 'fa fa-trash',
       command: e => e.runCommand(cmdClear),
+      attributes: {
+        title: 'Clear canvas'
+      }
     }],
   },{
     id: 'views',
     buttons  : [{
       id: osm,
       command: osm,
-      active: true,
+      active: 1,
       className: 'fa fa-paint-brush',
+      attributes: {
+        title: 'Style Manager'
+      }
     },{
       id: otm,
       command: otm,
+      active: 1,
       className: 'fa fa-cog',
+      attributes: {
+        title: 'Settings'
+      }
     },{
       id: ola,
       command: ola,
+      active: 1,
       className: 'fa fa-bars',
+      attributes: {
+        title: 'Layers'
+      }
     },{
       id: obl,
       command: obl,
       className: 'fa fa-th-large',
+      active: 1,
+      attributes: {
+        title: 'Blocks'
+      }
     }],
   }])
 
@@ -107,9 +144,6 @@ export default (editor, config) => {
     className: 'fa fa-mobile',
   }])
 
-  // const openBl = pn.getButton('views', obl)
-  // editor.on('load', () => openBl && openBl.set('active', 1))
-
   // On component change show the Style Manager
   config.showStylesOnChange && editor.on('component:selected', () => {
     const openSmBtn = pn.getButton('views', osm)
@@ -122,62 +156,20 @@ export default (editor, config) => {
     }
   })
 
-  // Add and beautify tooltips
-  [
-    ['sw-visibility', 'Show Borders'],
-    ['preview', 'Preview'],
-    ['fullscreen', 'Fullscreen'],
-    ['undo', 'Undo'],
-    ['redo', 'Redo'],
-    ['canvas-clear', 'Clear canvas']
-  ].forEach((item) => {
-    pn.getButton('options',
-      item[0]).set('attributes',
-      { title: item[1], 'data-tooltip-pos': 'bottom' }
-    )
-  })
-
-  [['open-sm', 'Style Manager'], ['open-layers', 'Layers'], ['open-blocks', 'Blocks']]
-  .forEach((item) => {
-    pn.getButton('views',
-    item[0]).set('attributes',
-    { title: item[1], 'data-tooltip-pos': 'bottom' })
-  })
-
-  const titles = document.querySelectorAll('*[title]')
-
-  for (let i = 0; i < titles.length; i++) {
-    const el = titles[i]
-    let title = el.getAttribute('title')
-    title = title ? title.trim(): ''
-    if(!title) {
-      break
-    }
-
-    el.setAttribute('data-tooltip', title)
-    el.setAttribute('title', '')
-  }
-
   editor.on('load', () => {
-    const pn = editor.Panels
-    // Load and show settings and style manager
-    const openTmBtn = pn.getButton('views', 'open-tm')
-    openTmBtn && openTmBtn.set('active', 1)
-    const openSm = pn.getButton('views', 'open-sm')
-    openSm && openSm.set('active', 1)
+    const pn       = editor.Panels
+    const editorEl = $(editor.getEl())
 
     // Add Settings Sector
-    const traitsSector = $('<div class="gjs-sm-sector no-select">'+
-      '<div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>' +
-      '<div class="gjs-sm-properties" style="display: none;"></div></div>')
-
-    const traitsProps = traitsSector.find('.gjs-sm-properties')
-    const myEditor = $(editor.getEl())
+    const traitsSector = $(`<div class="gjs-sm-sector no-select">
+<div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>
+<div class="gjs-sm-properties" style="display: none;"></div></div>`)
+    const traitsProps  = traitsSector.find('.gjs-sm-properties')
 
     // copy from settings tab into traits sector and then hide settings tab
-    traitsProps.append(myEditor.find('.gjs-trt-traits'))
-    myEditor.find('.gjs-sm-sectors').before(traitsSector)
-    myEditor.find('.gjs-pn-views .fa-cog').hide()
+    traitsProps.append(editorEl.find('.gjs-trt-traits'))
+    editorEl.find('.gjs-sm-sectors').before(traitsSector)
+    editorEl.find('.gjs-pn-views .fa-cog').hide()
 
     traitsSector.find('.gjs-sm-title').on('click', () => {
       const traitStyle = traitsProps.get(0).style
@@ -189,11 +181,7 @@ export default (editor, config) => {
       }
     })
 
-    // Open block manager
-    const openBlocksBtn = editor.Panels.getButton('views', 'open-blocks')
-    openBlocksBtn && openBlocksBtn.set('active', 1)
-
-    pn.getButton('options', 'sw-visibility').set('active', 1)
+    const openBl = pn.getButton('views', obl)
+    openBl && openBl.set('active', 1)
   })
-
 }
