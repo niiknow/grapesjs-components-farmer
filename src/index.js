@@ -1,4 +1,3 @@
-import doT from 'dot'
 import $ from 'jquery'
 
 export default (editor, opts = {}) => {
@@ -110,10 +109,16 @@ export default (editor, opts = {}) => {
   console.log(options)
 
   const compileTemplates = () => {
+    let doT = null
+
     Object.keys(options.comps).forEach(k => {
       const t = options.comps[k]
 
       if (t && typeof(t.template) === 'string') {
+        if (!doT) {
+          doT = require('dot')
+        }
+
         t.template = doT.template(t.template)
       }
     })

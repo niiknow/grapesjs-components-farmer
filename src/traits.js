@@ -1,9 +1,7 @@
-import doT from 'dot'
 import $ from 'jquery'
 
 export default (editor, opt = {}) => {
   const tm = editor.TraitManager
-
   const dc = editor.DomComponents
   const bm = editor.BlockManager
 
@@ -208,13 +206,10 @@ export default (editor, opt = {}) => {
       },
       init() {
         const that = this
-        const myHandler = () => {
-          that.generateHtml()
-        }
 
-        that.listenTo(that, 'change:label_attr', myHandler)
-        that.listenTo(that, 'change:name_attr', myHandler)
-        that.listenTo(that, 'change:placeholder_attr', myHandler)
+        that.listenTo(that, 'change:label_attr', that.generateHtml)
+        that.listenTo(that, 'change:name_attr', that.generateHtml)
+        that.listenTo(that, 'change:placeholder_attr', that.generateHtml)
       }
     }),
     view: myDefaultView
@@ -250,14 +245,11 @@ export default (editor, opt = {}) => {
       },
       init() {
         const that = this
-        const myHandler = () => {
-          that.generateHtml()
-        }
 
-        that.listenTo(that, 'change:label_attr', myHandler)
-        that.listenTo(that, 'change:name_attr', myHandler)
-        that.listenTo(that, 'change:multiple_attr', myHandler)
-        that.listenTo(that, 'change:option_attr', myHandler)
+        that.listenTo(that, 'change:label_attr', that.generateHtml)
+        that.listenTo(that, 'change:name_attr', that.generateHtml)
+        that.listenTo(that, 'change:multiple_attr', that.generateHtml)
+        that.listenTo(that, 'change:option_attr', that.generateHtml)
       }
     }),
     view: myDefaultView
@@ -302,15 +294,12 @@ export default (editor, opt = {}) => {
       },
       init() {
         const that = this
-        const myHandler = () => {
-          that.generateHtml()
-        }
 
-        that.listenTo(that, 'change:label_attr', myHandler)
-        that.listenTo(that, 'change:name_attr', myHandler)
-        that.listenTo(that, 'change:placeholder_attr', myHandler)
-        that.listenTo(that, 'change:cols_attr', myHandler)
-        that.listenTo(that, 'change:rows_attr', myHandler)
+        that.listenTo(that, 'change:label_attr', that.generateHtml)
+        that.listenTo(that, 'change:name_attr', that.generateHtml)
+        that.listenTo(that, 'change:placeholder_attr', that.generateHtml)
+        that.listenTo(that, 'change:cols_attr', that.generateHtml)
+        that.listenTo(that, 'change:rows_attr', that.generateHtml)
       }
     }),
     view: myDefaultView
@@ -337,12 +326,9 @@ export default (editor, opt = {}) => {
       },
       init() {
         const that = this
-        const myHandler = () => {
-          that.generateHtml()
-        }
 
-        that.listenTo(that, 'change:label_attr', myHandler)
-        that.listenTo(that, 'change:name_attr', myHandler)
+        that.listenTo(that, 'change:label_attr', that.generateHtml)
+        that.listenTo(that, 'change:name_attr', that.generateHtml)
       }
     }),
     view: myDefaultView
@@ -367,11 +353,8 @@ export default (editor, opt = {}) => {
       },
       init() {
         const that = this
-        const myHandler = () => {
-          that.generateHtml()
-        }
 
-        that.listenTo(that, 'change:name_attr', myHandler)
+        that.listenTo(that, 'change:name_attr', that.generateHtml)
       }
     }),
     view: myDefaultView
@@ -398,11 +381,8 @@ export default (editor, opt = {}) => {
       },
       init() {
         const that = this
-        const myHandler = () => {
-          that.generateHtml()
-        }
 
-        that.listenTo(that, 'change:label_attr', myHandler)
+        that.listenTo(that, 'change:label_attr', that.generateHtml)
       }
     }),
     view: myDefaultView

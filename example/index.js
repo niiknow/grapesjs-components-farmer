@@ -55216,11 +55216,8 @@ var cmdDeviceDesktop = 'set-device-desktop',
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var dot__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dot */ "./node_modules/dot/doT.js");
-/* harmony import */ var dot__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dot__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
-
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -55309,11 +55306,16 @@ __webpack_require__.r(__webpack_exports__);
   console.log(options);
 
   var compileTemplates = function compileTemplates() {
+    var doT = null;
     Object.keys(options.comps).forEach(function (k) {
       var t = options.comps[k];
 
       if (t && typeof t.template === 'string') {
-        t.template = dot__WEBPACK_IMPORTED_MODULE_0___default.a.template(t.template);
+        if (!doT) {
+          doT = __webpack_require__(/*! dot */ "./node_modules/dot/doT.js");
+        }
+
+        t.template = doT.template(t.template);
       }
     });
   };
@@ -55562,14 +55564,11 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var dot__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! dot */ "./node_modules/dot/doT.js");
-/* harmony import */ var dot__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(dot__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
@@ -55748,7 +55747,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.view.el;
       var k = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.attributes.tagName;
       var model = this;
-      var $el = jquery__WEBPACK_IMPORTED_MODULE_1___default()(el || this.view.el);
+      var $el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(el || this.view.el);
       var attrs = this.getTraitValues();
       var $k = $k || model.get('tagName');
 
@@ -55789,14 +55788,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
-
-        var myHandler = function myHandler() {
-          that.generateHtml();
-        };
-
-        that.listenTo(that, 'change:label_attr', myHandler);
-        that.listenTo(that, 'change:name_attr', myHandler);
-        that.listenTo(that, 'change:placeholder_attr', myHandler);
+        that.listenTo(that, 'change:label_attr', that.generateHtml);
+        that.listenTo(that, 'change:name_attr', that.generateHtml);
+        that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
       }
     }),
     view: myDefaultView
@@ -55828,15 +55822,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
-
-        var myHandler = function myHandler() {
-          that.generateHtml();
-        };
-
-        that.listenTo(that, 'change:label_attr', myHandler);
-        that.listenTo(that, 'change:name_attr', myHandler);
-        that.listenTo(that, 'change:multiple_attr', myHandler);
-        that.listenTo(that, 'change:option_attr', myHandler);
+        that.listenTo(that, 'change:label_attr', that.generateHtml);
+        that.listenTo(that, 'change:name_attr', that.generateHtml);
+        that.listenTo(that, 'change:multiple_attr', that.generateHtml);
+        that.listenTo(that, 'change:option_attr', that.generateHtml);
       }
     }),
     view: myDefaultView
@@ -55877,16 +55866,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
-
-        var myHandler = function myHandler() {
-          that.generateHtml();
-        };
-
-        that.listenTo(that, 'change:label_attr', myHandler);
-        that.listenTo(that, 'change:name_attr', myHandler);
-        that.listenTo(that, 'change:placeholder_attr', myHandler);
-        that.listenTo(that, 'change:cols_attr', myHandler);
-        that.listenTo(that, 'change:rows_attr', myHandler);
+        that.listenTo(that, 'change:label_attr', that.generateHtml);
+        that.listenTo(that, 'change:name_attr', that.generateHtml);
+        that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
+        that.listenTo(that, 'change:cols_attr', that.generateHtml);
+        that.listenTo(that, 'change:rows_attr', that.generateHtml);
       }
     }),
     view: myDefaultView
@@ -55909,13 +55893,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
-
-        var myHandler = function myHandler() {
-          that.generateHtml();
-        };
-
-        that.listenTo(that, 'change:label_attr', myHandler);
-        that.listenTo(that, 'change:name_attr', myHandler);
+        that.listenTo(that, 'change:label_attr', that.generateHtml);
+        that.listenTo(that, 'change:name_attr', that.generateHtml);
       }
     }),
     view: myDefaultView
@@ -55938,12 +55917,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
-
-        var myHandler = function myHandler() {
-          that.generateHtml();
-        };
-
-        that.listenTo(that, 'change:name_attr', myHandler);
+        that.listenTo(that, 'change:name_attr', that.generateHtml);
       }
     }),
     view: myDefaultView
@@ -55966,12 +55940,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
-
-        var myHandler = function myHandler() {
-          that.generateHtml();
-        };
-
-        that.listenTo(that, 'change:label_attr', myHandler);
+        that.listenTo(that, 'change:label_attr', that.generateHtml);
       }
     }),
     view: myDefaultView
