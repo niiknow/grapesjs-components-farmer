@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "author": "friends@niiknow.org",
   "license": "MIT",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "files": [
-    "lib"
+    "dist"
   ],
   "repository": {
     "type": "git",

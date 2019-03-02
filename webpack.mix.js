@@ -1,6 +1,6 @@
 const path   = require('path');
 const mix    = require('laravel-mix');
-const public = mix.inProduction() ? 'lib' : 'example';
+const public = mix.inProduction() ? 'dist' : 'example';
 
 mix.setPublicPath(path.normalize(public));
 
@@ -40,9 +40,7 @@ const config = {
 
 mix.webpackConfig(config).sourceMaps();
 
-mix.sass(`sass/bootstrap4.scss`, `example/`, {
-  outputStyle: mix.inProduction() ? 'compact' : 'expanded'
-});
+mix.sass(`sass/bootstrap4.scss`, `example/`);
 
 if (mix.inProduction()) {
   mix.js(`src/index.js`, `${ public }`);

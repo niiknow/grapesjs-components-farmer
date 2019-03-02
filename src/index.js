@@ -54,7 +54,7 @@ export default (editor, opts = {}) => {
     },
     'comp_submit': {
       classes: 'btn btn-primary btn-block',
-      tagName: 'button',
+      realTag: 'button',
       template: '{{= it.label_attr }}'
     },
     'comp_row': {
@@ -98,6 +98,21 @@ export default (editor, opts = {}) => {
         t.template = doT.template(t.template)
       }
     })
+  })
+
+  commands.add('get-real-html', () => {
+    // get the builder xml
+    let html = editor.getHtml()
+
+    // convert into html
+    for(let k in opts.comps) {
+      // default tag as div unless realTag value is provided
+      const tag = comps[k].realTag || 'div'
+      html = html.replace(new RegExp('<' + k, 'g'), '<' + tag)
+      html = html.replace(new RegExp('</' + k + '>', 'g'), '</' + tag + '>')
+    }
+
+    return html
   })
 
   // Add plugins
