@@ -41,4 +41,55 @@ const opts = {
   }
 }
 
-window.editor = grapesjs.init(opts)
+let editor     = grapesjs.init(opts)
+let pfx        = editor.getConfig().stylePrefix
+let modal      = editor.Modal
+let cmdm       = editor.Commands
+let codeViewer = editor.CodeManager.getViewer('CodeMirror').clone()
+let pnm        = editor.Panels
+let container  = document.createElement('div')
+
+codeViewer.set({
+  codeName: 'htmlmixed',
+  readOnly: 0,
+  theme: 'hopscotch',
+  autoBeautify: true,
+  autoCloseTags: true,
+  autoCloseBrackets: true,
+  lineWrapping: true,
+  styleActiveLine: true,
+  smartIndent: true,
+  indentWithTabs: true
+})
+
+cmdm.add('html-export-usable', {
+  run: function(editor, sender) {
+    sender && sender.set('active', 0)
+    let viewer = codeViewer.editor
+    modal.setTitle('Usable HTML')
+    if (!viewer) {
+      const txtarea = document.createElement('textarea')
+      container.appendChild(txtarea)
+      codeViewer.init(txtarea)
+      viewer = codeViewer.editor
+    }
+    modal.setContent('')
+    modal.setContent(container)
+    codeViewer.setContent(editor.runCommand('get-usable-html'))
+    modal.open()
+    viewer.refresh()
+  }
+})
+
+pnm.addButton('options',
+  [
+    {
+      id: 'export',
+      className: 'fa fa-download',
+      command: 'html-export-usable',
+      attributes: {
+        title: 'Export usable HTML'
+      }
+    }
+  ]
+)

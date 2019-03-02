@@ -148,7 +148,53 @@ var opts = {
     }
   }
 };
-window.editor = grapesjs__WEBPACK_IMPORTED_MODULE_1___default.a.init(opts);
+var editor = grapesjs__WEBPACK_IMPORTED_MODULE_1___default.a.init(opts);
+var pfx = editor.getConfig().stylePrefix;
+var modal = editor.Modal;
+var cmdm = editor.Commands;
+var codeViewer = editor.CodeManager.getViewer('CodeMirror').clone();
+var pnm = editor.Panels;
+var container = document.createElement('div');
+codeViewer.set({
+  codeName: 'htmlmixed',
+  readOnly: 0,
+  theme: 'hopscotch',
+  autoBeautify: true,
+  autoCloseTags: true,
+  autoCloseBrackets: true,
+  lineWrapping: true,
+  styleActiveLine: true,
+  smartIndent: true,
+  indentWithTabs: true
+});
+cmdm.add('html-export-usable', {
+  run: function run(editor, sender) {
+    sender && sender.set('active', 0);
+    var viewer = codeViewer.editor;
+    modal.setTitle('Usable HTML');
+
+    if (!viewer) {
+      var txtarea = document.createElement('textarea');
+      container.appendChild(txtarea);
+      codeViewer.init(txtarea);
+      viewer = codeViewer.editor;
+    }
+
+    modal.setContent('');
+    modal.setContent(container);
+    codeViewer.setContent(editor.runCommand('get-usable-html'));
+    modal.open();
+    viewer.refresh();
+  }
+});
+pnm.addButton('options', [{
+  id: 'export',
+  className: 'fa fa-download',
+  command: 'html-export-usable',
+  attributes: {
+    title: 'Export usable HTML'
+  }
+}]);
 
 /***/ }),
 
@@ -55210,7 +55256,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     'comp_submit': {
       classes: 'btn btn-primary btn-block',
-      tagName: 'button',
+      realTag: 'button',
       template: '{{= it.label_attr }}'
     },
     'comp_row': {
@@ -55240,7 +55286,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     comps: Object.assign(default_comps, opts_comps)
   }, opts);
 
-  console.log(options);
   options.formNextId = opts.formNextId || 1;
   options.categoryLabel = opts.categoryLabel || 'Basic';
   options.formFieldsPrefix = opts.formFieldsPrefix || 'Field';
@@ -55252,6 +55297,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         t.template = dot__WEBPACK_IMPORTED_MODULE_0___default.a.template(t.template);
       }
     });
+  });
+  commands.add('get-usable-html', {
+    run: function run() {
+      // get the builder xml
+      var html = editor.getHtml(); // convert into html
+
+      for (var k in options.comps) {
+        // default tag as div unless realTag value is provided
+        var tag = options.comps[k].realTag || 'div';
+        html = html.replace(new RegExp('<' + k, 'g'), '<' + tag);
+        html = html.replace(new RegExp('</' + k + '>', 'g'), '</' + tag + '>');
+      }
+
+      return html;
+    }
   }); // Add plugins
 
   __webpack_require__(/*! ./traits */ "./src/traits.js").default(editor, options);

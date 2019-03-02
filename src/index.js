@@ -100,19 +100,21 @@ export default (editor, opts = {}) => {
     })
   })
 
-  commands.add('get-real-html', () => {
-    // get the builder xml
-    let html = editor.getHtml()
+  commands.add('get-usable-html', {
+    run() {
+      // get the builder xml
+      let html = editor.getHtml()
 
-    // convert into html
-    for(let k in opts.comps) {
-      // default tag as div unless realTag value is provided
-      const tag = comps[k].realTag || 'div'
-      html = html.replace(new RegExp('<' + k, 'g'), '<' + tag)
-      html = html.replace(new RegExp('</' + k + '>', 'g'), '</' + tag + '>')
+      // convert into html
+      for(let k in options.comps) {
+        // default tag as div unless realTag value is provided
+        const tag = options.comps[k].realTag || 'div'
+        html = html.replace(new RegExp('<' + k, 'g'), '<' + tag)
+        html = html.replace(new RegExp('</' + k + '>', 'g'), '</' + tag + '>')
+      }
+
+      return html
     }
-
-    return html
   })
 
   // Add plugins
