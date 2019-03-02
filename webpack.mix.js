@@ -7,13 +7,14 @@ mix.setPublicPath(path.normalize(public));
 const config = {
   externals: {
     'jquery': 'jQuery',
-    'vue': 'Vue'
+    'grapesjs': 'grapesjs',
+    'dot': 'dot'
   },
   module: {
     rules: [
       {
         enforce: 'pre',
-        test: /\.(vue|js)$/,
+        test: /\.(jsx,js)$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'eslint-loader',
         options: {
