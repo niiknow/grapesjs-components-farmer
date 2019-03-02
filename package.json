@@ -30,8 +30,8 @@
     "not ie <= 8"
   ],
   "peerDependencies": {
-    "jquery": ">=1.7",
-    "grapesjs": ">=0.14.52"
+    "grapesjs": ">=0.14.52",
+    "jquery": ">=1.7"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -54,6 +54,7 @@
     "laravel-mix": "^4.0.14",
     "resolve-url-loader": "2.3.1",
     "sass": "^1.17.2",
-    "sass-loader": "7.*"
+    "sass-loader": "7.*",
+    "vue-template-compiler": "^2.6.8"
   }
 }
