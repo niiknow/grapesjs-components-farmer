@@ -1,6 +1,7 @@
 import pluginFarmer from '../src'
 import grapesjs from 'grapesjs'
 import $ from 'jquery'
+import customBlocks from './custom-blocks.js'
 
 // only for debugging purpose as pluginFarmer is reference from source
 // when you import directly as 'grapesjs-components-farmer' then you don't need to do this
@@ -37,10 +38,7 @@ const opts = {
   pluginsOpts: {
     'grapesjs-components-farmer': {
       formNextId: 1,
-      panel: 1,
-      summernote: {
-        airMode: true
-      }
+      panel: 1
     },
     'gjs-plugin-ckeditor': {
       position: 'center',
@@ -65,6 +63,8 @@ const opts = {
 }
 
 let editor     = grapesjs.init(opts)
+customBlocks(editor, { categoryLabel: 'Templates' })
+
 let pfx        = editor.getConfig().stylePrefix
 let modal      = editor.Modal
 let cmdm       = editor.Commands

@@ -166,6 +166,8 @@ export default (editor, opts = {}) => {
         const tag = options.comps[k].realTag || 'div'
         html = html.replace(new RegExp('<' + k, 'g'), '<' + tag)
         html = html.replace(new RegExp('</' + k + '>', 'g'), '</' + tag + '>')
+        html = html.replace(` data-gjs-type="${k}" `, ' ')
+        html = html.replace(' data-highlightable="1" ', ' ')
       }
 
       return html
@@ -179,15 +181,6 @@ export default (editor, opts = {}) => {
   if (opts.panel) {
     require('./panels').default(editor, options)
   }
-
-  if (opts.trumbowyg) {
-    require('./trumbowyg').default(editor, options)
-  }
-
-  if (opts.summernote) {
-    require('./summernote').default(editor, options)
-  }
-
 
   editor.on('load', () => {
     compileTemplates()

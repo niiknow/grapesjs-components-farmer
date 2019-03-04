@@ -142,18 +142,17 @@ export default (editor, opts = {}) => {
     ...allBlocks
   })
 
-
   bm.add('comp_text', {
     label: c.comp_text.label,
     attributes: {class:'gjs-fonts gjs-f-text'},
     content: {
       type:'comp_text',
-      content:'<div class="note-editor"></div>',
+      content:'Insert your text here',
       style: {padding: '10px' },
       activeOnRender: 1
     },
     ...allBlocks
-  });
+  })
 
   bm.add('comp_image', {
     label: c.comp_image.labelImage,
@@ -164,7 +163,7 @@ export default (editor, opts = {}) => {
       activeOnRender: 1
     },
     ...allBlocks
-  });
+  })
 
   bm.add('comp_map', {
     label: c.comp_map.label,
@@ -174,5 +173,5 @@ export default (editor, opts = {}) => {
       style: {height: '350px'}
     },
     ...allBlocks
-  });
+  })
 }
