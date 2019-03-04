@@ -137,7 +137,6 @@ if (window.location.href.indexOf('css=foundation') > 0) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var config = {
-  formNextId: 1,
   canvas: {
     styles: ['https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'],
     scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js']
@@ -833,7 +832,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       class: 'gjs-fonts gjs-f-text'
     },
     content: {
-      type: 'comp_text',
+      type: 'text',
       content: 'Insert your text here',
       style: {
         padding: '10px'

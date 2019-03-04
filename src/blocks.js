@@ -146,8 +146,8 @@ export default (editor, opts = {}) => {
     label: c.comp_text.label,
     attributes: { class:'gjs-fonts gjs-f-text' },
     content: {
-      type:'comp_text',
-      content:'Insert your text here',
+      type:'text',
+      content: 'Insert your text here',
       style: {padding: '10px' },
       activeOnRender: 1
     },

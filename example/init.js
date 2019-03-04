@@ -23,7 +23,7 @@ export default (opts = {}) => {
     canvas: opts.canvas,
     plugins: [
       'grapesjs-components-farmer',
-      'gjs-plugin-ckeditor'
+      'gjs-plugin-ckeditor',
     ],
     pluginsOpts: {
       'grapesjs-components-farmer': {
