@@ -1052,7 +1052,26 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     });
   };
+  /** Prevent Input Default Actions **/
 
+
+  var preventInputDefaults = function preventInputDefaults() {
+    var el = editor.Canvas.getBody();
+    var win = el.ownerWindow;
+    var body = jquery__WEBPACK_IMPORTED_MODULE_0___default()(el);
+    body.click(function (e) {
+      var event = e || win.event;
+      var target = event.target || event.srcElement;
+      var tagName = (target.tagName + '').toLowerCase();
+
+      if (tagName === 'input') {
+        event.preventDefault();
+        return false;
+      }
+    });
+  };
+
+  editor.runCommand('prevent-default');
   commands.add('get-usable-html', {
     run: function run() {
       // get the builder xml
@@ -1096,6 +1115,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
 
       head.appendChild(style);
+      preventInputDefaults();
     }, 10);
   });
 });

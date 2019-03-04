@@ -162,6 +162,25 @@ export default (editor, opts = {}) => {
     })
   }
 
+  /** Prevent Input Default Actions **/
+  const preventInputDefaults = () => {
+    const el     = editor.Canvas.getBody()
+    const win    = el.ownerWindow
+    const body = $(el)
+
+    body.click((e) => {
+      const event  = e || win.event
+      const target = event.target || event.srcElement
+      const tagName = (target.tagName + '').toLowerCase()
+      if (tagName === 'input') {
+        event.preventDefault()
+        return false
+      }
+    })
+  }
+
+  editor.runCommand('prevent-default');
+
   commands.add('get-usable-html', {
     run() {
       // get the builder xml
@@ -228,6 +247,7 @@ comp_col {
       }
 
       head.appendChild(style);
+      preventInputDefaults()
     }, 10)
   })
 }
