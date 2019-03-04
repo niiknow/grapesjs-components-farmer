@@ -136,9 +136,8 @@ export default (editor, opts = {}) => {
       return html
     },
     getTraitValues() {
-      const that   = this
-      const values = { ...that.attributes }
-      that.get('traits').
+      const values = { ...this.attributes }
+      this.get('traits').
         each((trait) => {
           const k = trait.get('name')
           values[k] = trait.get('value') || values[k]
@@ -168,25 +167,26 @@ export default (editor, opts = {}) => {
           name = `${opts.formFieldsPrefix}${opts.formNextId++}`
           nameTrait.set('value', name)
           model.set('name_attr', name)
+          return true
         }
-
-        // this ensure name value exists and is correct on the UI
-        attrs.name_attr = name
       }
+
+      return false
     },
     generateHtml(el = this.view.el, k = this.attributes.tagName) {
       const model = this
-      const $el   = $(el || this.view.el)
-      const attrs = this.getTraitValues()
+      const $el   = $(el || model.view.el)
+      const attrs = model.getTraitValues()
       const $k    = $k || model.get('tagName')
 
       if (opts && opts.comps && opts.comps[$k]) {
         const templateFn = opts.comps[$k].template
 
         if (typeof(templateFn) === 'function') {
-          model.ensureNameAttr(attrs)
-          $el.empty()
-          $el.append(templateFn(attrs))
+          if (!model.ensureNameAttr(attrs)) {
+            $el.empty()
+            $el.html(templateFn(attrs || {}))
+          }
         }
       }
 

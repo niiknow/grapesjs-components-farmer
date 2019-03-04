@@ -1090,11 +1090,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return html;
     },
     getTraitValues: function getTraitValues() {
-      var that = this;
+      var values = _objectSpread({}, this.attributes);
 
-      var values = _objectSpread({}, that.attributes);
-
-      that.get('traits').each(function (trait) {
+      this.get('traits').each(function (trait) {
         var k = trait.get('name');
         values[k] = trait.get('value') || values[k];
       });
@@ -1126,27 +1124,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           name = "".concat(opts.formFieldsPrefix).concat(opts.formNextId++);
           nameTrait.set('value', name);
           model.set('name_attr', name);
-        } // this ensure name value exists and is correct on the UI
-
-
-        attrs.name_attr = name;
+          return true;
+        }
       }
+
+      return false;
     },
     generateHtml: function generateHtml() {
       var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.view.el;
       var k = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.attributes.tagName;
       var model = this;
-      var $el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(el || this.view.el);
-      var attrs = this.getTraitValues();
+      var $el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(el || model.view.el);
+      var attrs = model.getTraitValues();
       var $k = $k || model.get('tagName');
 
       if (opts && opts.comps && opts.comps[$k]) {
         var templateFn = opts.comps[$k].template;
 
         if (typeof templateFn === 'function') {
-          model.ensureNameAttr(attrs);
-          $el.empty();
-          $el.append(templateFn(attrs));
+          if (!model.ensureNameAttr(attrs)) {
+            $el.empty();
+            $el.html(templateFn(attrs || {}));
+          }
         }
       }
 
