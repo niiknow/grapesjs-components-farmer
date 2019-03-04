@@ -131,14 +131,23 @@ export default (editor, opts) => {
     command: cmdDeviceDesktop,
     className: 'fa fa-desktop',
     active: 1,
+    attributes: {
+      title: 'Desktop'
+    }
   },{
     id: cmdDeviceTablet,
     command: cmdDeviceTablet,
     className: 'fa fa-tablet',
+    attributes: {
+      title: 'Tablet'
+    }
   },{
     id: cmdDeviceMobile,
     command: cmdDeviceMobile,
     className: 'fa fa-mobile',
+    attributes: {
+      title: 'Mobile'
+    }
   }])
 
 

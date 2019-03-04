@@ -462,7 +462,7 @@ __webpack_require__.r(__webpack_exports__);
             type: 'comp_input',
             label_attr: 'Employer',
             name_attr: 'employer',
-            placeholder_attr: 'employer'
+            placeholder_attr: 'Employer'
           }]
         }]
       }]
@@ -994,15 +994,24 @@ __webpack_require__.r(__webpack_exports__);
     id: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceDesktop"],
     command: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceDesktop"],
     className: 'fa fa-desktop',
-    active: 1
+    active: 1,
+    attributes: {
+      title: 'Desktop'
+    }
   }, {
     id: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceTablet"],
     command: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceTablet"],
-    className: 'fa fa-tablet'
+    className: 'fa fa-tablet',
+    attributes: {
+      title: 'Tablet'
+    }
   }, {
     id: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceMobile"],
     command: _consts__WEBPACK_IMPORTED_MODULE_0__["cmdDeviceMobile"],
-    className: 'fa fa-mobile'
+    className: 'fa fa-mobile',
+    attributes: {
+      title: 'Mobile'
+    }
   }]);
   editor.on('load', function () {
     var pn = editor.Panels;

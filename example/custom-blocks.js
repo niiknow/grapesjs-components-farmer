@@ -214,7 +214,7 @@ export default (editor, opts = {}) => {
             {
               type: 'comp_col',
               components: [
-                 { type: 'comp_input', label_attr: 'Employer', name_attr: 'employer', placeholder_attr: 'employer' }
+                 { type: 'comp_input', label_attr: 'Employer', name_attr: 'employer', placeholder_attr: 'Employer' }
               ]
             }
 
