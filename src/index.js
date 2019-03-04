@@ -87,14 +87,8 @@ export default (editor, opts = {}) => {
     'comp_text': {
       label: 'Text'
     },
-    'comp_link': {
-      label: 'Link'
-    },
     'comp_image': {
       label: 'Image'
-    },
-    'comp_video': {
-      label: 'Video'
     },
     'comp_map': {
       label: 'Map'
@@ -166,8 +160,8 @@ export default (editor, opts = {}) => {
         const tag = options.comps[k].realTag || 'div'
         html = html.replace(new RegExp('<' + k, 'g'), '<' + tag)
         html = html.replace(new RegExp('</' + k + '>', 'g'), '</' + tag + '>')
-        html = html.replace(` data-gjs-type="${k}" `, ' ')
-        html = html.replace(' data-highlightable="1" ', ' ')
+        html = html.replace(new RegExp(` data\-gjs\-type\=\"${k}\" `, 'g'), ' ')
+        html = html.replace(new RegExp(' data\-highlightable\=\"1\" ', 'g'), ' ')
       }
 
       return html

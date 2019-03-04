@@ -739,14 +739,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'comp_text': {
       label: 'Text'
     },
-    'comp_link': {
-      label: 'Link'
-    },
     'comp_image': {
       label: 'Image'
-    },
-    'comp_video': {
-      label: 'Video'
     },
     'comp_map': {
       label: 'Map'
@@ -816,8 +810,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var tag = options.comps[_k].realTag || 'div';
         html = html.replace(new RegExp('<' + _k, 'g'), '<' + tag);
         html = html.replace(new RegExp('</' + _k + '>', 'g'), '</' + tag + '>');
-        html = html.replace(" data-gjs-type=\"".concat(_k, "\" "), ' ');
-        html = html.replace(' data-highlightable="1" ', ' ');
+        html = html.replace(new RegExp(" data-gjs-type=\"".concat(_k, "\" "), 'g'), ' ');
+        html = html.replace(new RegExp(' data\-highlightable\=\"1\" ', 'g'), ' ');
       }
 
       return html;
