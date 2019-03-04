@@ -1090,13 +1090,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return html;
     },
     getTraitValues: function getTraitValues() {
-      var values = _objectSpread({}, this.attributes);
+      var that = this;
 
-      this.get('traits').each(function (trait) {
+      var values = _objectSpread({}, that.attributes);
+
+      that.get('traits').each(function (trait) {
         var k = trait.get('name');
         values[k] = trait.get('value') || values[k];
       });
       return values;
+    },
+    myInitDefaults: function myInitDefaults() {
+      var that = this;
+
+      var values = _objectSpread({}, that.attributes);
+
+      that.get('traits').each(function (trait) {
+        var k = trait.get('name'); // set defaults
+
+        if (k.indexOf('_attr') > 0) {
+          trait.set('value', values[k]);
+        }
+      });
     },
     ensureNameAttr: function ensureNameAttr(attrs) {
       var model = this;
@@ -1110,9 +1125,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         if (!name) {
           name = "".concat(opts.formFieldsPrefix).concat(opts.formNextId++);
           nameTrait.set('value', name);
-          model.setAttributes({
-            name_attr: name
-          });
+          model.set('name_attr', name);
         } // this ensure name value exists and is correct on the UI
 
 
@@ -1164,6 +1177,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
+        that.myInitDefaults();
         that.listenTo(that, 'change:label_attr', that.generateHtml);
         that.listenTo(that, 'change:name_attr', that.generateHtml);
         that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
@@ -1198,6 +1212,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
+        that.myInitDefaults();
         that.listenTo(that, 'change:label_attr', that.generateHtml);
         that.listenTo(that, 'change:name_attr', that.generateHtml);
         that.listenTo(that, 'change:multiple_attr', that.generateHtml);
@@ -1242,6 +1257,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
+        that.myInitDefaults();
         that.listenTo(that, 'change:label_attr', that.generateHtml);
         that.listenTo(that, 'change:name_attr', that.generateHtml);
         that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
@@ -1269,6 +1285,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
+        that.myInitDefaults();
         that.listenTo(that, 'change:label_attr', that.generateHtml);
         that.listenTo(that, 'change:name_attr', that.generateHtml);
       }
@@ -1293,6 +1310,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
+        that.myInitDefaults();
         that.listenTo(that, 'change:name_attr', that.generateHtml);
       }
     }),
@@ -1316,6 +1334,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }),
       init: function init() {
         var that = this;
+        that.myInitDefaults();
         that.listenTo(that, 'change:label_attr', that.generateHtml);
       }
     }),
@@ -1348,22 +1367,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })
     }),
     view: defaultView
-  }); // override default view to generate html
-
-  var myTextView = textType.view.extend({
-    getChildrenSelector: function getChildrenSelector() {
-      var container = jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.el).find('.note-editor');
-
-      if (container.length <= 0) {
-        jquery__WEBPACK_IMPORTED_MODULE_0___default()(this.el).html('<div class="note-editor" contenteditable="true"></div>');
-      }
-
-      return '.note-editor';
-    }
-  });
-  dc.addType('comp_text', {
-    model: textType.model,
-    view: myTextView
   });
 });
 

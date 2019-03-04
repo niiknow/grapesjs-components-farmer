@@ -136,13 +136,27 @@ export default (editor, opts = {}) => {
       return html
     },
     getTraitValues() {
-      const values = { ...this.attributes }
-      this.get('traits').
+      const that   = this
+      const values = { ...that.attributes }
+      that.get('traits').
         each((trait) => {
           const k = trait.get('name')
           values[k] = trait.get('value') || values[k]
         })
+
       return values
+    },
+    myInitDefaults() {
+      const that   = this
+      const values = { ...that.attributes }
+      that.get('traits').
+        each((trait) => {
+          const k = trait.get('name')
+          // set defaults
+          if (k.indexOf('_attr') > 0) {
+            trait.set('value', values[k])
+          }
+        })
     },
     ensureNameAttr(attrs) {
       const model = this
@@ -152,9 +166,8 @@ export default (editor, opts = {}) => {
         let name = attrs.name_attr
         if (!name) {
           name = `${opts.formFieldsPrefix}${opts.formNextId++}`
-
           nameTrait.set('value', name)
-          model.setAttributes({ name_attr: name })
+          model.set('name_attr', name)
         }
 
         // this ensure name value exists and is correct on the UI
@@ -207,6 +220,7 @@ export default (editor, opts = {}) => {
       },
       init() {
         const that = this
+        that.myInitDefaults()
 
         that.listenTo(that, 'change:label_attr', that.generateHtml)
         that.listenTo(that, 'change:name_attr', that.generateHtml)
@@ -246,6 +260,7 @@ export default (editor, opts = {}) => {
       },
       init() {
         const that = this
+        that.myInitDefaults()
 
         that.listenTo(that, 'change:label_attr', that.generateHtml)
         that.listenTo(that, 'change:name_attr', that.generateHtml)
@@ -295,6 +310,7 @@ export default (editor, opts = {}) => {
       },
       init() {
         const that = this
+        that.myInitDefaults()
 
         that.listenTo(that, 'change:label_attr', that.generateHtml)
         that.listenTo(that, 'change:name_attr', that.generateHtml)
@@ -327,6 +343,7 @@ export default (editor, opts = {}) => {
       },
       init() {
         const that = this
+        that.myInitDefaults()
 
         that.listenTo(that, 'change:label_attr', that.generateHtml)
         that.listenTo(that, 'change:name_attr', that.generateHtml)
@@ -354,6 +371,7 @@ export default (editor, opts = {}) => {
       },
       init() {
         const that = this
+        that.myInitDefaults()
 
         that.listenTo(that, 'change:name_attr', that.generateHtml)
       }
@@ -382,6 +400,7 @@ export default (editor, opts = {}) => {
       },
       init() {
         const that = this
+        that.myInitDefaults()
 
         that.listenTo(that, 'change:label_attr', that.generateHtml)
       }
@@ -419,22 +438,5 @@ export default (editor, opts = {}) => {
       }
     }),
     view: defaultView
-  })
-
-    // override default view to generate html
-  const myTextView = textType.view.extend({
-    getChildrenSelector() {
-      let container = $(this.el).find('.note-editor')
-      if (container.length <= 0) {
-        $(this.el).html('<div class="note-editor" contenteditable="true"></div>')
-      }
-
-      return '.note-editor'
-    }
-  })
-
-  dc.addType('comp_text', {
-    model: textType.model,
-    view: myTextView
   })
 }
