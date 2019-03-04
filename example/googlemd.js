@@ -14,8 +14,8 @@ const config = {
       classes: 'input-field col s12',
       useTag: 'div',
       template: `
-        <input {{= it.required_attr ? 'required ' : '' }}type="{{=it.type_attr}}" name="{{=it.name_attr}}" placeholder="{{=it.placeholder_attr || ''}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
-        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
+        <input <%= it.required_attr ? 'required ' : '' %>type="<%=it.type_attr%>" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+        <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
       `
     },
     'comp_select': {
@@ -23,13 +23,13 @@ const config = {
       classes: 'input-field col s12',
       useTag: 'div',
       template: `
-        <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}name="{{=it.name_attr}}">
+        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>name="<%=it.name_attr%>">
           <option selected>-- Please select an option -- </option>
-          {{~ (it.option_attr + "").trim().split("\\n") :option }}
-          {{ var msgProps = option.split('::');
-          }} <option value="{{= msgProps[0]}}">{{= msgProps[1] || msgProps[0] }}</option>{{~}}
+          <%~ (it.option_attr + "").trim().split("\\n") :option %>
+          <% var msgProps = option.split('::');
+          %> <option value="<%= msgProps[0]%>"><%= msgProps[1] || msgProps[0] %></option><%~%>
         </select>
-        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
+        <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
       `
     },
     'comp_textarea': {
@@ -37,8 +37,8 @@ const config = {
       classes: 'input-field col s12',
       useTag: 'div',
       template: `
-        <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' }}{{= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' }}name="{{=it.name_attr}}" placeholder="{{=it.placeholder_attr || ''}}">{{= it.value_attr || '' }}</textarea>
-        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
+        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' %><%= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' %>name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>"><%= it.value_attr || '' %></textarea>
+        <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
       `
     },
     'comp_checkbox': {
@@ -47,9 +47,9 @@ const config = {
       useTag: 'div',
       template: `
         <div class="input-field col s12">
-          <label for="{{=it.name_attr}}">
-            <input {{= it.required_attr ? 'required ' : '' }}type="checkbox" name="{{=it.name_attr}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
-            <span>{{=it.label_attr}}</span>
+          <label for="<%=it.name_attr%>">
+            <input <%= it.required_attr ? 'required ' : '' %>type="checkbox" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+            <span><%=it.label_attr%></span>
           </label>
         </div>
       `
@@ -58,14 +58,14 @@ const config = {
       label: 'Hidden Input',
       useTag: 'div',
       template: `
-        <input {{= it.required_attr ? 'required ' : '' }}type="hidden" name="{{=it.name_attr}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
+        <input <%= it.required_attr ? 'required ' : '' %>type="hidden" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
       `
     },
     'comp_submit': {
       label: 'Submit Button',
       classes: 'btn waves-effect waves-light',
       useTag: 'button',
-      template: '{{= it.label_attr }}'
+      template: '<%= it.label_attr %>'
     },
     'comp_row': {
       label: 'Row',

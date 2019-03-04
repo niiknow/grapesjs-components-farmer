@@ -121,6 +121,15 @@ export default (editor, opts = {}) => {
     ...allBlocks
   })
 
+  bm.add('comp_file', {
+    label: c.comp_file.label,
+    attributes: { class:'fa fa-file' },
+    content: {
+      type: 'comp_file'
+    },
+    ...allBlocks
+  })
+
   bm.add('comp_checkbox', {
     label: c.comp_checkbox.label,
     attributes: { class: 'fa fa-check-square' },

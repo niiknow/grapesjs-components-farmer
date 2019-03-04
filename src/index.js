@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import doTemplate from './templating'
 
 export default (editor, opts = {}) => {
   const commands   = editor.Commands
@@ -11,8 +12,8 @@ export default (editor, opts = {}) => {
       classes: 'form-group',
       useTag: 'div',
       template: `
-        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
-        <input {{= it.required_attr ? 'required ' : '' }}type="{{=it.type_attr}}" class="form-control" name="{{=it.name_attr}}" placeholder="{{=it.placeholder_attr || ''}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
+        <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
+        <input <%= it.required_attr ? 'required ' : '' %>type="<%=it.type_attr%>" class="form-control" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
       `
     },
     'comp_select': {
@@ -20,13 +21,22 @@ export default (editor, opts = {}) => {
       classes: 'form-group',
       useTag: 'div',
       template: `
-        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
-        <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}class="form-control" name="{{=it.name_attr}}">
+        <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
+        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>class="form-control" name="<%=it.name_attr%>">
           <option selected>-- Please select an option -- </option>
-          {{~ (it.option_attr + "").trim().split("\\n") :option }}
-          {{ var msgProps = option.split('::');
-          }} <option value="{{= msgProps[0]}}">{{= msgProps[1] || msgProps[0] }}</option>{{~}}
+          <%~ (it.option_attr + "").trim().split("\\n") :option %>
+          <% var msgProps = option.split('::');
+          %> <option value="<%= msgProps[0]%>"><%= msgProps[1] || msgProps[0] %></option><%~%>
         </select>
+      `
+    },
+    'comp_file': {
+      label: 'File',
+      classes: 'custom-file',
+      useTag: 'div',
+      template: `
+        <input <%= it.required_attr ? 'required ' : '' %>type="file" class="custom-file-input" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.accept_attr ? 'accept="' + it.accept_attr + '"' : '' %> <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+        <label for="<%=it.name_attr%>" class="custom-file-label"><%=it.label_attr%></label>
       `
     },
     'comp_textarea': {
@@ -34,8 +44,8 @@ export default (editor, opts = {}) => {
       classes: 'form-group',
       useTag: 'div',
       template: `
-        <label for="{{=it.name_attr}}">{{=it.label_attr}}</label>
-        <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' }}{{= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' }}class="form-control" name="{{=it.name_attr}}" placeholder="{{=it.placeholder_attr || ''}}">{{= it.value_attr || '' }}</textarea>
+        <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
+        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' %><%= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' %>class="form-control" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>"><%= it.value_attr || '' %></textarea>
       `
     },
     'comp_checkbox': {
@@ -43,9 +53,9 @@ export default (editor, opts = {}) => {
       classes: 'form-check',
       useTag: 'div',
       template: `
-        <label for="{{=it.name_attr}}" class="form-check-label">
-          <input {{= it.required_attr ? 'required ' : '' }}type="checkbox" name="{{=it.name_attr}}" class="form-check-input" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
-          {{=it.label_attr}}
+        <label for="<%=it.name_attr%>" class="form-check-label">
+          <input <%= it.required_attr ? 'required ' : '' %>type="checkbox" name="<%=it.name_attr%>" class="form-check-input" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+          <%=it.label_attr%>
         </label>
       `
     },
@@ -53,14 +63,14 @@ export default (editor, opts = {}) => {
       label: 'Hidden Input',
       useTag: 'div',
       template: `
-        <input {{= it.required_attr ? 'required ' : '' }}type="hidden" name="{{=it.name_attr}}" {{= it.value_attr ? 'value="' + it.value_attr + '"' : '' }}/>
+        <input <%= it.required_attr ? 'required ' : '' %>type="hidden" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
       `
     },
     'comp_submit': {
       label: 'Submit Button',
       classes: 'btn btn-primary btn-block',
       useTag: 'button',
-      template: '{{= it.label_attr }}'
+      template: '<%= it.label_attr %>'
     },
     'comp_row': {
       label: 'Row',
@@ -144,7 +154,7 @@ export default (editor, opts = {}) => {
 
       if (t && typeof(t.template) === 'string') {
         if (!doT) {
-          doT = require('dot')
+          doT = doTemplate()
         }
 
         t.template = doT.template(t.template)

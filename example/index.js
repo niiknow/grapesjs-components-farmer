@@ -422,36 +422,36 @@ var config = {
       label: 'Input',
       classes: 'cell large-12',
       useTag: 'div',
-      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}\n          <input {{= it.required_attr ? 'required ' : '' }}type=\"{{=it.type_attr}}\" name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        </label>\n      "
     },
     'comp_select': {
       label: 'Select',
       classes: 'cell large-12',
       useTag: 'div',
-      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}\n          <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}name=\"{{=it.name_attr}}\">\n            <option selected>-- Please select an option -- </option>\n            {{~ (it.option_attr + \"\").trim().split(\"\\n\") :option }}\n            {{ var msgProps = option.split('::');\n            }} <option value=\"{{= msgProps[0]}}\">{{= msgProps[1] || msgProps[0] }}</option>{{~}}\n          </select>\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>name=\"<%=it.name_attr%>\">\n            <option selected>-- Please select an option -- </option>\n            <%~ (it.option_attr + \"\").trim().split(\"\\n\") :option %>\n            <% var msgProps = option.split('::');\n            %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option><%~%>\n          </select>\n        </label>\n      "
     },
     'comp_textarea': {
       label: 'Textarea',
       classes: 'cell large-12',
       useTag: 'div',
-      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}\n          <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' }}{{= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' }}name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\">{{= it.value_attr || '' }}</textarea>\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n        </label>\n      "
     },
     'comp_checkbox': {
       label: 'Checkbox',
       classes: 'cell large-12',
       useTag: 'div',
-      template: "\n        <label for=\"{{=it.name_attr}}\">\n          <input {{= it.required_attr ? 'required ' : '' }}type=\"checkbox\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n          {{=it.label_attr}}\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\">\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n          <%=it.label_attr%>\n        </label>\n      "
     },
     'comp_hidden': {
       label: 'Hidden Input',
       useTag: 'div',
-      template: "\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"hidden\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
     },
     'comp_submit': {
       label: 'Submit Button',
       classes: 'button',
       useTag: 'button',
-      template: '{{= it.label_attr }}'
+      template: '<%= it.label_attr %>'
     },
     'comp_row': {
       label: 'Row',
@@ -512,36 +512,36 @@ var config = {
       label: 'Input',
       classes: 'input-field col s12',
       useTag: 'div',
-      template: "\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"{{=it.type_attr}}\" name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
     },
     'comp_select': {
       label: 'Select',
       classes: 'input-field col s12',
       useTag: 'div',
-      template: "\n        <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}name=\"{{=it.name_attr}}\">\n          <option selected>-- Please select an option -- </option>\n          {{~ (it.option_attr + \"\").trim().split(\"\\n\") :option }}\n          {{ var msgProps = option.split('::');\n          }} <option value=\"{{= msgProps[0]}}\">{{= msgProps[1] || msgProps[0] }}</option>{{~}}\n        </select>\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n      "
+      template: "\n        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>name=\"<%=it.name_attr%>\">\n          <option selected>-- Please select an option -- </option>\n          <%~ (it.option_attr + \"\").trim().split(\"\\n\") :option %>\n          <% var msgProps = option.split('::');\n          %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option><%~%>\n        </select>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
     },
     'comp_textarea': {
       label: 'Textarea',
       classes: 'input-field col s12',
       useTag: 'div',
-      template: "\n        <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' }}{{= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' }}name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\">{{= it.value_attr || '' }}</textarea>\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n      "
+      template: "\n        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
     },
     'comp_checkbox': {
       label: 'Checkbox',
       classes: 'row',
       useTag: 'div',
-      template: "\n        <div class=\"input-field col s12\">\n          <label for=\"{{=it.name_attr}}\">\n            <input {{= it.required_attr ? 'required ' : '' }}type=\"checkbox\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n            <span>{{=it.label_attr}}</span>\n          </label>\n        </div>\n      "
+      template: "\n        <div class=\"input-field col s12\">\n          <label for=\"<%=it.name_attr%>\">\n            <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n            <span><%=it.label_attr%></span>\n          </label>\n        </div>\n      "
     },
     'comp_hidden': {
       label: 'Hidden Input',
       useTag: 'div',
-      template: "\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"hidden\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
     },
     'comp_submit': {
       label: 'Submit Button',
       classes: 'btn waves-effect waves-light',
       useTag: 'button',
-      template: '{{= it.label_attr }}'
+      template: '<%= it.label_attr %>'
     },
     'comp_row': {
       label: 'Row',
@@ -811,6 +811,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: 'comp_select'
     }
   }, allBlocks));
+  bm.add('comp_file', _objectSpread({
+    label: c.comp_file.label,
+    attributes: {
+      class: 'fa fa-file'
+    },
+    content: {
+      type: 'comp_file'
+    }
+  }, allBlocks));
   bm.add('comp_checkbox', _objectSpread({
     label: c.comp_checkbox.label,
     attributes: {
@@ -900,9 +909,11 @@ var cmdDeviceDesktop = 'set-device-desktop',
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _templating__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./templating */ "./src/templating.js");
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
@@ -915,36 +926,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       label: 'Input',
       classes: 'form-group',
       useTag: 'div',
-      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"{{=it.type_attr}}\" class=\"form-control\" name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" class=\"form-control\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
     },
     'comp_select': {
       label: 'Select',
       classes: 'form-group',
       useTag: 'div',
-      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n        <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}class=\"form-control\" name=\"{{=it.name_attr}}\">\n          <option selected>-- Please select an option -- </option>\n          {{~ (it.option_attr + \"\").trim().split(\"\\n\") :option }}\n          {{ var msgProps = option.split('::');\n          }} <option value=\"{{= msgProps[0]}}\">{{= msgProps[1] || msgProps[0] }}</option>{{~}}\n        </select>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>class=\"form-control\" name=\"<%=it.name_attr%>\">\n          <option selected>-- Please select an option -- </option>\n          <%~ (it.option_attr + \"\").trim().split(\"\\n\") :option %>\n          <% var msgProps = option.split('::');\n          %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option><%~%>\n        </select>\n      "
+    },
+    'comp_file': {
+      label: 'File',
+      classes: 'custom-file',
+      useTag: 'div',
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"file\" class=\"custom-file-input\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.accept_attr ? 'accept=\"' + it.accept_attr + '\"' : '' %> <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        <label for=\"<%=it.name_attr%>\" class=\"custom-file-label\"><%=it.label_attr%></label>\n      "
     },
     'comp_textarea': {
       label: 'Textarea',
       classes: 'form-group',
       useTag: 'div',
-      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n        <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' }}{{= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' }}class=\"form-control\" name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\">{{= it.value_attr || '' }}</textarea>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>class=\"form-control\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n      "
     },
     'comp_checkbox': {
       label: 'Checkbox',
       classes: 'form-check',
       useTag: 'div',
-      template: "\n        <label for=\"{{=it.name_attr}}\" class=\"form-check-label\">\n          <input {{= it.required_attr ? 'required ' : '' }}type=\"checkbox\" name=\"{{=it.name_attr}}\" class=\"form-check-input\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n          {{=it.label_attr}}\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\" class=\"form-check-label\">\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\" name=\"<%=it.name_attr%>\" class=\"form-check-input\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n          <%=it.label_attr%>\n        </label>\n      "
     },
     'comp_hidden': {
       label: 'Hidden Input',
       useTag: 'div',
-      template: "\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"hidden\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
     },
     'comp_submit': {
       label: 'Submit Button',
       classes: 'btn btn-primary btn-block',
       useTag: 'button',
-      template: '{{= it.label_attr }}'
+      template: '<%= it.label_attr %>'
     },
     'comp_row': {
       label: 'Row',
@@ -1028,7 +1045,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       if (t && typeof t.template === 'string') {
         if (!doT) {
-          doT = __webpack_require__(/*! dot */ "dot");
+          doT = Object(_templating__WEBPACK_IMPORTED_MODULE_1__["default"])();
         }
 
         t.template = doT.template(t.template);
@@ -1294,6 +1311,36 @@ __webpack_require__.r(__webpack_exports__);
       }
     });
   });
+});
+
+/***/ }),
+
+/***/ "./src/templating.js":
+/*!***************************!*\
+  !*** ./src/templating.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var doT = __webpack_require__(/*! dot */ "dot");
+
+  doT.templateSettings = {
+    evaluate: /\<\%([\s\S]+?)\%\>/g,
+    interpolate: /\<\%=([\s\S]+?)\%\>/g,
+    encode: /\<\%!([\s\S]+?)\%\>/g,
+    use: /\<\%#([\s\S]+?)\%\>/g,
+    define: /\<\%##\s*([\w\.$]+)\s*(\:|=)([\s\S]+?)#\%\>/g,
+    conditional: /\<\%\?(\?)?\s*([\s\S]*?)\s*\%\>/g,
+    iterate: /\<\%~\s*(?:\%\>|([\s\S]+?)\s*\:\s*([\w$]+)\s*(?:\:\s*([\w$]+))?\s*\%\>)/g,
+    varname: 'it',
+    strip: true,
+    append: true,
+    selfcontained: false
+  };
+  return doT;
 });
 
 /***/ }),
@@ -1630,6 +1677,45 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
         that.listenTo(that, 'change:cols_attr', that.generateHtml);
         that.listenTo(that, 'change:rows_attr', that.generateHtml);
+      }
+    }),
+    view: myDefaultView
+  });
+  dc.addType('comp_file', {
+    model: myDefaultModel.extend({
+      defaults: _objectSpread({}, defaultModel.prototype.defaults, {
+        draggable: true,
+        droppable: false,
+        copyable: false,
+        tagName: 'comp_file',
+        label_attr: 'Choose file...',
+        traits: [{
+          type: 'checkbox',
+          name: 'required_attr',
+          changeProp: 1,
+          label: 'Required'
+        }, {
+          type: 'text',
+          name: 'placeholder_attr',
+          label: 'Placeholder',
+          changeProp: 1,
+          placeholder: 'Enter placeholder text..'
+        }, {
+          type: 'string',
+          name: 'accept_attr',
+          label: 'Accept',
+          changeProp: 1,
+          placeholder: 'image/jpeg, image/png, image/gif'
+        }].concat(fieldTraits),
+        classes: ['comp_file'].concat(opts.comps.comp_file.classes)
+      }),
+      init: function init() {
+        var that = this;
+        that.myInitDefaults();
+        that.listenTo(that, 'change:label_attr', that.generateHtml);
+        that.listenTo(that, 'change:name_attr', that.generateHtml);
+        that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
+        that.listenTo(that, 'change:accept_attr', that.generateHtml);
       }
     }),
     view: myDefaultView

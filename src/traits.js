@@ -322,6 +322,50 @@ export default (editor, opts = {}) => {
     view: myDefaultView
   })
 
+  dc.addType('comp_file', {
+    model: myDefaultModel.extend({
+      defaults: {
+        ...defaultModel.prototype.defaults,
+        draggable: true,
+        droppable: false,
+        copyable: false,
+        tagName: 'comp_file',
+        label_attr: 'Choose file...',
+        traits: [
+          {
+            type: 'checkbox',
+            name: 'required_attr',
+            changeProp: 1,
+            label: 'Required'
+          }, {
+            type: 'text',
+            name: 'placeholder_attr',
+            label: 'Placeholder',
+            changeProp: 1,
+            placeholder: 'Enter placeholder text..'
+          }, {
+            type: 'string',
+            name: 'accept_attr',
+            label: 'Accept',
+            changeProp: 1,
+            placeholder: 'image/jpeg, image/png, image/gif'
+          },
+        ].concat(fieldTraits),
+        classes: ['comp_file'].concat(opts.comps.comp_file.classes)
+      },
+      init() {
+        const that = this
+        that.myInitDefaults()
+
+        that.listenTo(that, 'change:label_attr', that.generateHtml)
+        that.listenTo(that, 'change:name_attr', that.generateHtml)
+        that.listenTo(that, 'change:placeholder_attr', that.generateHtml)
+        that.listenTo(that, 'change:accept_attr', that.generateHtml)
+      }
+    }),
+    view: myDefaultView
+  })
+
   dc.addType('comp_checkbox', {
     model: myDefaultModel.extend({
       defaults: {
