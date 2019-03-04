@@ -197,6 +197,17 @@ export default (editor, opts = {}) => {
             {
               type: 'comp_col',
               components: [
+                 { type: 'comp_input', type_attr: 'phone', label_attr: 'Phone 000-000-000', name_attr: 'phone', placeholder_attr: '000-000-000', pattern_attr: '000-000-000' }
+              ]
+            }
+          ]
+        },
+        {
+          type: 'comp_row',
+          components: [
+            {
+              type: 'comp_col',
+              components: [
                  { type: 'comp_checkbox', label_attr: 'I\'m retired or unemployed.', name_attr: 'is_retired_or_unemployed' }
               ]
             }
