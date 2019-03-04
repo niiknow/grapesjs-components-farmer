@@ -83,6 +83,21 @@ export default (editor, opts = {}) => {
     'comp_col3': {
       label: '3 Columns',
       useTag: 'div',
+    },
+    'comp_text': {
+      label: 'Text'
+    },
+    'comp_link': {
+      label: 'Link'
+    },
+    'comp_image': {
+      label: 'Image'
+    },
+    'comp_video': {
+      label: 'Video'
+    },
+    'comp_map': {
+      label: 'Map'
     }
   }
 
@@ -103,8 +118,23 @@ export default (editor, opts = {}) => {
     formNextId: 1,
     categoryLabel: 'Basic',
     formFieldsPrefix: 'Field',
-    showStylesOnChange: 1
-    , ...opts
+    showStylesOnChange: 1,
+    addResource: (url, type='script') => {
+
+      const doc    = editor.Canvas.getDocument()
+      const head   = doc.head || doc.getElementsByTagName('head')[0]
+      const res    = document.createElement(type)
+
+      if (type === 'script') {
+        res.src = url
+      }
+      else if (type === 'link') {
+        res.rel    = 'stylesheet'
+        res.href   = url
+      }
+
+      head.appendChild(res)
+    }, ...opts
   }
 
   options.comps = options.comps || opts_comps
@@ -150,12 +180,22 @@ export default (editor, opts = {}) => {
     require('./panels').default(editor, options)
   }
 
+  if (opts.trumbowyg) {
+    require('./trumbowyg').default(editor, options)
+  }
+
+  if (opts.summernote) {
+    require('./summernote').default(editor, options)
+  }
+
+
   editor.on('load', () => {
     compileTemplates()
 
     setTimeout(() => {
-      const doc = editor.getWrapper().view.$el[0].ownerDocument
-      var css = `
+      const doc  = editor.Canvas.getDocument()
+      const head = doc.head || doc.getElementsByTagName('head')[0]
+      var css    = `
 body {
   padding: 10px;
 }
@@ -177,7 +217,6 @@ comp_col {
 }
 `
 
-      const head  = doc.head || doc.getElementsByTagName('head')[0]
       const style = doc.createElement('style')
 
       style.type = 'text/css';

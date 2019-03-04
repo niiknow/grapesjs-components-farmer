@@ -1,15 +1,15 @@
-export default (editor, opt = {}) => {
+export default (editor, opts = {}) => {
   const bm     = editor.BlockManager
-  const c      = opt.comps
+  const c      = opts.comps
   const blocks = c.blocks
   const cats   = c.blockCategories
 
-  if (opt.resetBlocks) {
+  if (opts.resetBlocks) {
     bm.getAll().reset()
   }
 
   const allBlocks = {
-    category: opt.categoryLabel
+    category: opts.categoryLabel
   }
 
   // CORE BLOCKS
@@ -141,4 +141,38 @@ export default (editor, opt = {}) => {
     },
     ...allBlocks
   })
+
+
+  bm.add('comp_text', {
+    label: c.comp_text.label,
+    attributes: {class:'gjs-fonts gjs-f-text'},
+    content: {
+      type:'comp_text',
+      content:'<div class="note-editor"></div>',
+      style: {padding: '10px' },
+      activeOnRender: 1
+    },
+    ...allBlocks
+  });
+
+  bm.add('comp_image', {
+    label: c.comp_image.labelImage,
+    attributes: {class:'gjs-fonts gjs-f-image'},
+    content: {
+      style: {color: 'black'},
+      type:'image',
+      activeOnRender: 1
+    },
+    ...allBlocks
+  });
+
+  bm.add('comp_map', {
+    label: c.comp_map.label,
+    attributes: {class:'fa fa-map-o'},
+    content: {
+      type: 'map',
+      style: {height: '350px'}
+    },
+    ...allBlocks
+  });
 }

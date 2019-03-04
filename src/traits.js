@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-export default (editor, opt = {}) => {
+export default (editor, opts = {}) => {
   const tm = editor.TraitManager
   const dc = editor.DomComponents
   const bm = editor.BlockManager
@@ -9,8 +9,9 @@ export default (editor, opt = {}) => {
   const selectType   = dc.getType('select') || defaultType
   const defaultModel = defaultType.model
   const defaultView  = defaultType.view
+  const textType     = dc.getType('text')
 
-  const fieldTraits = [
+  const fieldTraits = defaultModel.prototype.defaults.traits.concat([
     {
       type: 'text',
       name: 'name_attr',
@@ -22,7 +23,7 @@ export default (editor, opt = {}) => {
       label: 'Label',
       placeholder: 'Enter a field label..'
     }
-  ]
+  ])
 
   const inputTraits = fieldTraits.concat([
     {
@@ -150,7 +151,7 @@ export default (editor, opt = {}) => {
       if (nameTrait) {
         let name = attrs.name_attr
         if (!name) {
-          name = `${opt.formFieldsPrefix}${opt.formNextId++}`
+          name = `${opts.formFieldsPrefix}${opts.formNextId++}`
 
           nameTrait.set('value', name)
           model.setAttributes({ name_attr: name })
@@ -166,8 +167,8 @@ export default (editor, opt = {}) => {
       const attrs = this.getTraitValues()
       const $k    = $k || model.get('tagName')
 
-      if (opt && opt.comps && opt.comps[$k]) {
-        const templateFn = opt.comps[$k].template
+      if (opts && opts.comps && opts.comps[$k]) {
+        const templateFn = opts.comps[$k].template
 
         if (typeof(templateFn) === 'function') {
           model.ensureNameAttr(attrs)
@@ -201,8 +202,8 @@ export default (editor, opt = {}) => {
         copyable: false,
         tagName: 'comp_input',
         type_attr: 'text',
-        traits: defaultModel.prototype.defaults.traits.concat(inputTypeTrait).concat(inputTraits),
-        classes: ('comp_input ' + (opt.comps.comp_input.classes || '')).split(' ')
+        traits: inputTraits.concat(inputTypeTrait),
+        classes: ('comp_input ' + (opts.comps.comp_input.classes || '')).split(' ')
       },
       init() {
         const that = this
@@ -241,7 +242,7 @@ export default (editor, opt = {}) => {
             label: 'Multiple'
           }
         ].concat(fieldTraits),
-        classes: ('comp_select ' + (opt.comps.comp_select.classes || '')).split(' ')
+        classes: ('comp_select ' + (opts.comps.comp_select.classes || '')).split(' ')
       },
       init() {
         const that = this
@@ -290,7 +291,7 @@ export default (editor, opt = {}) => {
             placeholder: 'Enter field columns/width..'
           },
         ].concat(fieldTraits),
-        classes: ('comp_textarea ' + (opt.comps.comp_textarea.classes || '')).split(' ')
+        classes: ('comp_textarea ' + (opts.comps.comp_textarea.classes || '')).split(' ')
       },
       init() {
         const that = this
@@ -322,7 +323,7 @@ export default (editor, opt = {}) => {
             label: 'Required'
           }
         ].concat(fieldTraits),
-        classes: ('comp_checkbox ' + (opt.comps.comp_checkbox.classes || '')).split(' ')
+        classes: ('comp_checkbox ' + (opts.comps.comp_checkbox.classes || '')).split(' ')
       },
       init() {
         const that = this
@@ -349,7 +350,7 @@ export default (editor, opt = {}) => {
           changeProp: 1,
           placeholder: 'Enter a field name...'
         }],
-        classes: ('comp_hidden ' + (opt.comps.comp_hidden.classes || '')).split(' ')
+        classes: ('comp_hidden ' + (opts.comps.comp_hidden.classes || '')).split(' ')
       },
       init() {
         const that = this
@@ -369,15 +370,15 @@ export default (editor, opt = {}) => {
         copyable: false,
         tagName: 'comp_submit',
         label_attr: 'Send',
-        traits:[
+        traits: defaultModel.prototype.defaults.traits.concat([
           {
             type: 'text',
             name: 'label_attr',
             label: 'Label',
             placeholder: 'Enter a field label..'
           }
-        ],
-        classes: ('comp_submit ' + (opt.comps.comp_submit.classes || '')).split(' ')
+        ]),
+        classes: ('comp_submit ' + (opts.comps.comp_submit.classes || '')).split(' ')
       },
       init() {
         const that = this
@@ -398,7 +399,7 @@ export default (editor, opt = {}) => {
         copyable: false,
         // Can drop other elements inside it
         droppable: 'comp_col',
-        classes: ('comp_row ' + (opt.comps.comp_row.classes || '')).split(' ')
+        classes: ('comp_row ' + (opts.comps.comp_row.classes || '')).split(' ')
       }
     }),
     view: defaultView
@@ -414,9 +415,26 @@ export default (editor, opt = {}) => {
         // Can drop other elements inside it
         droppable: true,
         copyable: false,
-        classes: ('comp_col ' + (opt.comps.comp_col.classes || '')).split(' ')
+        classes: ('comp_col ' + (opts.comps.comp_col.classes || '')).split(' ')
       }
     }),
     view: defaultView
+  })
+
+    // override default view to generate html
+  const myTextView = textType.view.extend({
+    getChildrenSelector() {
+      let container = $(this.el).find('.note-editor')
+      if (container.length <= 0) {
+        $(this.el).html('<div class="note-editor" contenteditable="true"></div>')
+      }
+
+      return '.note-editor'
+    }
+  })
+
+  dc.addType('comp_text', {
+    model: textType.model,
+    view: myTextView
   })
 }

@@ -31,12 +31,35 @@ const opts = {
     window.nextNameIndex = 1
   },
   plugins: [
-    'grapesjs-components-farmer'
+    'grapesjs-components-farmer',
+    'gjs-plugin-ckeditor'
   ],
   pluginsOpts: {
     'grapesjs-components-farmer': {
       formNextId: 1,
-      panel: 1
+      panel: 1,
+      summernote: {
+        airMode: true
+      }
+    },
+    'gjs-plugin-ckeditor': {
+      position: 'center',
+      options: {
+        startupFocus: true,
+        // Allows any class and any inline style
+        extraAllowedContent: '*(*);*{*}',
+        // Disable auto-formatting, class removing, etc.
+        allowedContent: true,
+        enterMode: CKEDITOR.ENTER_BR,
+        extraPlugins: 'sharedspace,justify,colorbutton,panelbutton,font',
+        toolbar: [
+          { name: 'styles', items: ['Font', 'FontSize' ] },
+          ['Bold', 'Italic', 'Underline', 'Strike'],
+          { name: 'paragraph', items : [ 'NumberedList', 'BulletedList'] },
+          { name: 'links', items: ['Link', 'Unlink'] },
+          { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
+        ]
+      }
     }
   }
 }

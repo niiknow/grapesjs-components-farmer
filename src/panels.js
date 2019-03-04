@@ -7,7 +7,7 @@ import {
 
 import $ from 'jquery'
 
-export default (editor, config) => {
+export default (editor, opts) => {
   const cmds    = editor.Commands
   const pn      = editor.Panels
   const eConfig = editor.getConfig()
@@ -24,7 +24,7 @@ export default (editor, config) => {
 
   eConfig.showDevices = 0
 
-  const txtConfirm = config.textCleanCanvas || 'Are you sure to clean the canvas?'
+  const txtConfirm = opts.textCleanCanvas || 'Are you sure to clean the canvas?'
 
   cmds.add(cmdDeviceDesktop, e => e.setDevice('Desktop'))
   cmds.add(cmdDeviceTablet, e => e.setDevice('Tablet'))
@@ -177,7 +177,7 @@ export default (editor, config) => {
     openBl && openBl.set('active', 1)
 
     // On component change show the Style Manager
-    config.showStylesOnChange && editor.on('component:selected', () => {
+    opts.showStylesOnChange && editor.on('component:selected', () => {
       const openSmBtn = pn.getButton('views', osm)
       const openLayersBtn = pn.getButton('views', ola)
 
