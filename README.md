@@ -39,15 +39,12 @@ This library is available on NPM, to install:
 npm install grapesjs-components-farmer
 ```
 
-## Planning
-- [ ] Build generic form field components
-- [ ] Demo how to get components json and html
-
 ## Why GrapesJS?
 We like the fact that grapesjs can provide/separate output for components json, xml code, and html.  This allow us to build HTML visually, while saving the code and generating the actual HTML for the user (e.g. in case the browser HTML get injected by browser, some bad extensions, or by a password manager).  
 
 ## Point of Interest
-* [SurveyJS](https://surveyjs.io/)
+* [Lambda Form](https://github.com/niiknow/lambda-form) - this plugin was built primary for use with this thing.
+* [SurveyJS](https://surveyjs.io/) - more advance form builder to look into.
 
 ## License
 
