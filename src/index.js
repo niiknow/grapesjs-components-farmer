@@ -103,9 +103,12 @@ export default (editor, opts = {}) => {
       for(let j in y) {
         y[j] = y[j] || x[j]
       }
+      opts_comps[k] = y
     } else {
       opts_comps[k] = x
     }
+
+    opts_comps[k]['classes'] = (opts_comps[k]['classes'] || '').split(' ')
   }
 
   const options = {

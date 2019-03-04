@@ -105,126 +105,45 @@ return /******/ (function(modules) { // webpackBootstrap
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _src__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src */ "./src/index.js");
-/* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! grapesjs */ "grapesjs");
-/* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(grapesjs__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "jquery");
-/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _custom_blocks_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./custom-blocks.js */ "./example/custom-blocks.js");
+/* harmony import */ var _init__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./init */ "./example/init.js");
+/* harmony import */ var _bootstrap4__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./bootstrap4 */ "./example/bootstrap4.js");
+/* harmony import */ var _foundation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./foundation */ "./example/foundation.js");
+/* harmony import */ var _googlemd__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./googlemd */ "./example/googlemd.js");
 
 
 
- // only for debugging purpose as pluginFarmer is reference from source
-// when you import directly as 'grapesjs-components-farmer' then you don't need to do this
 
-window['grapesjs-components-farmer'] = _src__WEBPACK_IMPORTED_MODULE_0__["default"];
-var opts = {
-  container: '#gjs',
-  height: '100%',
-  noticeOnUnload: 0,
-  showOffsets: 1,
-  autorender: 1,
-  allowScripts: 1,
-  storageManager: {
-    type: 'none'
-  },
-  forceClass: 0,
-  avoidInlineStyle: 1,
-  styleManager: {
-    clearProperties: 1
-  },
-  fromElement: 1,
+
+if (window.location.href.indexOf('css=foundation') > 0) {
+  console.log('Foundation CSS');
+  Object(_init__WEBPACK_IMPORTED_MODULE_0__["default"])(_foundation__WEBPACK_IMPORTED_MODULE_2__["default"]);
+} else if (window.location.href.indexOf('css=materialize') > 0) {
+  console.log('Google Materialize CSS');
+  Object(_init__WEBPACK_IMPORTED_MODULE_0__["default"])(_googlemd__WEBPACK_IMPORTED_MODULE_3__["default"]);
+} else {
+  console.log('Bootstrap 4 CSS');
+  Object(_init__WEBPACK_IMPORTED_MODULE_0__["default"])(_bootstrap4__WEBPACK_IMPORTED_MODULE_1__["default"]);
+}
+
+/***/ }),
+
+/***/ "./example/bootstrap4.js":
+/*!*******************************!*\
+  !*** ./example/bootstrap4.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var config = {
+  formNextId: 1,
   canvas: {
     styles: ['https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'],
     scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js']
-  },
-  script: function script() {
-    // initialize next id
-    window.nextNameIndex = 1;
-  },
-  plugins: ['grapesjs-components-farmer', 'gjs-plugin-ckeditor'],
-  pluginsOpts: {
-    'grapesjs-components-farmer': {
-      formNextId: 1,
-      panel: 1
-    },
-    'gjs-plugin-ckeditor': {
-      position: 'center',
-      options: {
-        startupFocus: true,
-        // Allows any class and any inline style
-        extraAllowedContent: '*(*);*{*}',
-        // Disable auto-formatting, class removing, etc.
-        allowedContent: true,
-        enterMode: CKEDITOR.ENTER_BR,
-        extraPlugins: 'sharedspace,justify,colorbutton,panelbutton,font',
-        toolbar: [{
-          name: 'styles',
-          items: ['Font', 'FontSize']
-        }, ['Bold', 'Italic', 'Underline', 'Strike'], {
-          name: 'paragraph',
-          items: ['NumberedList', 'BulletedList']
-        }, {
-          name: 'links',
-          items: ['Link', 'Unlink']
-        }, {
-          name: 'colors',
-          items: ['TextColor', 'BGColor']
-        }]
-      }
-    }
   }
 };
-var editor = grapesjs__WEBPACK_IMPORTED_MODULE_1___default.a.init(opts);
-Object(_custom_blocks_js__WEBPACK_IMPORTED_MODULE_3__["default"])(editor, {
-  categoryLabel: 'Templates'
-});
-var pfx = editor.getConfig().stylePrefix;
-var modal = editor.Modal;
-var cmdm = editor.Commands;
-var codeViewer = editor.CodeManager.getViewer('CodeMirror').clone();
-var pnm = editor.Panels;
-var container = document.createElement('div');
-codeViewer.set({
-  codeName: 'htmlmixed',
-  readOnly: 0,
-  theme: 'hopscotch',
-  autoBeautify: true,
-  autoCloseTags: true,
-  autoCloseBrackets: true,
-  lineWrapping: true,
-  styleActiveLine: true,
-  smartIndent: true,
-  indentWithTabs: true
-});
-cmdm.add('html-export-usable', {
-  run: function run(editor, sender) {
-    sender && sender.set('active', 0);
-    var viewer = codeViewer.editor;
-    modal.setTitle('Usable HTML');
-
-    if (!viewer) {
-      var txtarea = document.createElement('textarea');
-      container.appendChild(txtarea);
-      codeViewer.init(txtarea);
-      viewer = codeViewer.editor;
-    }
-
-    modal.setContent('');
-    modal.setContent(container);
-    codeViewer.setContent(editor.runCommand('get-usable-html'));
-    modal.open();
-    viewer.refresh();
-  }
-});
-pnm.addButton('options', [{
-  id: 'export',
-  className: 'fa fa-download',
-  command: 'html-export-usable',
-  attributes: {
-    title: 'Export usable HTML'
-  }
-}]);
+/* harmony default export */ __webpack_exports__["default"] = (config);
 
 /***/ }),
 
@@ -353,7 +272,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   });
   bm.add('donation', {
-    label: "<svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n        <path class=\"gjs-block-svg-path\" d=\"M22,5.5 C22,5.2 21.5,5 20.75,5 L3.25,5 C2.5,5 2,5.2 2,5.5 L2,8.5 C2,8.8 2.5,9 3.25,9 L20.75,9 C21.5,9 22,8.8 22,8.5 L22,5.5 Z M21,8 L3,8 L3,6 L21,6 L21,8 Z\" fill-rule=\"nonzero\"></path>\n        <path class=\"gjs-block-svg-path\" d=\"M22,10.5 C22,10.2 21.5,10 20.75,10 L3.25,10 C2.5,10 2,10.2 2,10.5 L2,13.5 C2,13.8 2.5,14 3.25,14 L20.75,14 C21.5,14 22,13.8 22,13.5 L22,10.5 Z M21,13 L3,13 L3,11 L21,11 L21,13 Z\" fill-rule=\"nonzero\"></path>\n        <rect class=\"gjs-block-svg-path\" x=\"2\" y=\"15\" width=\"10\" height=\"3\" rx=\"0.5\"></rect>\n      </svg>\n      <div class=\"gjs-block-label\">donation</div></div>",
+    label: "<svg class=\"gjs-block-svg\" viewBox=\"0 0 24 24\" xmlns=\"http://www.w3.org/2000/svg\">\n        <path class=\"gjs-block-svg-path\" d=\"M22,5.5 C22,5.2 21.5,5 20.75,5 L3.25,5 C2.5,5 2,5.2 2,5.5 L2,8.5 C2,8.8 2.5,9 3.25,9 L20.75,9 C21.5,9 22,8.8 22,8.5 L22,5.5 Z M21,8 L3,8 L3,6 L21,6 L21,8 Z\" fill-rule=\"nonzero\"></path>\n        <path class=\"gjs-block-svg-path\" d=\"M22,10.5 C22,10.2 21.5,10 20.75,10 L3.25,10 C2.5,10 2,10.2 2,10.5 L2,13.5 C2,13.8 2.5,14 3.25,14 L20.75,14 C21.5,14 22,13.8 22,13.5 L22,10.5 Z M21,13 L3,13 L3,11 L21,11 L21,13 Z\" fill-rule=\"nonzero\"></path>\n        <rect class=\"gjs-block-svg-path\" x=\"2\" y=\"15\" width=\"10\" height=\"3\" rx=\"0.5\"></rect>\n      </svg>\n      <div class=\"gjs-block-label\">Donation</div></div>",
     category: opts.cateogyrLabel || 'Templates',
     content: {
       components: [{
@@ -443,7 +362,7 @@ __webpack_require__.r(__webpack_exports__);
           components: [{
             type: 'comp_input',
             type_attr: 'phone',
-            label_attr: 'Phone 000-000-000',
+            label_attr: 'Phone #000-000-000',
             name_attr: 'phone',
             placeholder_attr: '000-000-000',
             pattern_attr: '000-000-000'
@@ -485,6 +404,314 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./example/foundation.js":
+/*!*******************************!*\
+  !*** ./example/foundation.js ***!
+  \*******************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var config = {
+  canvas: {
+    styles: ['https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css'],
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js']
+  },
+  comps: {
+    'comp_input': {
+      label: 'Input',
+      classes: 'cell large-12',
+      useTag: 'div',
+      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}\n          <input {{= it.required_attr ? 'required ' : '' }}type=\"{{=it.type_attr}}\" name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n        </label>\n      "
+    },
+    'comp_select': {
+      label: 'Select',
+      classes: 'cell large-12',
+      useTag: 'div',
+      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}\n          <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}name=\"{{=it.name_attr}}\">\n            <option selected>-- Please select an option -- </option>\n            {{~ (it.option_attr + \"\").trim().split(\"\\n\") :option }}\n            {{ var msgProps = option.split('::');\n            }} <option value=\"{{= msgProps[0]}}\">{{= msgProps[1] || msgProps[0] }}</option>{{~}}\n          </select>\n        </label>\n      "
+    },
+    'comp_textarea': {
+      label: 'Textarea',
+      classes: 'cell large-12',
+      useTag: 'div',
+      template: "\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}\n          <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' }}{{= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' }}name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\">{{= it.value_attr || '' }}</textarea>\n        </label>\n      "
+    },
+    'comp_checkbox': {
+      label: 'Checkbox',
+      classes: 'cell large-12',
+      useTag: 'div',
+      template: "\n        <label for=\"{{=it.name_attr}}\">\n          <input {{= it.required_attr ? 'required ' : '' }}type=\"checkbox\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n          {{=it.label_attr}}\n        </label>\n      "
+    },
+    'comp_hidden': {
+      label: 'Hidden Input',
+      useTag: 'div',
+      template: "\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"hidden\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n      "
+    },
+    'comp_submit': {
+      label: 'Submit Button',
+      classes: 'button',
+      useTag: 'button',
+      template: '{{= it.label_attr }}'
+    },
+    'comp_row': {
+      label: 'Row',
+      useTag: 'div',
+      classes: 'grid-x'
+    },
+    'comp_col': {
+      label: 'Column',
+      useTag: 'div',
+      classes: 'cell'
+    },
+    'comp_col1': {
+      label: '1 Column',
+      useTag: 'div',
+      classes: 'large-12'
+    },
+    'comp_col2': {
+      label: '2 Columns',
+      useTag: 'div',
+      classes: 'large-6'
+    },
+    'comp_col3': {
+      label: '3 Columns',
+      useTag: 'div',
+      classes: 'large-4'
+    },
+    'comp_text': {
+      label: 'Text'
+    },
+    'comp_image': {
+      label: 'Image'
+    },
+    'comp_map': {
+      label: 'Map'
+    }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (config);
+
+/***/ }),
+
+/***/ "./example/googlemd.js":
+/*!*****************************!*\
+  !*** ./example/googlemd.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var config = {
+  canvas: {
+    styles: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'],
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js']
+  },
+  comps: {
+    'comp_input': {
+      label: 'Input',
+      classes: 'input-field col s12',
+      useTag: 'div',
+      template: "\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"{{=it.type_attr}}\" name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n      "
+    },
+    'comp_select': {
+      label: 'Select',
+      classes: 'input-field col s12',
+      useTag: 'div',
+      template: "\n        <select {{= it.multiple_attr ? 'multiple ' : '' }}{{= it.required_attr ? 'required ' : '' }}name=\"{{=it.name_attr}}\">\n          <option selected>-- Please select an option -- </option>\n          {{~ (it.option_attr + \"\").trim().split(\"\\n\") :option }}\n          {{ var msgProps = option.split('::');\n          }} <option value=\"{{= msgProps[0]}}\">{{= msgProps[1] || msgProps[0] }}</option>{{~}}\n        </select>\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n      "
+    },
+    'comp_textarea': {
+      label: 'Textarea',
+      classes: 'input-field col s12',
+      useTag: 'div',
+      template: "\n        <textarea {{= it.required_attr ? 'required ' : '' }}{{= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' }}{{= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' }}name=\"{{=it.name_attr}}\" placeholder=\"{{=it.placeholder_attr || ''}}\">{{= it.value_attr || '' }}</textarea>\n        <label for=\"{{=it.name_attr}}\">{{=it.label_attr}}</label>\n      "
+    },
+    'comp_checkbox': {
+      label: 'Checkbox',
+      classes: 'row',
+      useTag: 'div',
+      template: "\n        <div class=\"input-field col s12\">\n          <label for=\"{{=it.name_attr}}\">\n            <input {{= it.required_attr ? 'required ' : '' }}type=\"checkbox\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n            <span>{{=it.label_attr}}</span>\n          </label>\n        </div>\n      "
+    },
+    'comp_hidden': {
+      label: 'Hidden Input',
+      useTag: 'div',
+      template: "\n        <input {{= it.required_attr ? 'required ' : '' }}type=\"hidden\" name=\"{{=it.name_attr}}\" {{= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' }}/>\n      "
+    },
+    'comp_submit': {
+      label: 'Submit Button',
+      classes: 'btn waves-effect waves-light',
+      useTag: 'button',
+      template: '{{= it.label_attr }}'
+    },
+    'comp_row': {
+      label: 'Row',
+      useTag: 'div',
+      classes: 'row'
+    },
+    'comp_col': {
+      label: 'Column',
+      useTag: 'div'
+    },
+    'comp_col1': {
+      label: '1 Column',
+      useTag: 'div',
+      classes: 'col s12'
+    },
+    'comp_col2': {
+      label: '2 Columns',
+      useTag: 'div',
+      classes: 'col s6'
+    },
+    'comp_col3': {
+      label: '3 Columns',
+      useTag: 'div',
+      classes: 'col s4'
+    },
+    'comp_text': {
+      label: 'Text'
+    },
+    'comp_image': {
+      label: 'Image'
+    },
+    'comp_map': {
+      label: 'Map'
+    }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (config);
+
+/***/ }),
+
+/***/ "./example/init.js":
+/*!*************************!*\
+  !*** ./example/init.js ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _src__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../src */ "./src/index.js");
+/* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! grapesjs */ "grapesjs");
+/* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(grapesjs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! jquery */ "jquery");
+/* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _custom_blocks_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./custom-blocks.js */ "./example/custom-blocks.js");
+
+
+
+ // only for debugging purpose as pluginFarmer is reference from source
+// when you import directly as 'grapesjs-components-farmer' then you don't need to do this
+
+window['grapesjs-components-farmer'] = _src__WEBPACK_IMPORTED_MODULE_0__["default"];
+/* harmony default export */ __webpack_exports__["default"] = (function () {
+  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var config = {
+    container: '#gjs',
+    height: '100%',
+    noticeOnUnload: 0,
+    showOffsets: 1,
+    autorender: 1,
+    allowScripts: 1,
+    storageManager: {
+      type: 'none'
+    },
+    forceClass: 0,
+    avoidInlineStyle: 1,
+    styleManager: {
+      clearProperties: 1
+    },
+    fromElement: 1,
+    canvas: opts.canvas,
+    plugins: ['grapesjs-components-farmer', 'gjs-plugin-ckeditor'],
+    pluginsOpts: {
+      'grapesjs-components-farmer': {
+        formNextId: 1,
+        panel: 1,
+        comps: opts.comps
+      },
+      'gjs-plugin-ckeditor': {
+        position: 'center',
+        options: {
+          startupFocus: true,
+          // Allows any class and any inline style
+          extraAllowedContent: '*(*);*{*}',
+          // Disable auto-formatting, class removing, etc.
+          allowedContent: true,
+          enterMode: CKEDITOR.ENTER_BR,
+          extraPlugins: 'sharedspace,justify,colorbutton,panelbutton,font',
+          toolbar: [{
+            name: 'styles',
+            items: ['Font', 'FontSize']
+          }, ['Bold', 'Italic', 'Underline', 'Strike'], {
+            name: 'paragraph',
+            items: ['NumberedList', 'BulletedList']
+          }, {
+            name: 'links',
+            items: ['Link', 'Unlink']
+          }, {
+            name: 'colors',
+            items: ['TextColor', 'BGColor']
+          }]
+        }
+      }
+    }
+  };
+  var editor = grapesjs__WEBPACK_IMPORTED_MODULE_1___default.a.init(config);
+  Object(_custom_blocks_js__WEBPACK_IMPORTED_MODULE_3__["default"])(editor, {
+    categoryLabel: 'Templates'
+  });
+  var pfx = editor.getConfig().stylePrefix;
+  var modal = editor.Modal;
+  var cmdm = editor.Commands;
+  var codeViewer = editor.CodeManager.getViewer('CodeMirror').clone();
+  var pnm = editor.Panels;
+  var container = document.createElement('div');
+  codeViewer.set({
+    codeName: 'htmlmixed',
+    readOnly: 0,
+    theme: 'hopscotch',
+    autoBeautify: true,
+    autoCloseTags: true,
+    autoCloseBrackets: true,
+    lineWrapping: true,
+    styleActiveLine: true,
+    smartIndent: true,
+    indentWithTabs: true
+  });
+  cmdm.add('html-export-usable', {
+    run: function run(editor, sender) {
+      sender && sender.set('active', 0);
+      var viewer = codeViewer.editor;
+      modal.setTitle('Usable HTML');
+
+      if (!viewer) {
+        var txtarea = document.createElement('textarea');
+        container.appendChild(txtarea);
+        codeViewer.init(txtarea);
+        viewer = codeViewer.editor;
+      }
+
+      modal.setContent('');
+      modal.setContent(container);
+      codeViewer.setContent(editor.runCommand('get-usable-html'));
+      modal.open();
+      viewer.refresh();
+    }
+  });
+  pnm.addButton('options', [{
+    id: 'export',
+    className: 'fa fa-download',
+    command: 'html-export-usable',
+    attributes: {
+      title: 'Export usable HTML'
+    }
+  }]);
+});
+
+/***/ }),
+
 /***/ "./src/blocks.js":
 /*!***********************!*\
   !*** ./src/blocks.js ***!
@@ -521,7 +748,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     content: {
       type: 'comp_row',
       components: [{
-        type: 'comp_col'
+        type: 'comp_col',
+        classes: c.comp_col1.classes.concat(c.comp_col.classes)
       }]
     }
   }, allBlocks));
@@ -533,9 +761,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     content: {
       type: 'comp_row',
       components: [{
-        type: 'comp_col'
+        type: 'comp_col',
+        classes: c.comp_col2.classes.concat(c.comp_col.classes)
       }, {
-        type: 'comp_col'
+        type: 'comp_col',
+        classes: c.comp_col2.classes.concat(c.comp_col.classes)
       }]
     }
   }, allBlocks));
@@ -547,11 +777,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     content: {
       type: 'comp_row',
       components: [{
-        type: 'comp_col'
+        type: 'comp_col',
+        classes: c.comp_col3.classes.concat(c.comp_col.classes)
       }, {
-        type: 'comp_col'
+        type: 'comp_col',
+        classes: c.comp_col3.classes.concat(c.comp_col.classes)
       }, {
-        type: 'comp_col'
+        type: 'comp_col',
+        classes: c.comp_col3.classes.concat(c.comp_col.classes)
       }]
     }
   }, allBlocks));
@@ -609,7 +842,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   }, allBlocks));
   bm.add('comp_image', _objectSpread({
-    label: c.comp_image.labelImage,
+    label: c.comp_image.label,
     attributes: {
       class: 'gjs-fonts gjs-f-image'
     },
@@ -756,9 +989,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       for (var j in y) {
         y[j] = y[j] || x[j];
       }
+
+      opts_comps[k] = y;
     } else {
       opts_comps[k] = x;
     }
+
+    opts_comps[k]['classes'] = (opts_comps[k]['classes'] || '').split(' ');
   }
 
   var options = _objectSpread({
@@ -1304,7 +1541,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         tagName: 'comp_input',
         type_attr: 'text',
         traits: inputTraits.concat(inputTypeTrait),
-        classes: ('comp_input ' + (opts.comps.comp_input.classes || '')).split(' ')
+        classes: ['comp_input'].concat(opts.comps.comp_input.classes)
       }),
       init: function init() {
         var that = this;
@@ -1339,7 +1576,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           changeProp: 1,
           label: 'Multiple'
         }].concat(fieldTraits),
-        classes: ('comp_select ' + (opts.comps.comp_select.classes || '')).split(' ')
+        classes: ['comp_select'].concat(opts.comps.comp_select.classes)
       }),
       init: function init() {
         var that = this;
@@ -1384,7 +1621,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           changeProp: 1,
           placeholder: 'Enter field columns/width..'
         }].concat(fieldTraits),
-        classes: ('comp_textarea ' + (opts.comps.comp_textarea.classes || '')).split(' ')
+        classes: ['comp_textarea'].concat(opts.comps.comp_textarea.classes)
       }),
       init: function init() {
         var that = this;
@@ -1412,7 +1649,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           changeProp: 1,
           label: 'Required'
         }].concat(fieldTraits),
-        classes: ('comp_checkbox ' + (opts.comps.comp_checkbox.classes || '')).split(' ')
+        classes: ['comp_checkbox'].concat(opts.comps.comp_checkbox.classes)
       }),
       init: function init() {
         var that = this;
@@ -1437,7 +1674,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           changeProp: 1,
           placeholder: 'Enter a field name...'
         }],
-        classes: ('comp_hidden ' + (opts.comps.comp_hidden.classes || '')).split(' ')
+        classes: ['comp_hidden'].concat(opts.comps.comp_hidden.classes)
       }),
       init: function init() {
         var that = this;
@@ -1461,7 +1698,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
           label: 'Label',
           placeholder: 'Enter a field label..'
         }]),
-        classes: ('comp_submit ' + (opts.comps.comp_submit.classes || '')).split(' ')
+        classes: ['comp_submit'].concat(opts.comps.comp_submit.classes)
       }),
       init: function init() {
         var that = this;
@@ -1480,7 +1717,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         copyable: false,
         // Can drop other elements inside it
         droppable: 'comp_col',
-        classes: ('comp_row ' + (opts.comps.comp_row.classes || '')).split(' ')
+        classes: ['comp_row'].concat(opts.comps.comp_row.classes)
       })
     }),
     view: defaultView
@@ -1494,7 +1731,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         // Can drop other elements inside it
         droppable: true,
         copyable: false,
-        classes: ('comp_col ' + (opts.comps.comp_col.classes || '')).split(' ')
+        classes: ['comp_col'].concat(opts.comps.comp_col.classes)
       })
     }),
     view: defaultView

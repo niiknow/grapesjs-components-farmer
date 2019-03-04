@@ -113,7 +113,7 @@ export default (editor, opts = {}) => {
         <path class="gjs-block-svg-path" d="M22,10.5 C22,10.2 21.5,10 20.75,10 L3.25,10 C2.5,10 2,10.2 2,10.5 L2,13.5 C2,13.8 2.5,14 3.25,14 L20.75,14 C21.5,14 22,13.8 22,13.5 L22,10.5 Z M21,13 L3,13 L3,11 L21,11 L21,13 Z" fill-rule="nonzero"></path>
         <rect class="gjs-block-svg-path" x="2" y="15" width="10" height="3" rx="0.5"></rect>
       </svg>
-      <div class="gjs-block-label">donation</div></div>`,
+      <div class="gjs-block-label">Donation</div></div>`,
     category: opts.cateogyrLabel || 'Templates',
     content: {
       components: [
@@ -197,7 +197,7 @@ export default (editor, opts = {}) => {
             {
               type: 'comp_col',
               components: [
-                 { type: 'comp_input', type_attr: 'phone', label_attr: 'Phone 000-000-000', name_attr: 'phone', placeholder_attr: '000-000-000', pattern_attr: '000-000-000' }
+                 { type: 'comp_input', type_attr: 'phone', label_attr: 'Phone #000-000-000', name_attr: 'phone', placeholder_attr: '000-000-000', pattern_attr: '000-000-000' }
               ]
             }
           ]

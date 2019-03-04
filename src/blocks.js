@@ -19,7 +19,7 @@ export default (editor, opts = {}) => {
     content: {
       type: 'comp_row',
       components: [
-        { type: 'comp_col' }
+        { type: 'comp_col', classes: c.comp_col1.classes.concat(c.comp_col.classes) }
       ]
     },
     ...allBlocks
@@ -31,8 +31,8 @@ export default (editor, opts = {}) => {
     content: {
       type: 'comp_row',
       components: [
-        { type: 'comp_col' },
-        { type: 'comp_col' }
+        { type: 'comp_col', classes: c.comp_col2.classes.concat(c.comp_col.classes) },
+        { type: 'comp_col', classes: c.comp_col2.classes.concat(c.comp_col.classes) }
       ]
     },
     ...allBlocks
@@ -44,9 +44,9 @@ export default (editor, opts = {}) => {
     content: {
       type: 'comp_row',
       components: [
-        { type: 'comp_col' },
-        { type: 'comp_col' },
-        { type: 'comp_col' }
+        { type: 'comp_col', classes: c.comp_col3.classes.concat(c.comp_col.classes) },
+        { type: 'comp_col', classes: c.comp_col3.classes.concat(c.comp_col.classes) },
+        { type: 'comp_col', classes: c.comp_col3.classes.concat(c.comp_col.classes) }
       ]
     },
     ...allBlocks
@@ -144,7 +144,7 @@ export default (editor, opts = {}) => {
 
   bm.add('comp_text', {
     label: c.comp_text.label,
-    attributes: {class:'gjs-fonts gjs-f-text'},
+    attributes: { class:'gjs-fonts gjs-f-text' },
     content: {
       type:'comp_text',
       content:'Insert your text here',
@@ -155,8 +155,8 @@ export default (editor, opts = {}) => {
   })
 
   bm.add('comp_image', {
-    label: c.comp_image.labelImage,
-    attributes: {class:'gjs-fonts gjs-f-image'},
+    label: c.comp_image.label,
+    attributes: { class:'gjs-fonts gjs-f-image' },
     content: {
       style: {color: 'black'},
       type:'image',
@@ -167,7 +167,7 @@ export default (editor, opts = {}) => {
 
   bm.add('comp_map', {
     label: c.comp_map.label,
-    attributes: {class:'fa fa-map-o'},
+    attributes: { class:'fa fa-map-o' },
     content: {
       type: 'map',
       style: {height: '350px'}

@@ -1,118 +1,15 @@
-import pluginFarmer from '../src'
-import grapesjs from 'grapesjs'
-import $ from 'jquery'
-import customBlocks from './custom-blocks.js'
+import init from './init'
+import bootstrap4 from './bootstrap4'
+import foundation from './foundation'
+import googlemd   from './googlemd'
 
-// only for debugging purpose as pluginFarmer is reference from source
-// when you import directly as 'grapesjs-components-farmer' then you don't need to do this
-window['grapesjs-components-farmer'] = pluginFarmer
-
-const opts = {
-  container: '#gjs',
-  height: '100%',
-  noticeOnUnload: 0,
-  showOffsets: 1,
-  autorender: 1,
-  allowScripts:1,
-  storageManager: {type: 'none'},
-  forceClass: 0,
-  avoidInlineStyle: 1,
-  styleManager: { clearProperties: 1 },
-  fromElement: 1,
-  canvas: {
-    styles: [
-      'https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'
-    ],
-    scripts: [
-      'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'
-    ]
-  },
-  script: () => {
-    // initialize next id
-    window.nextNameIndex = 1
-  },
-  plugins: [
-    'grapesjs-components-farmer',
-    'gjs-plugin-ckeditor'
-  ],
-  pluginsOpts: {
-    'grapesjs-components-farmer': {
-      formNextId: 1,
-      panel: 1
-    },
-    'gjs-plugin-ckeditor': {
-      position: 'center',
-      options: {
-        startupFocus: true,
-        // Allows any class and any inline style
-        extraAllowedContent: '*(*);*{*}',
-        // Disable auto-formatting, class removing, etc.
-        allowedContent: true,
-        enterMode: CKEDITOR.ENTER_BR,
-        extraPlugins: 'sharedspace,justify,colorbutton,panelbutton,font',
-        toolbar: [
-          { name: 'styles', items: ['Font', 'FontSize' ] },
-          ['Bold', 'Italic', 'Underline', 'Strike'],
-          { name: 'paragraph', items : [ 'NumberedList', 'BulletedList'] },
-          { name: 'links', items: ['Link', 'Unlink'] },
-          { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
-        ]
-      }
-    }
-  }
+if (window.location.href.indexOf('css=foundation') > 0) {
+  console.log('Foundation CSS')
+  init(foundation)
+} else if (window.location.href.indexOf('css=materialize') > 0) {
+  console.log('Google Materialize CSS')
+  init(googlemd)
+} else {
+  console.log('Bootstrap 4 CSS')
+  init(bootstrap4)
 }
-
-let editor     = grapesjs.init(opts)
-customBlocks(editor, { categoryLabel: 'Templates' })
-
-let pfx        = editor.getConfig().stylePrefix
-let modal      = editor.Modal
-let cmdm       = editor.Commands
-let codeViewer = editor.CodeManager.getViewer('CodeMirror').clone()
-let pnm        = editor.Panels
-let container  = document.createElement('div')
-
-codeViewer.set({
-  codeName: 'htmlmixed',
-  readOnly: 0,
-  theme: 'hopscotch',
-  autoBeautify: true,
-  autoCloseTags: true,
-  autoCloseBrackets: true,
-  lineWrapping: true,
-  styleActiveLine: true,
-  smartIndent: true,
-  indentWithTabs: true
-})
-
-cmdm.add('html-export-usable', {
-  run: function(editor, sender) {
-    sender && sender.set('active', 0)
-    let viewer = codeViewer.editor
-    modal.setTitle('Usable HTML')
-    if (!viewer) {
-      const txtarea = document.createElement('textarea')
-      container.appendChild(txtarea)
-      codeViewer.init(txtarea)
-      viewer = codeViewer.editor
-    }
-    modal.setContent('')
-    modal.setContent(container)
-    codeViewer.setContent(editor.runCommand('get-usable-html'))
-    modal.open()
-    viewer.refresh()
-  }
-})
-
-pnm.addButton('options',
-  [
-    {
-      id: 'export',
-      className: 'fa fa-download',
-      command: 'html-export-usable',
-      attributes: {
-        title: 'Export usable HTML'
-      }
-    }
-  ]
-)

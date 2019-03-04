@@ -216,7 +216,7 @@ export default (editor, opts = {}) => {
         tagName: 'comp_input',
         type_attr: 'text',
         traits: inputTraits.concat(inputTypeTrait),
-        classes: ('comp_input ' + (opts.comps.comp_input.classes || '')).split(' ')
+        classes: ['comp_input'].concat(opts.comps.comp_input.classes)
       },
       init() {
         const that = this
@@ -256,7 +256,7 @@ export default (editor, opts = {}) => {
             label: 'Multiple'
           }
         ].concat(fieldTraits),
-        classes: ('comp_select ' + (opts.comps.comp_select.classes || '')).split(' ')
+        classes: ['comp_select'].concat(opts.comps.comp_select.classes)
       },
       init() {
         const that = this
@@ -306,7 +306,7 @@ export default (editor, opts = {}) => {
             placeholder: 'Enter field columns/width..'
           },
         ].concat(fieldTraits),
-        classes: ('comp_textarea ' + (opts.comps.comp_textarea.classes || '')).split(' ')
+        classes: ['comp_textarea'].concat(opts.comps.comp_textarea.classes)
       },
       init() {
         const that = this
@@ -339,7 +339,7 @@ export default (editor, opts = {}) => {
             label: 'Required'
           }
         ].concat(fieldTraits),
-        classes: ('comp_checkbox ' + (opts.comps.comp_checkbox.classes || '')).split(' ')
+        classes: ['comp_checkbox'].concat(opts.comps.comp_checkbox.classes)
       },
       init() {
         const that = this
@@ -367,7 +367,7 @@ export default (editor, opts = {}) => {
           changeProp: 1,
           placeholder: 'Enter a field name...'
         }],
-        classes: ('comp_hidden ' + (opts.comps.comp_hidden.classes || '')).split(' ')
+        classes: ['comp_hidden'].concat(opts.comps.comp_hidden.classes)
       },
       init() {
         const that = this
@@ -396,7 +396,7 @@ export default (editor, opts = {}) => {
             placeholder: 'Enter a field label..'
           }
         ]),
-        classes: ('comp_submit ' + (opts.comps.comp_submit.classes || '')).split(' ')
+        classes: ['comp_submit'].concat(opts.comps.comp_submit.classes)
       },
       init() {
         const that = this
@@ -418,7 +418,7 @@ export default (editor, opts = {}) => {
         copyable: false,
         // Can drop other elements inside it
         droppable: 'comp_col',
-        classes: ('comp_row ' + (opts.comps.comp_row.classes || '')).split(' ')
+        classes: ['comp_row'].concat(opts.comps.comp_row.classes)
       }
     }),
     view: defaultView
@@ -434,7 +434,7 @@ export default (editor, opts = {}) => {
         // Can drop other elements inside it
         droppable: true,
         copyable: false,
-        classes: ('comp_col ' + (opts.comps.comp_col.classes || '')).split(' ')
+        classes: ['comp_col'].concat(opts.comps.comp_col.classes)
       }
     }),
     view: defaultView
