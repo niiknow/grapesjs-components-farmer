@@ -600,10 +600,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // only for debugging purpose as pluginFarmer is reference from source
-// when you import directly as 'grapesjs-components-farmer' then you don't need to do this
 
-window['grapesjs-components-farmer'] = _src__WEBPACK_IMPORTED_MODULE_0__["default"];
 /* harmony default export */ __webpack_exports__["default"] = (function () {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
   var config = {
@@ -910,13 +907,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _templating__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./templating */ "./src/templating.js");
+/* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! grapesjs */ "grapesjs");
+/* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(grapesjs__WEBPACK_IMPORTED_MODULE_2__);
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
-/* harmony default export */ __webpack_exports__["default"] = (function (editor) {
+
+/* harmony default export */ __webpack_exports__["default"] = (grapesjs__WEBPACK_IMPORTED_MODULE_2___default.a.plugins.add('grapesjs-components-farmer', function (editor) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
   var commands = editor.Commands;
   var pn = editor.Panels;
@@ -1118,7 +1118,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       preventInputDefaults();
     }, 10);
   });
-});
+}));
 
 /***/ }),
 

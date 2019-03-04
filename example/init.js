@@ -3,10 +3,6 @@ import grapesjs from 'grapesjs'
 import $ from 'jquery'
 import customBlocks from './custom-blocks.js'
 
-// only for debugging purpose as pluginFarmer is reference from source
-// when you import directly as 'grapesjs-components-farmer' then you don't need to do this
-window['grapesjs-components-farmer'] = pluginFarmer
-
 export default (opts = {}) => {
   const config = {
     container: '#gjs',

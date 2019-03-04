@@ -1,7 +1,8 @@
 import $ from 'jquery'
 import doTemplate from './templating'
+import grapesjs from 'grapesjs'
 
-export default (editor, opts = {}) => {
+export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts = {}) => {
   const commands   = editor.Commands
   const pn         = editor.Panels
   const opts_comps = opts.comps || {}
@@ -250,4 +251,4 @@ comp_col {
       preventInputDefaults()
     }, 10)
   })
-}
+})
