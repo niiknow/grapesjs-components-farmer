@@ -125,7 +125,7 @@ export default (editor, opts = {}) => {
     // force regenerate of HTML
     toHTML() {
       let html = ''
-      if (!this.view.el) {
+      if (this.view && !this.view.el) {
         const el = document.createElement(this.attributes.tagName)
 
         html = this.generateHtml(el)[0].outerHTML
@@ -173,6 +173,10 @@ export default (editor, opts = {}) => {
 
       return false
     },
+    // function to use with listener
+    genHtml() {
+      this.generateHtml()
+    },
     generateHtml(el = this.view.el, k = this.attributes.tagName) {
       const model = this
       const $el   = $(el || model.view.el)
@@ -197,8 +201,8 @@ export default (editor, opts = {}) => {
   // override default view to generate html
   const myDefaultView = defaultView.extend({
     onRender() {
-      if (this.model.generateHtml) {
-        this.model.generateHtml()
+      if (this.model.genHtml) {
+        this.model.genHtml()
       }
 
       return this
@@ -222,9 +226,9 @@ export default (editor, opts = {}) => {
         const that = this
         that.myInitDefaults()
 
-        that.listenTo(that, 'change:label_attr', that.generateHtml)
-        that.listenTo(that, 'change:name_attr', that.generateHtml)
-        that.listenTo(that, 'change:placeholder_attr', that.generateHtml)
+        that.listenTo(that, 'change:label_attr', that.genHtml)
+        that.listenTo(that, 'change:name_attr', that.genHtml)
+        that.listenTo(that, 'change:placeholder_attr', that.genHtml)
       }
     }),
     view: myDefaultView
@@ -262,10 +266,10 @@ export default (editor, opts = {}) => {
         const that = this
         that.myInitDefaults()
 
-        that.listenTo(that, 'change:label_attr', that.generateHtml)
-        that.listenTo(that, 'change:name_attr', that.generateHtml)
-        that.listenTo(that, 'change:multiple_attr', that.generateHtml)
-        that.listenTo(that, 'change:option_attr', that.generateHtml)
+        that.listenTo(that, 'change:label_attr', that.genHtml)
+        that.listenTo(that, 'change:name_attr', that.genHtml)
+        that.listenTo(that, 'change:multiple_attr', that.genHtml)
+        that.listenTo(that, 'change:option_attr', that.genHtml)
       }
     }),
     view: myDefaultView
@@ -312,11 +316,11 @@ export default (editor, opts = {}) => {
         const that = this
         that.myInitDefaults()
 
-        that.listenTo(that, 'change:label_attr', that.generateHtml)
-        that.listenTo(that, 'change:name_attr', that.generateHtml)
-        that.listenTo(that, 'change:placeholder_attr', that.generateHtml)
-        that.listenTo(that, 'change:cols_attr', that.generateHtml)
-        that.listenTo(that, 'change:rows_attr', that.generateHtml)
+        that.listenTo(that, 'change:label_attr', that.genHtml)
+        that.listenTo(that, 'change:name_attr', that.genHtml)
+        that.listenTo(that, 'change:placeholder_attr', that.genHtml)
+        that.listenTo(that, 'change:cols_attr', that.genHtml)
+        that.listenTo(that, 'change:rows_attr', that.genHtml)
       }
     }),
     view: myDefaultView
@@ -357,10 +361,10 @@ export default (editor, opts = {}) => {
         const that = this
         that.myInitDefaults()
 
-        that.listenTo(that, 'change:label_attr', that.generateHtml)
-        that.listenTo(that, 'change:name_attr', that.generateHtml)
-        that.listenTo(that, 'change:placeholder_attr', that.generateHtml)
-        that.listenTo(that, 'change:accept_attr', that.generateHtml)
+        that.listenTo(that, 'change:label_attr', that.genHtml)
+        that.listenTo(that, 'change:name_attr', that.genHtml)
+        that.listenTo(that, 'change:placeholder_attr', that.genHtml)
+        that.listenTo(that, 'change:accept_attr', that.genHtml)
       }
     }),
     view: myDefaultView
@@ -389,8 +393,8 @@ export default (editor, opts = {}) => {
         const that = this
         that.myInitDefaults()
 
-        that.listenTo(that, 'change:label_attr', that.generateHtml)
-        that.listenTo(that, 'change:name_attr', that.generateHtml)
+        that.listenTo(that, 'change:label_attr', that.genHtml)
+        that.listenTo(that, 'change:name_attr', that.genHtml)
       }
     }),
     view: myDefaultView
@@ -417,7 +421,7 @@ export default (editor, opts = {}) => {
         const that = this
         that.myInitDefaults()
 
-        that.listenTo(that, 'change:name_attr', that.generateHtml)
+        that.listenTo(that, 'change:name_attr', that.genHtml)
       }
     }),
     view: myDefaultView
@@ -446,7 +450,7 @@ export default (editor, opts = {}) => {
         const that = this
         that.myInitDefaults()
 
-        that.listenTo(that, 'change:label_attr', that.generateHtml)
+        that.listenTo(that, 'change:label_attr', that.genHtml)
       }
     }),
     view: myDefaultView

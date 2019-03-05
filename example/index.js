@@ -1516,7 +1516,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     toHTML: function toHTML() {
       var html = '';
 
-      if (!this.view.el) {
+      if (this.view && !this.view.el) {
         var el = document.createElement(this.attributes.tagName);
         html = this.generateHtml(el)[0].outerHTML;
       }
@@ -1565,6 +1565,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return false;
     },
+    // function to use with listener
+    genHtml: function genHtml() {
+      this.generateHtml();
+    },
     generateHtml: function generateHtml() {
       var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.view.el;
       var k = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.attributes.tagName;
@@ -1590,8 +1594,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   var myDefaultView = defaultView.extend({
     onRender: function onRender() {
-      if (this.model.generateHtml) {
-        this.model.generateHtml();
+      if (this.model.genHtml) {
+        this.model.genHtml();
       }
 
       return this;
@@ -1612,9 +1616,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       init: function init() {
         var that = this;
         that.myInitDefaults();
-        that.listenTo(that, 'change:label_attr', that.generateHtml);
-        that.listenTo(that, 'change:name_attr', that.generateHtml);
-        that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
+        that.listenTo(that, 'change:label_attr', that.genHtml);
+        that.listenTo(that, 'change:name_attr', that.genHtml);
+        that.listenTo(that, 'change:placeholder_attr', that.genHtml);
       }
     }),
     view: myDefaultView
@@ -1647,10 +1651,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       init: function init() {
         var that = this;
         that.myInitDefaults();
-        that.listenTo(that, 'change:label_attr', that.generateHtml);
-        that.listenTo(that, 'change:name_attr', that.generateHtml);
-        that.listenTo(that, 'change:multiple_attr', that.generateHtml);
-        that.listenTo(that, 'change:option_attr', that.generateHtml);
+        that.listenTo(that, 'change:label_attr', that.genHtml);
+        that.listenTo(that, 'change:name_attr', that.genHtml);
+        that.listenTo(that, 'change:multiple_attr', that.genHtml);
+        that.listenTo(that, 'change:option_attr', that.genHtml);
       }
     }),
     view: myDefaultView
@@ -1692,11 +1696,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       init: function init() {
         var that = this;
         that.myInitDefaults();
-        that.listenTo(that, 'change:label_attr', that.generateHtml);
-        that.listenTo(that, 'change:name_attr', that.generateHtml);
-        that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
-        that.listenTo(that, 'change:cols_attr', that.generateHtml);
-        that.listenTo(that, 'change:rows_attr', that.generateHtml);
+        that.listenTo(that, 'change:label_attr', that.genHtml);
+        that.listenTo(that, 'change:name_attr', that.genHtml);
+        that.listenTo(that, 'change:placeholder_attr', that.genHtml);
+        that.listenTo(that, 'change:cols_attr', that.genHtml);
+        that.listenTo(that, 'change:rows_attr', that.genHtml);
       }
     }),
     view: myDefaultView
@@ -1732,10 +1736,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       init: function init() {
         var that = this;
         that.myInitDefaults();
-        that.listenTo(that, 'change:label_attr', that.generateHtml);
-        that.listenTo(that, 'change:name_attr', that.generateHtml);
-        that.listenTo(that, 'change:placeholder_attr', that.generateHtml);
-        that.listenTo(that, 'change:accept_attr', that.generateHtml);
+        that.listenTo(that, 'change:label_attr', that.genHtml);
+        that.listenTo(that, 'change:name_attr', that.genHtml);
+        that.listenTo(that, 'change:placeholder_attr', that.genHtml);
+        that.listenTo(that, 'change:accept_attr', that.genHtml);
       }
     }),
     view: myDefaultView
@@ -1759,8 +1763,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       init: function init() {
         var that = this;
         that.myInitDefaults();
-        that.listenTo(that, 'change:label_attr', that.generateHtml);
-        that.listenTo(that, 'change:name_attr', that.generateHtml);
+        that.listenTo(that, 'change:label_attr', that.genHtml);
+        that.listenTo(that, 'change:name_attr', that.genHtml);
       }
     }),
     view: myDefaultView
@@ -1784,7 +1788,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       init: function init() {
         var that = this;
         that.myInitDefaults();
-        that.listenTo(that, 'change:name_attr', that.generateHtml);
+        that.listenTo(that, 'change:name_attr', that.genHtml);
       }
     }),
     view: myDefaultView
@@ -1808,7 +1812,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       init: function init() {
         var that = this;
         that.myInitDefaults();
-        that.listenTo(that, 'change:label_attr', that.generateHtml);
+        that.listenTo(that, 'change:label_attr', that.genHtml);
       }
     }),
     view: myDefaultView
