@@ -124,16 +124,7 @@ export default (editor, opts = {}) => {
     },
     // force regenerate of HTML
     toHTML() {
-      let html = ''
-      if (this.view && !this.view.el) {
-        const el = document.createElement(this.attributes.tagName)
-
-        html = this.generateHtml(el)[0].outerHTML
-      }
-
-      html = this.generateHtml()[0].outerHTML
-
-      return html
+      return this.genHtml()[0].outerHTML
     },
     getTraitValues() {
       const values = { ...this.attributes }
@@ -175,9 +166,14 @@ export default (editor, opts = {}) => {
     },
     // function to use with listener
     genHtml() {
-      this.generateHtml()
+      if (!this.view || !this.view.el) {
+        const el = document.createElement(this.attributes.tagName)
+        return this.generateHtml(el, this.attributes.tagName)
+      }
+
+      return this.generateHtml(this.view.el, this.attributes.tagName)
     },
-    generateHtml(el = this.view.el, k = this.attributes.tagName) {
+    generateHtml(el, k) {
       const model = this
       const $el   = $(el || model.view.el)
       const attrs = model.getTraitValues()

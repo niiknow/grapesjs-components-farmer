@@ -1017,7 +1017,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   var options = _objectSpread({
     formNextId: 1,
     categoryLabel: 'Basic',
-    formFieldsPrefix: 'Field',
+    formFieldsPrefix: 'field',
     showStylesOnChange: 1,
     addResource: function addResource(url) {
       var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'script';
@@ -1514,15 +1514,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }),
     // force regenerate of HTML
     toHTML: function toHTML() {
-      var html = '';
-
-      if (this.view && !this.view.el) {
-        var el = document.createElement(this.attributes.tagName);
-        html = this.generateHtml(el)[0].outerHTML;
-      }
-
-      html = this.generateHtml()[0].outerHTML;
-      return html;
+      return this.genHtml()[0].outerHTML;
     },
     getTraitValues: function getTraitValues() {
       var values = _objectSpread({}, this.attributes);
@@ -1567,11 +1559,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     // function to use with listener
     genHtml: function genHtml() {
-      this.generateHtml();
+      if (!this.view || !this.view.el) {
+        var el = document.createElement(this.attributes.tagName);
+        return this.generateHtml(el, this.attributes.tagName);
+      }
+
+      return this.generateHtml(this.view.el, this.attributes.tagName);
     },
-    generateHtml: function generateHtml() {
-      var el = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.view.el;
-      var k = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.attributes.tagName;
+    generateHtml: function generateHtml(el, k) {
       var model = this;
       var $el = jquery__WEBPACK_IMPORTED_MODULE_0___default()(el || model.view.el);
       var attrs = model.getTraitValues();

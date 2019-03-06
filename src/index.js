@@ -125,7 +125,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
   const options = {
     formNextId: 1,
     categoryLabel: 'Basic',
-    formFieldsPrefix: 'Field',
+    formFieldsPrefix: 'field',
     showStylesOnChange: 1,
     addResource: (url, type='script') => {
 
