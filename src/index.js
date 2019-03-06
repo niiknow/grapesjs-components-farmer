@@ -189,8 +189,8 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
 
       // convert into html
       for(let k in options.comps) {
-        // default tag as div unless realTag value is provided
-        const tag = options.comps[k].realTag || 'div'
+        // default tag as div unless useTag value is provided
+        const tag = options.comps[k].useTag || 'div'
         html = html.replace(new RegExp('<' + k, 'g'), '<' + tag)
         html = html.replace(new RegExp('</' + k + '>', 'g'), '</' + tag + '>')
         html = html.replace(new RegExp(` data\-gjs\-type\=\"${k}\" `, 'g'), ' ')

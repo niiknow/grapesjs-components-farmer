@@ -1232,8 +1232,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var html = editor.getHtml(); // convert into html
 
       for (var _k in options.comps) {
-        // default tag as div unless realTag value is provided
-        var tag = options.comps[_k].realTag || 'div';
+        // default tag as div unless useTag value is provided
+        var tag = options.comps[_k].useTag || 'div';
         html = html.replace(new RegExp('<' + _k, 'g'), '<' + tag);
         html = html.replace(new RegExp('</' + _k + '>', 'g'), '</' + tag + '>');
         html = html.replace(new RegExp(" data-gjs-type=\"".concat(_k, "\" "), 'g'), ' ');
