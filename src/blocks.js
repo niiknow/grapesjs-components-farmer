@@ -179,8 +179,20 @@ export default (editor, opts = {}) => {
     attributes: { class:'fa fa-map-o' },
     content: {
       type: 'map',
-      style: {height: '350px'}
+      style: { height: '350px' }
     },
     ...allBlocks
   })
+
+  bm.add('comp_recaptcha', {
+    label: `
+      <image src="https://www.gstatic.com/recaptcha/api2/logo_48.png">
+      <br /><br />
+    <div class="gjs-block-label">${c.comp_recaptcha.label}</div>`,
+    content: {
+      type: 'comp_recaptcha'
+    },
+    ...allBlocks
+  })
+
 }

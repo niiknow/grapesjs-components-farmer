@@ -483,4 +483,34 @@ export default (editor, opts = {}) => {
     }),
     view: defaultView
   })
+
+
+  dc.addType('comp_recaptcha', {
+    model: myDefaultModel.extend({
+      defaults: {
+        ...myDefaultModel.prototype.defaults,
+        draggable: true,
+        droppable: false,
+        copyable: false,
+        tagName: 'comp_recaptcha',
+        sitekey_attr: 'sitekey',
+        traits: defaultModel.prototype.defaults.traits.concat([
+          {
+            type: 'text',
+            name: 'sitekey_attr',
+            label: 'Site key',
+            placeholder: 'e.g. sitekey'
+          }
+        ]),
+        classes: ['comp_recaptcha'].concat(opts.comps.comp_recaptcha.classes)
+      },
+      init() {
+        const that = this
+        that.myInitDefaults()
+
+        that.listenTo(that, 'change:sitekey_attr', that.genHtml)
+      }
+    }),
+    view: myDefaultView
+  })
 }

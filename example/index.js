@@ -1025,6 +1025,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       }
     }
   }, allBlocks));
+  bm.add('comp_recaptcha', _objectSpread({
+    label: "\n      <image src=\"https://www.gstatic.com/recaptcha/api2/logo_48.png\">\n      <br /><br />\n    <div class=\"gjs-block-label\">".concat(c.comp_recaptcha.label, "</div>"),
+    content: {
+      type: 'comp_recaptcha'
+    }
+  }, allBlocks));
 });
 
 /***/ }),
@@ -1147,6 +1153,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     },
     'comp_map': {
       label: 'Map'
+    },
+    'comp_recaptcha': {
+      label: 'reCaptcha',
+      classes: 'form-group',
+      template: "\n        <script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>\n        <div class=\"g-recaptcha\" data-sitekey=\"<%= it.sitekey_attr %>\"></div>\n      "
     } // provide defaults
 
   };
@@ -1257,7 +1268,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setTimeout(function () {
       var doc = editor.Canvas.getDocument();
       var head = doc.head || doc.getElementsByTagName('head')[0];
-      var css = "\nbody {\n  padding: 10px;\n}\n\ncomp_row,\ncomp_col {\n  min-height: 2rem !important;\n}\n\ncomp_row {\n  display: block;\n  width: 100%;\n  margin-left: 15px;\n  margin-right: 15px;\n}\n\ncomp_col {\n  min-width: 100px;\n}\n";
+      var css = "\nbody {\n  padding: 10px;\n}\n\ncomp_recaptcha,\ncomp_row,\ncomp_col,\ncomp_hidden {\n  min-height: 2rem !important;\n}\n\ncomp_row {\n  display: block;\n  width: 100%;\n  margin-left: 15px;\n  margin-right: 15px;\n}\n\ncomp_col {\n  min-width: 100px;\n}\n\ncomp_hidden, comp_recaptcha {\n  display: block;\n  width: 100%;\n  min-width: 100%;\n}\n";
       var style = doc.createElement('style');
       style.type = 'text/css';
 
@@ -1994,6 +2005,30 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       })
     }),
     view: defaultView
+  });
+  dc.addType('comp_recaptcha', {
+    model: myDefaultModel.extend({
+      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+        draggable: true,
+        droppable: false,
+        copyable: false,
+        tagName: 'comp_recaptcha',
+        sitekey_attr: 'sitekey',
+        traits: defaultModel.prototype.defaults.traits.concat([{
+          type: 'text',
+          name: 'sitekey_attr',
+          label: 'Site key',
+          placeholder: 'e.g. sitekey'
+        }]),
+        classes: ['comp_recaptcha'].concat(opts.comps.comp_recaptcha.classes)
+      }),
+      init: function init() {
+        var that = this;
+        that.myInitDefaults();
+        that.listenTo(that, 'change:sitekey_attr', that.genHtml);
+      }
+    }),
+    view: myDefaultView
   });
 });
 

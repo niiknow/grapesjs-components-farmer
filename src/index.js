@@ -103,6 +103,14 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
     },
     'comp_map': {
       label: 'Map'
+    },
+    'comp_recaptcha': {
+      label: 'reCaptcha',
+      classes: 'form-group',
+      template: `
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <div class="g-recaptcha" data-sitekey="<%= it.sitekey_attr %>"></div>
+      `
     }
   }
 
@@ -220,8 +228,10 @@ body {
   padding: 10px;
 }
 
+comp_recaptcha,
 comp_row,
-comp_col {
+comp_col,
+comp_hidden {
   min-height: 2rem !important;
 }
 
@@ -234,6 +244,12 @@ comp_row {
 
 comp_col {
   min-width: 100px;
+}
+
+comp_hidden, comp_recaptcha {
+  display: block;
+  width: 100%;
+  min-width: 100%;
 }
 `
 
