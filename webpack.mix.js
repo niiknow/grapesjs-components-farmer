@@ -8,7 +8,6 @@ const config = {
   externals: {
     'jquery': 'jQuery',
     'grapesjs': 'grapesjs',
-    'dot': 'doT',
     'gjs-plugin-ckeditor': 'gjs-plugin-ckeditor',
     'grapesjs-plugin-ckeditor': 'grapesjs-plugin-ckeditor'
   },

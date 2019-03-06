@@ -1,6 +1,6 @@
-export default () => {
-  const doT = require('dot')
+import doT from 'doT'
 
+export default () => {
   doT.templateSettings = {
     evaluate:    /\<\%([\s\S]+?)\%\>/g,
     interpolate: /\<\%=([\s\S]+?)\%\>/g,
