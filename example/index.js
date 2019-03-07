@@ -1157,7 +1157,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'comp_recaptcha': {
       label: 'reCaptcha',
       classes: 'form-group',
-      template: "\n        <script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>\n        <div class=\"g-recaptcha\" data-sitekey=\"<%= it.sitekey_attr %>\"></div>\n      "
+      template: "\n        <script src=\"https://www.google.com/recaptcha/api.js?render=<%= it.sitekey_attr %>\"></script>\n        <input type=\"hidden\" name=\"g-recaptcha-response\" id=\"g-recaptcha-response\" data-sitekey=\"<%= it.sitekey_attr %>\" data-action=\"<%= it.action_attr %>\" />\n      "
     } // provide defaults
 
   };
@@ -2014,11 +2014,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         copyable: false,
         tagName: 'comp_recaptcha',
         sitekey_attr: 'sitekey',
+        action_attr: 'contact-us',
         traits: defaultModel.prototype.defaults.traits.concat([{
           type: 'text',
           name: 'sitekey_attr',
           label: 'Site key',
           placeholder: 'e.g. sitekey'
+        }, {
+          type: 'text',
+          name: 'action_attr',
+          label: 'Action',
+          placeholder: 'recaptcha action name'
         }]),
         classes: ['comp_recaptcha'].concat(opts.comps.comp_recaptcha.classes)
       }),
