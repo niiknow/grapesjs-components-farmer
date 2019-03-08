@@ -12,6 +12,7 @@
     "type": "git",
     "url": "https://github.com/niiknow/grapesjs-components-farmer.git"
   },
+  "homepage": "https://niiknow.github.io/grapesjs-components-farmer/",
   "scripts": {
     "client": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=webpack.client.js",
     "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",

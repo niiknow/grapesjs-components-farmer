@@ -4,7 +4,7 @@
  * 
  * @version v0.2.8
  * @author friends@niiknow.org
- * @homepage undefined
+ * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
  */
 (function webpackUniversalModuleDefinition(root, factory) {
