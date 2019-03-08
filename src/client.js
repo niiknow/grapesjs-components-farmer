@@ -1,11 +1,20 @@
 /**
  * Client-side script for form submission
+ *
+ * requires: jQuery - todo remove later
  */
+const myRoot = (typeof self === 'object' && self.self === self && self) ||
+  (typeof global === 'object' && global.global === global && global) ||
+  this
+
 class GcfClient {
   constructor(opts = {}) {
     this._name = 'GcfClient'
-    this.win   = opts.win || window
+    this.win   = opts.win || myRoot
     this.opts  = opts
+    this.dom   = this.win.jQuery
+    this.ajax  = this.dom.ajax
+    this.doc   = this.win.document || {}
     this.init()
   }
 
@@ -69,37 +78,59 @@ class GcfClient {
     const that   = this
     const opts   = that.opts
     const win    = that.win
-    const jQuery = win.jQuery
+    const dom    = that.dom
+    const formId = opts.formId
     const iQuery = win.location.href.indexOf('?')
+
+    // auto populate query string to form field
     if (iQuery > 0) {
       const vars = that.queryParseString(win.location.href.slice(iQuery + 1))
+
       for(let k in vars) {
         if (vars[k]) {
-          jQuery('[name="'+k+'"]').val(vars[k])
+          dom(`[name="${k}"]`).val(vars[k])
         }
       }
     }
 
-    const formId = opts.formId
+    // handle form submission with ajax
     const doAjaxPost = (form) => {
-      jQuery.ajax({
+      that.ajax({
         type: 'POST',
         mode: 'cors',
         url: form.attr('action'),
         data: form.serialize(),
         success: (data) => {
           alert(JSON.stringify(data, 2))
+          setTimeout(() => {
+            that.isSubmitting = false
+          }, 200)
         },
         error: (data) => {
           alert(JSON.stringify(data.responseJSON, 2))
+          setTimeout(() => {
+            that.isSubmitting = false
+          }, 200)
         }
       })
     }
 
-    const form = jQuery('#' + formId)
+    // get the first form
+    let form = dom(document.getElementsByClassName('form')[0])
+    if (formId) {
+      form = dom('#' + formId)
+    }
+
     form.on('submit', (e) => {
+      // prevent double submitts
       e.preventDefault()
-      const input = jQuery('#g-recaptcha-response')
+      if (that.isSubmitting) {
+        return false
+      }
+      that.isSubmitting = true
+
+      // find captcha input
+      const input = form.find('input[name="g-recaptcha-response"]')
 
       /* do something to prevent double submit, like disable submit button */
       if (win.grecaptcha && input.length > 0) {
