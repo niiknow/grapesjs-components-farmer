@@ -7,7 +7,7 @@ const rst = {
   entry: path.join(__dirname, 'src/client.js'),
   output: {
     filename: 'gcfclient.min.js',
-    library: 'gcfclient',
+    library: 'GcfClient',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

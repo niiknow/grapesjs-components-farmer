@@ -2,9 +2,9 @@
  * Client-side script for form submission
  */
 class GcfClient {
-  constructor(opts = {}, win = window) {
+  constructor(opts = {}) {
     this._name = 'GcfClient'
-    this.win   = win
+    this.win   = opts.win || window
     this.opts  = opts
     this.init()
   }
@@ -72,24 +72,26 @@ class GcfClient {
     const jQuery = win.jQuery
     const iQuery = win.location.href.indexOf('?')
     if (iQuery > 0) {
-      var vars = that.queryParseString(win.location.href.slice(iQuery + 1))
-      for(var k in vars) {
+      const vars = that.queryParseString(win.location.href.slice(iQuery + 1))
+      for(let k in vars) {
         if (vars[k]) {
           jQuery('[name="'+k+'"]').val(vars[k])
         }
       }
     }
 
-    var formId = opts.formId;
-    var doAjaxPost = function(form) {
+    const formId = opts.formId
+    const doAjaxPost = (form) => {
       jQuery.ajax({
         type: 'POST',
         mode: 'cors',
         url: form.attr('action'),
         data: form.serialize(),
-        success: function (data)
-        {
-          alert(JSON.stringify(data))
+        success: (data) => {
+          alert(JSON.stringify(data, 2))
+        },
+        error: (data) => {
+          alert(JSON.stringify(data.responseJSON, 2))
         }
       })
     }

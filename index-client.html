@@ -13,7 +13,7 @@
    <body>
       <link rel="stylesheet" href="https://pages.brickinc.net/lambda-form.css">
       <div id="lambda-form" class="lambda-form lambda-form-wrapper">
-         <form id="e9d391af-41e9-40fd-b58f-7f7ac88fa34a" method="post" class="container" action="https://x5bzp3vla9.execute-api.us-east-1.amazonaws.com/dev/form/e9d391af-41e9-40fd-b58f-7f7ac88fa34a" role="form" enctype="multipart/form-data">
+         <form id="e9d391af-41e9-40fd-b58f-7f7ac88fa34a" method="post" class="container" action="https://x5bzp3vla9.execute-api.us-east-1.amazonaws.com/dev/form/demo" role="form" enctype="multipart/form-data">
             <div class="lambda-form-content">
                <div class="comp_input form-group" id="itmt"> <label for="name">Name</label> <input type="text" class="form-control" name="name" placeholder="Name"> </div>
                <div class="comp_input form-group" id="i9sl"> <label for="email">Email</label> <input type="email" class="form-control" name="email" placeholder="Email"> </div>
@@ -25,8 +25,7 @@
       </div>
       <script src="dist/gcfclient.min.js"></script>
       <script>
-        console.log(window);
-        const client = new gcfclient.default({formId: "e9d391af-41e9-40fd-b58f-7f7ac88fa34a"}, window);
+        new GcfClient.default({formId: "e9d391af-41e9-40fd-b58f-7f7ac88fa34a"}, window);
       </script>
    </body>
 </html>
