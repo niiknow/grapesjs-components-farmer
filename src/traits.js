@@ -124,6 +124,16 @@ export default (editor, opts = {}) => {
     },
     // force regenerate of HTML
     toHTML() {
+      const cf  = opts.comps[this.attributes.tagName]
+      const rst = this.genHtml()
+      if (cf && cf.useTag) {
+        if (cf.useTag === 'innerHTML') {
+          return rst.html()
+        } else if (cf.useTag === 'innerText') {
+          return this.genHtml()[0].innerText
+        }
+      }
+
       return this.genHtml()[0].outerHTML
     },
     getTraitValues() {
