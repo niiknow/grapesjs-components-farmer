@@ -142,22 +142,19 @@ class GcfClient {
         type: 'POST',
         mode: 'cors',
         url: form.attr('action'),
-        data: form.serialize(),
-        done: (data, textStatus, jqXHR) => {
-          if (that.onDone) {
-            that.onDone(data, textStatus, jqXHR)
-          }
-        },
-        fail: (jqXHR, textStatus, errorThrown) => {
-          if (that.onFail) {
-            that.onDone(jqXHR, textStatus, errorThrown)
-          }
-        },
-        always: () => {
-          setTimeout(() => {
-            that.isSubmitting = false
-          }, 200)
+        data: form.serialize()
+      }).done((data, textStatus, jqXHR) => {
+        if (that.onDone) {
+          that.onDone(data, textStatus, jqXHR)
         }
+      }).fail((jqXHR, textStatus, errorThrown) => {
+        if (that.onFail) {
+          that.onDone(jqXHR, textStatus, errorThrown)
+        }
+      }).always(() => {
+        setTimeout(() => {
+          that.isSubmitting = false
+        }, 200)
       })
     }
 
