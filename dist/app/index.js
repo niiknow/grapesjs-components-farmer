@@ -2,7 +2,7 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  * 
- * @version v0.2.9
+ * @version v0.2.10
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
@@ -1040,6 +1040,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       type: 'comp_recaptcha'
     }
   }, allBlocks));
+  bm.add('comp_stripe', _objectSpread({
+    label: c.comp_stripe.label,
+    attributes: {
+      class: 'fa fa-cc-stripe'
+    },
+    content: {
+      type: 'comp_stripe'
+    }
+  }, allBlocks));
 });
 
 /***/ }),
@@ -1166,7 +1175,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'comp_recaptcha': {
       label: 'reCaptcha',
       classes: 'form-group',
-      template: "\n        <script src=\"https://www.google.com/recaptcha/api.js?render=<%= it.sitekey_attr %>\"></script>\n        <input type=\"hidden\" name=\"g-recaptcha-response\" id=\"g-recaptcha-response\" data-sitekey=\"<%= it.sitekey_attr %>\" data-action=\"<%= it.action_attr %>\" />\n      "
+      template: "\n        <script src=\"https://www.google.com/recaptcha/api.js?render=<%= it.sitekey_attr %>\"></script>\n        <input type=\"hidden\" name=\"g-recaptcha-response\" id=\"g-recaptcha-response\" data-sitekey=\"<%= it.sitekey_attr || '' %>\" data-action=\"<%= it.action_attr || '' %>\" />\n      "
+    },
+    'comp_stripe': {
+      label: 'Payment',
+      classes: 'form-group',
+      template: "\n        <script src=\"https://js.stripe.com/v3/\"></script>\n        <div id=\"stripeElement\" data-key=\"<%= it.publickey_attr || '' %>\">&nbsp;</div>\n      "
     } // provide defaults
 
   };
@@ -1277,7 +1291,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setTimeout(function () {
       var doc = editor.Canvas.getDocument();
       var head = doc.head || doc.getElementsByTagName('head')[0];
-      var css = "\nbody {\n  padding: 10px;\n}\n\ncomp_recaptcha,\ncomp_row,\ncomp_col,\ncomp_hidden {\n  min-height: 2rem !important;\n}\n\ncomp_row {\n  display: block;\n  width: 100%;\n  margin-left: 15px;\n  margin-right: 15px;\n}\n\ncomp_col {\n  min-width: 100px;\n}\n\ncomp_hidden, comp_recaptcha {\n  display: block;\n  width: 100%;\n  min-width: 100%;\n}\n";
+      var css = "\nbody {\n  padding: 10px;\n}\n\ncomp_recaptcha,\ncomp_row,\ncomp_col,\ncomp_hidden {\n  min-height: 2rem !important;\n}\n\ncomp_row {\n  display: block;\n  width: 100%;\n  margin-left: 15px;\n  margin-right: 15px;\n}\n\ncomp_col {\n  min-width: 100px;\n}\n\ncomp_hidden, comp_recaptcha, comp_stripe {\n  display: block;\n  width: 100%;\n  min-width: 100%;\n}\n";
       var style = doc.createElement('style');
       style.type = 'text/css';
 
@@ -2052,6 +2066,29 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var that = this;
         that.myInitDefaults();
         that.listenTo(that, 'change:sitekey_attr', that.genHtml);
+      }
+    }),
+    view: myDefaultView
+  });
+  dc.addType('comp_stripe', {
+    model: myDefaultModel.extend({
+      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+        draggable: true,
+        droppable: false,
+        copyable: false,
+        tagName: 'comp_stripe',
+        traits: defaultModel.prototype.defaults.traits.concat([{
+          type: 'text',
+          name: 'publickey_attr',
+          label: 'Public key',
+          placeholder: 'e.g. stripe public key'
+        }]),
+        classes: ['comp_stripe'].concat(opts.comps.comp_recaptcha.classes)
+      }),
+      init: function init() {
+        var that = this;
+        that.myInitDefaults();
+        that.listenTo(that, 'change:publickey_attr', that.genHtml);
       }
     }),
     view: myDefaultView

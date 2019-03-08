@@ -195,4 +195,13 @@ export default (editor, opts = {}) => {
     ...allBlocks
   })
 
+  bm.add('comp_stripe', {
+    label: c.comp_stripe.label,
+    attributes: { class:'fa fa-cc-stripe' },
+    content: {
+      type: 'comp_stripe'
+    },
+    ...allBlocks
+  })
+
 }

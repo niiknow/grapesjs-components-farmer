@@ -494,7 +494,6 @@ export default (editor, opts = {}) => {
     view: defaultView
   })
 
-
   dc.addType('comp_recaptcha', {
     model: myDefaultModel.extend({
       defaults: {
@@ -526,6 +525,34 @@ export default (editor, opts = {}) => {
         that.myInitDefaults()
 
         that.listenTo(that, 'change:sitekey_attr', that.genHtml)
+      }
+    }),
+    view: myDefaultView
+  })
+
+  dc.addType('comp_stripe', {
+    model: myDefaultModel.extend({
+      defaults: {
+        ...myDefaultModel.prototype.defaults,
+        draggable: true,
+        droppable: false,
+        copyable: false,
+        tagName: 'comp_stripe',
+        traits: defaultModel.prototype.defaults.traits.concat([
+          {
+            type: 'text',
+            name: 'publickey_attr',
+            label: 'Public key',
+            placeholder: 'e.g. stripe public key'
+          }
+        ]),
+        classes: ['comp_stripe'].concat(opts.comps.comp_recaptcha.classes)
+      },
+      init() {
+        const that = this
+        that.myInitDefaults()
+
+        that.listenTo(that, 'change:publickey_attr', that.genHtml)
       }
     }),
     view: myDefaultView

@@ -109,7 +109,15 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       classes: 'form-group',
       template: `
         <script src="https://www.google.com/recaptcha/api.js?render=<%= it.sitekey_attr %>"></script>
-        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response" data-sitekey="<%= it.sitekey_attr %>" data-action="<%= it.action_attr %>" />
+        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response" data-sitekey="<%= it.sitekey_attr || '' %>" data-action="<%= it.action_attr || '' %>" />
+      `
+    },
+    'comp_stripe': {
+      label: 'Payment',
+      classes: 'form-group',
+      template: `
+        <script src="https://js.stripe.com/v3/"></script>
+        <div id="stripeElement" data-key="<%= it.publickey_attr || '' %>">&nbsp;</div>
       `
     }
   }
@@ -246,7 +254,7 @@ comp_col {
   min-width: 100px;
 }
 
-comp_hidden, comp_recaptcha {
+comp_hidden, comp_recaptcha, comp_stripe {
   display: block;
   width: 100%;
   min-width: 100%;

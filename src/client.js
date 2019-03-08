@@ -89,7 +89,7 @@ class GcfClient {
 
     if (typeof(stripe) === 'function') {
       const stripeEl = dom(`#${elSel}`)
-      const key      = (stripeEl.data('publickey') || '').trim()
+      const key      = (stripeEl.data('key') || '').trim()
 
       if (key.length > 2) {
         that.stripe   = stripe(key);
