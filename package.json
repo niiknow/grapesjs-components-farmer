@@ -1,7 +1,7 @@
 {
   "name": "grapesjs-components-farmer",
   "description": "grapesjs plugin to build components for different css framework",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "author": "friends@niiknow.org",
   "license": "MIT",
   "main": "dist/index.js",
@@ -43,7 +43,7 @@
     "browser-sync": "^2.26.0",
     "browser-sync-webpack-plugin": "^2.0.1",
     "cross-env": "^5.1.6",
-    "css-loader": "^2.1.0",
+    "css-loader": "^2.1.1",
     "dot": "^1.1.2",
     "eslint": "^5.14.1",
     "eslint-config-prettier": "^3.6.0",

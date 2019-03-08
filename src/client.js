@@ -9,12 +9,13 @@ const myRoot = (typeof self === 'object' && self.self === self && self) ||
 
 class GcfClient {
   constructor(opts = {}) {
-    this._name = 'GcfClient'
-    this.win   = opts.win || myRoot
-    this.opts  = opts
-    this.dom   = this.win.jQuery
-    this.ajax  = this.dom.ajax
-    this.doc   = this.win.document || {}
+    this._name  = 'GcfClient'
+    this.win    = opts.win || myRoot
+    this.opts   = opts
+    this.dom    = this.win.jQuery
+    this.ajax   = this.dom.ajax
+    this.doc    = this.win.document || {}
+    this.errors = { stripe_client: null, stripe_server: null }
     this.init()
   }
 
@@ -42,6 +43,10 @@ class GcfClient {
     } catch (e) {
       return str;
     }
+  }
+
+  isValid(that, form) {
+    return true
   }
 
   /**
@@ -74,6 +79,43 @@ class GcfClient {
     return obj || {}
   }
 
+  initStripe(form) {
+    const that   = this
+    const opts   = that.opts
+    const win    = that.win
+    const stripe = win.Stripe
+    const style  = opts.stripeStyle
+    const elSel  = opts.stripeSelector || '#stripeElement'
+
+    if (typeof(stripe) === 'function') {
+      const stripeEl = dom(`#${elSel}`)
+      const key      = (stripeEl.data('publickey') || '').trim()
+
+      if (key.length > 2) {
+        that.stripe   = stripe(key);
+        that.elements = that.stripe.elements();
+
+        // Create an instance of the card Element
+        that.card = that.elements.create('card', {
+          style: style,
+          hidePostalCode: true
+        })
+
+        // Add an instance of the card Element into div
+        that.card.mount(`#${elSel}`)
+
+        // Handle real-time validation errors from the card Element.
+        that.card.addEventListener('change', (e) => {
+          that.errors.stripe_client = null
+          that.errors.stripe_server = null
+          if (e.error) {
+            $this.errors.stripe_client = e.error.message;
+          }
+        })
+      }
+    }
+  }
+
   init() {
     const that   = this
     const opts   = that.opts
@@ -94,20 +136,24 @@ class GcfClient {
     }
 
     // handle form submission with ajax
+    // status: "success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror"
     const doAjaxPost = (form) => {
       that.ajax({
         type: 'POST',
         mode: 'cors',
         url: form.attr('action'),
         data: form.serialize(),
-        success: (data) => {
-          alert(JSON.stringify(data, 2))
-          setTimeout(() => {
-            that.isSubmitting = false
-          }, 200)
+        done: (data, textStatus, jqXHR) => {
+          if (that.onDone) {
+            that.onDone(data, textStatus, jqXHR)
+          }
         },
-        error: (data) => {
-          alert(JSON.stringify(data.responseJSON, 2))
+        fail: (jqXHR, textStatus, errorThrown) => {
+          if (that.onFail) {
+            that.onDone(jqXHR, textStatus, errorThrown)
+          }
+        },
+        always: () => {
           setTimeout(() => {
             that.isSubmitting = false
           }, 200)
@@ -121,32 +167,41 @@ class GcfClient {
       form = dom('#' + formId)
     }
 
+    // handle form submit
     form.on('submit', (e) => {
-      // prevent double submitts
+      // prevent double submits
       e.preventDefault()
       if (that.isSubmitting) {
         return false
       }
-      that.isSubmitting = true
 
-      // find captcha input
-      const input = form.find('input[name="g-recaptcha-response"]')
+      if (that.isValid(that, form)) {
+        that.isSubmitting = true
 
-      /* do something to prevent double submit, like disable submit button */
-      if (win.grecaptcha && input.length > 0) {
-        win.grecaptcha.ready(function() {
-          win.grecaptcha.execute(input.data('sitekey'), { action: (input.data('action') || form.attr('id')) })
-          .then(function(token) {
-            input.val(token)
-            doAjaxPost(form)
-          })
-        });
-      } else {
-        doAjaxPost(form)
+        // find captcha input
+        const input = form.find('input[name="g-recaptcha-response"]')
+
+        /* do something to prevent double submit, like disable submit button */
+        if (win.grecaptcha && input.length > 0) {
+          win.grecaptcha.ready(function() {
+            win.grecaptcha.execute(input.data('sitekey'), { action: (input.data('action') || form.attr('id')) })
+            .then(function(token) {
+              input.val(token)
+              doAjaxPost(form)
+            })
+          });
+        } else {
+          doAjaxPost(form)
+        }
       }
 
       return false
     })
+
+    // init strype
+    if (win.Stripe) {
+      that.initStripe(form)
+    }
   }
 }
 

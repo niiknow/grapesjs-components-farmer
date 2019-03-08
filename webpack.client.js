@@ -1,13 +1,13 @@
-const path    = require('path')
-const webpack = require('webpack')
-const pkg     = require('./package.json')
+const path    = require('path');
+const webpack = require('webpack');
+const pkg     = require('./package.json');
 
 const banner  = `${pkg.name} client-side script
 ${pkg.description}\n
 @version v${pkg.version}
 @author ${pkg.author}
 @homepage ${pkg.homepage}
-@repository ${pkg.repository.url}`
+@repository ${pkg.repository.url}`;
 
 const rst = {
   mode: 'production',
@@ -56,4 +56,4 @@ const rst = {
   ]
 }
 
-module.exports = rst
+module.exports = rst;

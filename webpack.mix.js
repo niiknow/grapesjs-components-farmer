@@ -1,6 +1,15 @@
-const path   = require('path');
-const mix    = require('laravel-mix');
-const public = mix.inProduction() ? 'dist' : 'example';
+const path    = require('path');
+const mix     = require('laravel-mix');
+const pkg     = require('./package.json');
+const webpack = require('webpack');
+
+const public  = 'dist';
+const banner  = `${pkg.name}
+${pkg.description}\n
+@version v${pkg.version}
+@author ${pkg.author}
+@homepage ${pkg.homepage}
+@repository ${pkg.repository.url}`;
 
 mix.setPublicPath(path.normalize(public));
 
@@ -27,8 +36,6 @@ const config = {
     ]
   },
   output: {
-    path: path.resolve(public),
-    filename: 'index.js',
     library: 'grapesjs-components-farmer',
     libraryTarget: 'umd',
     umdNamedDefine: true
@@ -37,6 +44,12 @@ const config = {
     inline: true,
     quiet: false
   },
+  plugins: [
+    new webpack.ProvidePlugin({
+      Promise: 'es6-promise'
+    }),
+    new webpack.BannerPlugin(banner)
+  ],
   devtool: 'source-map'
 };
 
@@ -47,7 +60,7 @@ if (mix.inProduction()) {
   mix.version();
   mix.disableNotifications();
 } else {
-  mix.js(`example/app.js`, `${ public }`);
+  mix.js(`example/index.js`, `${ public }/app`);
   mix.browserSync({
     proxy: false,
     port: 3000,
