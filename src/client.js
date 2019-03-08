@@ -45,7 +45,83 @@ class GcfClient {
     }
   }
 
-  isValid(that, form) {
+  validateAll(that, form) {
+    return true
+  }
+
+  validatePhone(that, form) {
+    return true
+  }
+
+  validateEmployment(that, form) {
+    return true
+  }
+
+  /**
+   * Numeric Input event handler
+   *
+   * @param  {Event}  evt the event
+   * @return {Boolean}     false if not number
+   */
+  numericInputEventHandler(evt) {
+    evt = evt || this.win.event
+    var charCode = (evt.which) ? evt.which : evt.keyCode
+
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      if (charCode === 42) return true
+      evt.preventDefault()
+      return false
+    } else {
+      return true
+    }
+  }
+
+  stripeResponseHandler(response) {
+    const that = this
+
+    if (response.error) {
+      that.isSubmitting = false
+      that.err.stripe_server = response.error.message
+      return false
+    }
+
+    const source = response.source
+    const payload = {
+      recurrence_period: that.contributionType || 'one-time',
+      amount: parseInt(that.amount) * 100,
+      email: that.email,
+      first_name: that.first_name,
+      last_name: that.last_name,
+      address1: that.address1,
+      postal: that.postal,
+      city: that.city,
+      state: that.state,
+      phone: that.phone,
+      occupation: that.occupation,
+      is_retired: that.is_retired,
+      employer: that.employer
+    }
+
+    if (response.source) {
+      payload.card_brand = source.card.brand
+      payload.card_last4 = source.card.last4
+      payload.card_month = source.card.exp_month
+      payload.card_year = source.card.exp_year
+      payload.stripe_token = source.id
+      payload.stripe_source = JSON.stringify(source)
+    } else {
+      payload.card_brand = that.card_brand
+      payload.card_last4 = that.card_last4
+      payload.card_month = that.card_month
+      payload.card_year = that.card_year
+    }
+
+    if (that.address2) {
+      payload.address2 = that.address2
+    }
+
+    that.errs.server = null
+
     return true
   }
 
@@ -77,6 +153,28 @@ class GcfClient {
     })
 
     return obj || {}
+  }
+
+  doFormSubmit(form) {
+    const that = this
+    that.ajax({
+      type: 'POST',
+      mode: 'cors',
+      url: form.attr('action'),
+      data: form.serialize()
+    }).done((data, textStatus, jqXHR) => {
+      if (that.onDone) {
+        that.onDone(data, textStatus, jqXHR)
+      }
+    }).fail((jqXHR, textStatus, errorThrown) => {
+      if (that.onFail) {
+        that.onDone(jqXHR, textStatus, errorThrown)
+      }
+    }).always(() => {
+      setTimeout(() => {
+        that.isSubmitting = false
+      }, 200)
+    })
   }
 
   initStripe(form) {
@@ -138,24 +236,28 @@ class GcfClient {
     // handle form submission with ajax
     // status: "success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror"
     const doAjaxPost = (form) => {
-      that.ajax({
-        type: 'POST',
-        mode: 'cors',
-        url: form.attr('action'),
-        data: form.serialize()
-      }).done((data, textStatus, jqXHR) => {
-        if (that.onDone) {
-          that.onDone(data, textStatus, jqXHR)
+      const that = this
+      const ownerInfo = {
+        owner: {
+          name: that.first_name + ' ' + that.last_name,
+          address: {
+            line1: that.address1,
+            line2: that.address2,
+            city: that.city,
+            state: that.state,
+            postal_code: that.postal,
+            country: that.country
+          },
+          email: that.email
         }
-      }).fail((jqXHR, textStatus, errorThrown) => {
-        if (that.onFail) {
-          that.onDone(jqXHR, textStatus, errorThrown)
-        }
-      }).always(() => {
-        setTimeout(() => {
-          that.isSubmitting = false
-        }, 200)
-      })
+      }
+
+      that.stripe.createSource(that.card, ownerInfo)
+        .then((rsp) => {
+          if (that.handleStripeResponse(rsp)) {
+            that.doFormSubmit(form)
+          }
+        });
     }
 
     // get the first form
@@ -172,7 +274,17 @@ class GcfClient {
         return false
       }
 
-      if (that.isValid(that, form)) {
+      that.validateAll(that, form)
+      that.validatePhone(that, form)
+      that.validateEmployment(that, form)
+
+      let errs = that.errors
+      let isValid = that.errors.length <= 0
+
+      isValid = isValid && !errs.phone && !errs.amount && !errs.stripe_client && !errs.stripe_server;
+      isValid = isValid && !errs.employer && !errs.occupation;
+
+      if (isValid) {
         that.isSubmitting = true
 
         // find captcha input
