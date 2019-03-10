@@ -9,13 +9,14 @@ const myRoot = (typeof self === 'object' && self.self === self && self) ||
 
 class GcfClient {
   constructor(opts = {}) {
-    this._name  = 'GcfClient'
-    this.win    = opts.win || myRoot
-    this.opts   = opts
-    this.dom    = this.win.jQuery
-    this.ajax   = this.dom.ajax
-    this.doc    = this.win.document || {}
-    this.errors = { stripe_client: null, stripe_server: null }
+    this._name = 'GcfClient'
+    this.win   = opts.win || myRoot
+    this.opts  = opts
+    this.dom   = this.win.jQuery
+    this.ajax  = this.dom.ajax
+    this.doc   = this.win.document || {}
+    this.errs  = { stripe_client: null, stripe_server: null }
+    this.model = {}
     this.init()
   }
 
@@ -63,7 +64,7 @@ class GcfClient {
    * @param  {Event}  evt the event
    * @return {Boolean}     false if not number
    */
-  numericInputEventHandler(evt) {
+  preventNonNumericInput(evt) {
     evt = evt || this.win.event
     var charCode = (evt.which) ? evt.which : evt.keyCode
 
@@ -77,52 +78,28 @@ class GcfClient {
   }
 
   stripeResponseHandler(response) {
-    const that = this
 
     if (response.error) {
-      that.isSubmitting = false
-      that.err.stripe_server = response.error.message
+      this.isSubmitting       = false
+      this.errs.stripe_server = response.error.message
       return false
     }
 
-    const source = response.source
-    const payload = {
-      recurrence_period: that.contributionType || 'one-time',
-      amount: parseInt(that.amount) * 100,
-      email: that.email,
-      first_name: that.first_name,
-      last_name: that.last_name,
-      address1: that.address1,
-      postal: that.postal,
-      city: that.city,
-      state: that.state,
-      phone: that.phone,
-      occupation: that.occupation,
-      is_retired: that.is_retired,
-      employer: that.employer
-    }
+    const source  = response.source
+    const payload = {}
 
     if (response.source) {
       payload.card_brand = source.card.brand
       payload.card_last4 = source.card.last4
-      payload.card_month = source.card.exp_month
-      payload.card_year = source.card.exp_year
-      payload.stripe_token = source.id
-      payload.stripe_source = JSON.stringify(source)
-    } else {
-      payload.card_brand = that.card_brand
-      payload.card_last4 = that.card_last4
-      payload.card_month = that.card_month
-      payload.card_year = that.card_year
+      payload.card_month = source.card_month
+      payload.card_year  = source.card_year
+      payload.pay_token  = source.id
+      payload.pay_source = JSON.stringify(source)
     }
 
-    if (that.address2) {
-      payload.address2 = that.address2
-    }
+    this.errs.server = null
 
-    that.errs.server = null
-
-    return true
+    return payload
   }
 
   /**
@@ -155,13 +132,13 @@ class GcfClient {
     return obj || {}
   }
 
-  doFormSubmit(form) {
+  doFormSubmit(form, fd) {
     const that = this
     that.ajax({
       type: 'POST',
       mode: 'cors',
       url: form.attr('action'),
-      data: form.serialize()
+      data: fd
     }).done((data, textStatus, jqXHR) => {
       if (that.onDone) {
         that.onDone(data, textStatus, jqXHR)
@@ -196,7 +173,7 @@ class GcfClient {
         // Create an instance of the card Element
         that.card = that.elements.create('card', {
           style: style,
-          hidePostalCode: true
+          hidePostalCode: (opts.hidePostalCode || true)
         })
 
         // Add an instance of the card Element into div
@@ -204,10 +181,10 @@ class GcfClient {
 
         // Handle real-time validation errors from the card Element.
         that.card.addEventListener('change', (e) => {
-          that.errors.stripe_client = null
-          that.errors.stripe_server = null
+          that.errs.stripe_client = null
+          that.errs.stripe_server = null
           if (e.error) {
-            $this.errors.stripe_client = e.error.message;
+            that.errs.stripe_client = e.error.message
           }
         })
       }
@@ -236,26 +213,52 @@ class GcfClient {
     // handle form submission with ajax
     // status: "success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror"
     const doAjaxPost = (form) => {
-      const that = this
+      // serialize form
+      const fd    = new FormData(form)
+
+      // if no payment then simply submit
+      if (!that.card) {
+        return that.doFormSubmit(form, fd)
+      }
+
+      // otherwise, process stripe charge
+      const model = {}
+
+      // convert to object
+      fd.forEach((value, key) => {
+        model[key] = value;
+      })
+
+      // set model
+      that.model = model
+
+      // compose payload for stripe
       const ownerInfo = {
         owner: {
-          name: that.first_name + ' ' + that.last_name,
+          name: model.first_name + ' ' + model.last_name,
           address: {
-            line1: that.address1,
-            line2: that.address2,
-            city: that.city,
-            state: that.state,
-            postal_code: that.postal,
-            country: that.country
+            line1: model.address1,
+            line2: model.address2,
+            city: model.city,
+            state: model.state,
+            postal_code: model.postal,
+            country: model.country
           },
-          email: that.email
+          email: model.email
         }
       }
 
+      // send to stripe
       that.stripe.createSource(that.card, ownerInfo)
         .then((rsp) => {
-          if (that.handleStripeResponse(rsp)) {
-            that.doFormSubmit(form)
+          let rst = that.handleStripeResponse(rsp)
+          if (rst) {
+            // append result to form data
+            for(let k in rst) {
+              fd.append(k, rst[k])
+            }
+
+            that.doFormSubmit(form, fd)
           }
         });
     }
@@ -278,11 +281,11 @@ class GcfClient {
       that.validatePhone(that, form)
       that.validateEmployment(that, form)
 
-      let errs = that.errors
-      let isValid = that.errors.length <= 0
+      let errs = that.errs
+      let isValid = that.errs.length <= 0
 
-      isValid = isValid && !errs.phone && !errs.amount && !errs.stripe_client && !errs.stripe_server;
-      isValid = isValid && !errs.employer && !errs.occupation;
+      isValid = isValid && !errs.phone && !errs.amount && !errs.stripe_client && !errs.stripe_server
+      isValid = isValid && !errs.employer && !errs.occupation
 
       if (isValid) {
         that.isSubmitting = true
