@@ -17,7 +17,14 @@
             <div class="lambda-form-content">
                <div class="comp_input form-group" id="itmt"> <label for="name">Name</label> <input type="text" class="form-control" name="name" placeholder="Name"> </div>
                <div class="comp_input form-group" id="i9sl"> <label for="email">Email</label> <input type="email" class="form-control" name="email" placeholder="Email"> </div>
-               <div class="comp_textarea form-group" id="i1pm"> <label for="message">Message</label> <textarea class="form-control" name="message" placeholder="Message"></textarea> </div>
+               <div class="comp_textarea form-group" id="i1pm"> <label for="message">Message</label>
+                  <textarea class="form-control" name="message" placeholder="Message"></textarea>
+               </div>
+               <div class="comp_stripe form-group row" id="itx6u">
+                <script src="https://js.stripe.com/v3/"></script>
+                <div class="col col-md-4 col-sm-6 col-xs-12" id="stripeElement" data-key="pk_test_CWdD9aYrDinoOBfGPNiMYbuZ" data-hide-postal="false">&nbsp;
+                </div>
+              </div>
                <button class="comp_submit btn btn-primary btn-block" id="ieul">Send</button>
             </div>
          </form>

@@ -117,7 +117,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       classes: 'form-group',
       template: `
         <script src="https://js.stripe.com/v3/"></script>
-        <div id="stripeElement" data-key="<%= it.publickey_attr || '' %>">&nbsp;</div>
+        <div id="stripeElement" data-key="<%= it.publickey_attr || '' %>" data-hide-postal="<%= it.hidepostal_attr || 'false' %>">&nbsp;</div>
       `
     }
   }

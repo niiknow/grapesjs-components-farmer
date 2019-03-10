@@ -15,8 +15,17 @@ class GcfClient {
     this.dom   = this.win.jQuery
     this.ajax  = this.dom.ajax
     this.doc   = this.win.document || {}
-    this.errs  = { stripe_client: null, stripe_server: null }
+    this.errs  = []
     this.model = {}
+
+    this.opts.stripe = opts.stripe || { hidePostalCode: false, style: { } }
+    this.opts.stripe.style = {
+      base: {
+          'lineHeight': '1.49'
+      }
+      , ...opts.stripe.style
+    }
+
     this.init()
   }
 
@@ -90,8 +99,8 @@ class GcfClient {
     if (response.source) {
       payload.card_brand = source.card.brand
       payload.card_last4 = source.card.last4
-      payload.card_month = source.card_month
-      payload.card_year  = source.card_year
+      payload.card_month = source.card.month
+      payload.card_year  = source.card.year
       payload.pay_token  = source.id
       payload.pay_source = JSON.stringify(source)
     }
@@ -134,7 +143,7 @@ class GcfClient {
   doAlways(form) {
     const that    = this
     const dom     = that.dom
-    const $inputs = dom('input[type="file"]', form)
+    const $inputs = dom('input[type="file"]', form[0])
 
     setTimeout(() => {
       // see safariQuirks
@@ -147,8 +156,12 @@ class GcfClient {
     const that = this
 
     that.ajax({
-      type: 'POST',
       mode: 'cors',
+      cache: false,
+      contentType: false,
+      processData: false,
+      method: 'POST',
+      type: 'POST', // For jQuery < 1.9
       url: form.attr('action'),
       data: fd
     }).done((data, textStatus, jqXHR) => {
@@ -168,13 +181,14 @@ class GcfClient {
     const that   = this
     const opts   = that.opts
     const win    = that.win
+    const dom    = that.dom
     const stripe = win.Stripe
-    const style  = opts.stripeStyle
     const elSel  = opts.stripeSelector || '#stripeElement'
 
     if (typeof(stripe) === 'function') {
-      const stripeEl = dom(`#${elSel}`)
+      const stripeEl = dom(elSel)
       const key      = (stripeEl.data('key') || '').trim()
+      const hidePostal = stripeEl.data('hide-postal')
 
       if (key.length > 2) {
         that.stripe   = stripe(key);
@@ -182,12 +196,12 @@ class GcfClient {
 
         // Create an instance of the card Element
         that.card = that.elements.create('card', {
-          style: style,
-          hidePostalCode: (opts.hidePostalCode || true)
+          style: opts.stripe.style,
+          hidePostalCode: hidePostal
         })
 
         // Add an instance of the card Element into div
-        that.card.mount(`#${elSel}`)
+        that.card.mount(elSel)
 
         // Handle real-time validation errors from the card Element.
         that.card.addEventListener('change', (e) => {
@@ -206,12 +220,15 @@ class GcfClient {
    *
    */
   safariQuirks(form) {
+    const that    = this
     const dom     = that.dom
-    const $inputs = dom('input[type="file"]:not([disabled])', form)
-    $inputs.each((_, input) => {
-      if (input.files.length > 0) return
-      dom(input).prop('disabled', true)
-    })
+    const $inputs = dom('input[type="file"]:not([disabled])', form[0])
+    if ($inputs.length > 0) {
+      $inputs.each((_, input) => {
+        if (input.files.length > 0) return
+        dom(input).prop('disabled', true)
+      })
+    }
   }
 
   init() {
@@ -238,7 +255,7 @@ class GcfClient {
     const doAjaxPost = (form) => {
       // serialize form
       that.safariQuirks(form)
-      const fd = new FormData(form)
+      const fd = new FormData(form[0])
 
       // if no payment then simply submit
       if (!that.card) {
@@ -260,23 +277,32 @@ class GcfClient {
       // compose payload for stripe
       const ownerInfo = {
         owner: {
-          name: model.first_name + ' ' + model.last_name,
-          address: {
-            line1: model.address1,
-            line2: model.address2,
-            city: model.city,
-            state: model.state,
-            postal_code: model.postal,
-            country: model.country
-          },
+          name: model.name,
           email: model.email
         }
+      }
+
+      // if address exist, pass it along
+      if (model.address1) {
+        ownerInfo.owner.address =  {
+          line1: model.address1,
+          line2: model.address2,
+          city: model.city,
+          state: model.state,
+          postal_code: model.postal,
+          country: model.country
+        }
+      }
+
+      // if first name exists, there must be a last name
+      if (model.first_name) {
+        ownerInfo.name = model.first_name + ' ' + model.last_name
       }
 
       // send to stripe
       that.stripe.createSource(that.card, ownerInfo)
         .then((rsp) => {
-          let rst = that.handleStripeResponse(rsp)
+          let rst = that.stripeResponseHandler(rsp)
           if (rst) {
             // append result to form data
             for(let k in rst) {

@@ -1180,7 +1180,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'comp_stripe': {
       label: 'Payment',
       classes: 'form-group',
-      template: "\n        <script src=\"https://js.stripe.com/v3/\"></script>\n        <div id=\"stripeElement\" data-key=\"<%= it.publickey_attr || '' %>\">&nbsp;</div>\n      "
+      template: "\n        <script src=\"https://js.stripe.com/v3/\"></script>\n        <div id=\"stripeElement\" data-key=\"<%= it.publickey_attr || '' %>\" data-hide-postal=\"<%= it.hidepostal_attr || 'false' %>\">&nbsp;</div>\n      "
     } // provide defaults
 
   };
@@ -2077,11 +2077,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         droppable: false,
         copyable: false,
         tagName: 'comp_stripe',
+        hidepostal_attr: 'false',
         traits: defaultModel.prototype.defaults.traits.concat([{
           type: 'text',
           name: 'publickey_attr',
           label: 'Public key',
           placeholder: 'e.g. stripe public key'
+        }, {
+          type: 'checkbox',
+          name: 'hidepostal_attr',
+          label: 'Hide postal'
         }]),
         classes: ['comp_stripe'].concat(opts.comps.comp_recaptcha.classes)
       }),
