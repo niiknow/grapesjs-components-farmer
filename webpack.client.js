@@ -35,7 +35,12 @@ const rst = {
     {
       test: /\.(js|jsx)$/,
       loader: 'babel-loader',
-      exclude: /(node_modules|bower_components)/
+      exclude: /(node_modules|bower_components)/,
+      query: {
+        cacheDirectory: true,
+        plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-transform-runtime', '@babel/plugin-syntax-dynamic-import'],
+        presets: ['@babel/preset-env']
+      },
     }, {
       test: /\.css$/,
       use: [
