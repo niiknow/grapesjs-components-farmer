@@ -78,7 +78,6 @@ class GcfClient {
   }
 
   stripeResponseHandler(response) {
-
     if (response.error) {
       this.isSubmitting       = false
       this.errs.stripe_server = response.error.message
@@ -132,8 +131,21 @@ class GcfClient {
     return obj || {}
   }
 
+  doAlways(form) {
+    const that    = this
+    const dom     = that.dom
+    const $inputs = dom('input[type="file"]', form)
+
+    setTimeout(() => {
+      // see safariQuirks
+      $inputs.prop('disabled', false)
+      that.isSubmitting = false
+    }, 200)
+  }
+
   doFormSubmit(form, fd) {
     const that = this
+
     that.ajax({
       type: 'POST',
       mode: 'cors',
@@ -148,9 +160,7 @@ class GcfClient {
         that.onDone(jqXHR, textStatus, errorThrown)
       }
     }).always(() => {
-      setTimeout(() => {
-        that.isSubmitting = false
-      }, 200)
+      that.doAlways(form)
     })
   }
 
@@ -191,6 +201,19 @@ class GcfClient {
     }
   }
 
+  /**
+   * https://stackoverflow.com/questions/51201011/ios-safari-fails-to-send-form-data-via-ajax/51273135
+   *
+   */
+  safariQuirks(form) {
+    const dom     = that.dom
+    const $inputs = dom('input[type="file"]:not([disabled])', form)
+    $inputs.each((_, input) => {
+      if (input.files.length > 0) return
+      dom(input).prop('disabled', true)
+    })
+  }
+
   init() {
     const that   = this
     const opts   = that.opts
@@ -214,7 +237,8 @@ class GcfClient {
     // status: "success", "notmodified", "nocontent", "error", "timeout", "abort", or "parsererror"
     const doAjaxPost = (form) => {
       // serialize form
-      const fd    = new FormData(form)
+      that.safariQuirks(form)
+      const fd = new FormData(form)
 
       // if no payment then simply submit
       if (!that.card) {
@@ -224,13 +248,14 @@ class GcfClient {
       // otherwise, process stripe charge
       const model = {}
 
+      // we use form serializeArray to provide better browser support
+      // as FormData is not compatible with many browsers
+      const fa    = form.serializeArray()
+
       // convert to object
-      fd.forEach((value, key) => {
+      fa.forEach((value, key) => {
         model[key] = value;
       })
-
-      // set model
-      that.model = model
 
       // compose payload for stripe
       const ownerInfo = {
@@ -259,6 +284,8 @@ class GcfClient {
             }
 
             that.doFormSubmit(form, fd)
+          } else {
+            that.doAlways(form)
           }
         });
     }
@@ -281,7 +308,7 @@ class GcfClient {
       that.validatePhone(that, form)
       that.validateEmployment(that, form)
 
-      let errs = that.errs
+      const errs  = that.errs
       let isValid = that.errs.length <= 0
 
       isValid = isValid && !errs.phone && !errs.amount && !errs.stripe_client && !errs.stripe_server
@@ -295,9 +322,9 @@ class GcfClient {
 
         /* do something to prevent double submit, like disable submit button */
         if (win.grecaptcha && input.length > 0) {
-          win.grecaptcha.ready(function() {
+          win.grecaptcha.ready(() => {
             win.grecaptcha.execute(input.data('sitekey'), { action: (input.data('action') || form.attr('id')) })
-            .then(function(token) {
+            .then((token) => {
               input.val(token)
               doAjaxPost(form)
             })
