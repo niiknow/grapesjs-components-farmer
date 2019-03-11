@@ -317,7 +317,9 @@ class GcfClient {
     }
 
     // get the first form
-    let form = dom(document.getElementsByClassName('form')[0])
+    let form = dom(document.forms[0])
+
+    // if id is provided, get by id
     if (formId) {
       form = dom('#' + formId)
     }
