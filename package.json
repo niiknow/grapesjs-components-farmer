@@ -1,7 +1,7 @@
 {
   "name": "grapesjs-components-farmer",
   "description": "grapesjs plugin to build components for different css framework",
-  "version": "0.2.10",
+  "version": "0.3.0",
   "author": "friends@niiknow.org",
   "license": "MIT",
   "main": "dist/index.js",
@@ -34,9 +34,6 @@
     "grapesjs": ">=0.14.52",
     "jquery": ">=1.7"
   },
-  "dependencies": {
-    "dot": "^1.1.2"
-  },
   "devDependencies": {
     "@babel/core": "^7.3.4",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -45,16 +42,16 @@
     "browser-sync-webpack-plugin": "^2.0.1",
     "cross-env": "^5.1.6",
     "css-loader": "^2.1.1",
-    "dot": "^1.1.2",
     "eslint": "^5.14.1",
     "eslint-config-prettier": "^3.6.0",
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-import": "^2.16.0",
     "file-loader": "^3.0.1",
-    "grapesjs": "^0.14.52",
+    "grapesjs": "^0.14.57",
     "jquery": ">=1.7",
     "laravel-mix": "^4.0.14",
+    "lodash.template": "^4.4.0",
     "resolve-url-loader": "2.3.1",
     "vue-template-compiler": "^2.6.8"
   }

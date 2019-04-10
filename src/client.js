@@ -49,9 +49,9 @@ class GcfClient {
    */
   encode(str) {
     try {
-      return encodeURIComponent(str);
+      return encodeURIComponent(str)
     } catch (e) {
-      return str;
+      return str
     }
   }
 
@@ -191,8 +191,8 @@ class GcfClient {
       const hidePostal = stripeEl.data('hide-postal')
 
       if (key.length > 2) {
-        that.stripe   = stripe(key);
-        that.elements = that.stripe.elements();
+        that.stripe   = stripe(key)
+        that.elements = that.stripe.elements()
 
         // Create an instance of the card Element
         that.card = that.elements.create('card', {
@@ -271,7 +271,7 @@ class GcfClient {
 
       // convert to object
       fa.forEach((value, key) => {
-        model[key] = value;
+        model[key] = value
       })
 
       // compose payload for stripe
@@ -313,7 +313,7 @@ class GcfClient {
           } else {
             that.doAlways(form)
           }
-        });
+        })
     }
 
     // get the first form
@@ -356,7 +356,7 @@ class GcfClient {
               input.val(token)
               doAjaxPost(form)
             })
-          });
+          })
         } else {
           doAjaxPost(form)
         }

@@ -27,9 +27,10 @@ const config = {
         <label for="<%=it.name_attr%>"><%=it.label_attr%>
           <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>name="<%=it.name_attr%>">
             <option selected>-- Please select an option -- </option>
-            <%~ (it.option_attr + "").trim().split("\\n") :option %>
+            <% (it.option_attr + "").trim().split("\\n").forEach(function(option){ %>
             <% var msgProps = option.split('::');
-            %> <option value="<%= msgProps[0]%>"><%= msgProps[1] || msgProps[0] %></option><%~%>
+            %> <option value="<%= msgProps[0]%>"><%= msgProps[1] || msgProps[0] %></option>
+            <% }); %>
           </select>
         </label>
       `

@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import doTemplate from './templating'
+import _template from 'lodash.template'
 import grapesjs from 'grapesjs'
 
 export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts = {}) => {
@@ -25,9 +25,10 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
         <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
         <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>class="form-control" name="<%=it.name_attr%>">
           <option selected>-- Please select an option -- </option>
-          <%~ (it.option_attr + "").trim().split("\\n") :option %>
+          <% (it.option_attr + "").trim().split("\\n").forEach(function(option){ %>
           <% var msgProps = option.split('::');
-          %> <option value="<%= msgProps[0]%>"><%= msgProps[1] || msgProps[0] %></option><%~%>
+          %> <option value="<%= msgProps[0]%>"><%= msgProps[1] || msgProps[0] %></option>
+          <% }); %>
         </select>
       `
     },
@@ -170,11 +171,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       const t = options.comps[k]
 
       if (t && typeof(t.template) === 'string') {
-        if (!doT) {
-          doT = doTemplate()
-        }
-
-        t.template = doT.template(t.template)
+        t.template = _template(t.template)
       }
     })
   }
@@ -195,8 +192,6 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       }
     })
   }
-
-  editor.runCommand('prevent-default');
 
   commands.add('get-usable-html', {
     run() {
@@ -263,15 +258,15 @@ comp_hidden, comp_recaptcha, comp_stripe {
 
       const style = doc.createElement('style')
 
-      style.type = 'text/css';
+      style.type = 'text/css'
       if (style.styleSheet){
         // This is required for IE8 and below.
-        style.styleSheet.cssText = css;
+        style.styleSheet.cssText = css
       } else {
-        style.appendChild(doc.createTextNode(css));
+        style.appendChild(doc.createTextNode(css))
       }
 
-      head.appendChild(style);
+      head.appendChild(style)
       preventInputDefaults()
     }, 10)
   })

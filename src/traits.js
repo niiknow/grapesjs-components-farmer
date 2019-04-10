@@ -195,7 +195,7 @@ export default (editor, opts = {}) => {
         if (typeof(templateFn) === 'function') {
           if (!model.ensureNameAttr(attrs)) {
             $el.empty()
-            $el.html(templateFn(attrs || {}))
+            $el.html(templateFn({ it: attrs || {} }))
           }
         }
       }
