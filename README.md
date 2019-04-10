@@ -53,6 +53,4 @@ We like the fact that grapesjs can provide/separate output for components json, 
 * [Lambda Form](https://github.com/niiknow/lambda-form) - server-side component.
 * [SurveyJS](https://surveyjs.io/) - more advance form builder to look into.
 
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+## MIT

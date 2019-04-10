@@ -165,8 +165,6 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
   options.comps = options.comps || opts_comps
 
   const compileTemplates = () => {
-    let doT = null
-
     Object.keys(options.comps).forEach(k => {
       const t = options.comps[k]
 
