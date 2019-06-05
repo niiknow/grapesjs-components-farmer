@@ -2,7 +2,7 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  * 
- * @version v0.2.10
+ * @version v0.3.1
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
@@ -2565,7 +2565,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   options.comps = options.comps || opts_comps;
 
   var compileTemplates = function compileTemplates() {
-    var doT = null;
     Object.keys(options.comps).forEach(function (k) {
       var t = options.comps[k];
 
