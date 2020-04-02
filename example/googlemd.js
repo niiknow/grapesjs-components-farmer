@@ -4,7 +4,7 @@ const config = {
      'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'
     ],
     scripts: [
-      'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'
     ]
   },
@@ -14,7 +14,7 @@ const config = {
       classes: 'input-field col s12',
       useTag: 'div',
       template: `
-        <input <%= it.required_attr ? 'required ' : '' %>type="<%=it.type_attr%>" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+        <input <%= it.required_attr ? 'required ' : '' %>type="<%=it.type_attr%>" id="<%=it.name_attr%>" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
         <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
       `
     },
@@ -23,7 +23,7 @@ const config = {
       classes: 'input-field col s12',
       useTag: 'div',
       template: `
-        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>name="<%=it.name_attr%>">
+        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>id="<%=it.name_attr%>" name="<%=it.name_attr%>">
           <option selected>-- Please select an option -- </option>
           <% (it.option_attr + "").trim().split("\\n").forEach(function(option){ %>
           <% var msgProps = option.split('::');
@@ -38,7 +38,7 @@ const config = {
       classes: 'input-field col s12',
       useTag: 'div',
       template: `
-        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' %><%= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' %>name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>"><%= it.value_attr || '' %></textarea>
+        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' %><%= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' %>id="<%=it.name_attr%>" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>"><%= it.value_attr || '' %></textarea>
         <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
       `
     },
@@ -49,7 +49,7 @@ const config = {
       template: `
         <div class="input-field col s12">
           <label for="<%=it.name_attr%>">
-            <input <%= it.required_attr ? 'required ' : '' %>type="checkbox" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+            <input <%= it.required_attr ? 'required ' : '' %>type="checkbox" id="<%=it.name_attr%>" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
             <span><%=it.label_attr%></span>
           </label>
         </div>
@@ -59,7 +59,7 @@ const config = {
       label: 'Hidden Input',
       useTag: 'div',
       template: `
-        <input <%= it.required_attr ? 'required ' : '' %>type="hidden" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+        <input <%= it.required_attr ? 'required ' : '' %>type="hidden" id="<%=it.name_attr%>" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
       `
     },
     'comp_submit': {

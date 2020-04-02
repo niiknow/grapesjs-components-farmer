@@ -14,7 +14,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       useTag: 'div',
       template: `
         <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
-        <input <%= it.required_attr ? 'required ' : '' %>type="<%=it.type_attr%>" class="form-control" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+        <input <%= it.required_attr ? 'required ' : '' %>type="<%=it.type_attr%>" class="form-control" id="<%=it.name_attr%>" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
       `
     },
     'comp_select': {
@@ -23,7 +23,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       useTag: 'div',
       template: `
         <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
-        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>class="form-control" name="<%=it.name_attr%>">
+        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>class="form-control" id="<%=it.name_attr%>" name="<%=it.name_attr%>">
           <option selected>-- Please select an option -- </option>
           <% (it.option_attr + "").trim().split("\\n").forEach(function(option){ %>
           <% var msgProps = option.split('::');
@@ -37,7 +37,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       classes: 'custom-file',
       useTag: 'div',
       template: `
-        <input <%= it.required_attr ? 'required ' : '' %>type="file" class="custom-file-input" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.accept_attr ? 'accept="' + it.accept_attr + '"' : '' %> <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+        <input <%= it.required_attr ? 'required ' : '' %>type="file" class="custom-file-input" id="<%=it.name_attr%>" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>" <%= it.accept_attr ? 'accept="' + it.accept_attr + '"' : '' %> <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
         <label for="<%=it.name_attr%>" class="custom-file-label"><%=it.label_attr%></label>
       `
     },
@@ -47,7 +47,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       useTag: 'div',
       template: `
         <label for="<%=it.name_attr%>"><%=it.label_attr%></label>
-        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' %><%= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' %>class="form-control" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>"><%= it.value_attr || '' %></textarea>
+        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows="' + it.rows_attr + '" ' : '' %><%= it.rows_attr ? 'cols="' + it.rows_attr + '" ' : '' %>class="form-control" id="<%=it.name_attr%>" name="<%=it.name_attr%>" placeholder="<%=it.placeholder_attr || ''%>"><%= it.value_attr || '' %></textarea>
       `
     },
     'comp_checkbox': {
@@ -56,7 +56,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       useTag: 'div',
       template: `
         <label for="<%=it.name_attr%>" class="form-check-label">
-          <input <%= it.required_attr ? 'required ' : '' %>type="checkbox" name="<%=it.name_attr%>" class="form-check-input" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+          <input <%= it.required_attr ? 'required ' : '' %>type="checkbox" id="<%=it.name_attr%>" name="<%=it.name_attr%>" class="form-check-input" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
           <%=it.label_attr%>
         </label>
       `
@@ -65,7 +65,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       label: 'Hidden Input',
       useTag: 'div',
       template: `
-        <input <%= it.required_attr ? 'required ' : '' %>type="hidden" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
+        <input <%= it.required_attr ? 'required ' : '' %>type="hidden" id="<%=it.name_attr%>" name="<%=it.name_attr%>" <%= it.value_attr ? 'value="' + it.value_attr + '"' : '' %>/>
       `
     },
     'comp_submit': {

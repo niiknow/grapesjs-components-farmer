@@ -2,7 +2,7 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  * 
- * @version v0.3.2
+ * @version v0.5.0
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
@@ -116,8 +116,8 @@ return /******/ (function(modules) { // webpackBootstrap
 __webpack_require__.r(__webpack_exports__);
 var config = {
   canvas: {
-    styles: ['https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js']
+    styles: ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'],
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js']
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (config);
@@ -392,38 +392,38 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 var config = {
   canvas: {
-    styles: ['https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.5.3/js/foundation.min.js']
+    styles: ['https://cdn.jsdelivr.net/npm/foundation-sites@6.6.2/dist/css/foundation.min.css'],
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.2/js/foundation.min.js']
   },
   comps: {
     'comp_input': {
       label: 'Input',
       classes: 'cell large-12',
       useTag: 'div',
-      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        </label>\n      "
     },
     'comp_select': {
       label: 'Select',
       classes: 'cell large-12',
       useTag: 'div',
-      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>name=\"<%=it.name_attr%>\">\n            <option selected>-- Please select an option -- </option>\n            <% (it.option_attr + \"\").trim().split(\"\\n\").forEach(function(option){ %>\n            <% var msgProps = option.split('::');\n            %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option>\n            <% }); %>\n          </select>\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\">\n            <option selected>-- Please select an option -- </option>\n            <% (it.option_attr + \"\").trim().split(\"\\n\").forEach(function(option){ %>\n            <% var msgProps = option.split('::');\n            %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option>\n            <% }); %>\n          </select>\n        </label>\n      "
     },
     'comp_textarea': {
       label: 'Textarea',
       classes: 'cell large-12',
       useTag: 'div',
-      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%>\n          <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n        </label>\n      "
     },
     'comp_checkbox': {
       label: 'Checkbox',
       classes: 'cell large-12',
       useTag: 'div',
-      template: "\n        <label for=\"<%=it.name_attr%>\">\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n          <%=it.label_attr%>\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\">\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\"id=\"<%=it.name_attr%>\"  name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n          <%=it.label_attr%>\n        </label>\n      "
     },
     'comp_hidden': {
       label: 'Hidden Input',
       useTag: 'div',
-      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
     },
     'comp_submit': {
       label: 'Submit Button',
@@ -483,37 +483,37 @@ __webpack_require__.r(__webpack_exports__);
 var config = {
   canvas: {
     styles: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js']
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js']
   },
   comps: {
     'comp_input': {
       label: 'Input',
       classes: 'input-field col s12',
       useTag: 'div',
-      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
     },
     'comp_select': {
       label: 'Select',
       classes: 'input-field col s12',
       useTag: 'div',
-      template: "\n        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>name=\"<%=it.name_attr%>\">\n          <option selected>-- Please select an option -- </option>\n          <% (it.option_attr + \"\").trim().split(\"\\n\").forEach(function(option){ %>\n          <% var msgProps = option.split('::');\n          %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option>\n          <% }); %>\n        </select>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
+      template: "\n        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\">\n          <option selected>-- Please select an option -- </option>\n          <% (it.option_attr + \"\").trim().split(\"\\n\").forEach(function(option){ %>\n          <% var msgProps = option.split('::');\n          %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option>\n          <% }); %>\n        </select>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
     },
     'comp_textarea': {
       label: 'Textarea',
       classes: 'input-field col s12',
       useTag: 'div',
-      template: "\n        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
+      template: "\n        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n      "
     },
     'comp_checkbox': {
       label: 'Checkbox',
       classes: 'row',
       useTag: 'div',
-      template: "\n        <div class=\"input-field col s12\">\n          <label for=\"<%=it.name_attr%>\">\n            <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n            <span><%=it.label_attr%></span>\n          </label>\n        </div>\n      "
+      template: "\n        <div class=\"input-field col s12\">\n          <label for=\"<%=it.name_attr%>\">\n            <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n            <span><%=it.label_attr%></span>\n          </label>\n        </div>\n      "
     },
     'comp_hidden': {
       label: 'Hidden Input',
       useTag: 'div',
-      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
     },
     'comp_submit': {
       label: 'Submit Button',
@@ -2877,7 +2877,7 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -2893,9 +2893,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   }
 
   var allBlocks = {
-    category: opts.categoryLabel // CORE BLOCKS
+    category: opts.categoryLabel
+  }; // CORE BLOCKS
 
-  };
   bm.add('comp_col1').set(_objectSpread({
     label: c.comp_col1.label,
     attributes: {
@@ -3087,7 +3087,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(grapesjs__WEBPACK_IMPORTED_MODULE_2__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -3104,36 +3104,36 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       label: 'Input',
       classes: 'form-group',
       useTag: 'div',
-      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" class=\"form-control\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"<%=it.type_attr%>\" class=\"form-control\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
     },
     'comp_select': {
       label: 'Select',
       classes: 'form-group',
       useTag: 'div',
-      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>class=\"form-control\" name=\"<%=it.name_attr%>\">\n          <option selected>-- Please select an option -- </option>\n          <% (it.option_attr + \"\").trim().split(\"\\n\").forEach(function(option){ %>\n          <% var msgProps = option.split('::');\n          %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option>\n          <% }); %>\n        </select>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <select <%= it.multiple_attr ? 'multiple ' : '' %><%= it.required_attr ? 'required ' : '' %>class=\"form-control\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\">\n          <option selected>-- Please select an option -- </option>\n          <% (it.option_attr + \"\").trim().split(\"\\n\").forEach(function(option){ %>\n          <% var msgProps = option.split('::');\n          %> <option value=\"<%= msgProps[0]%>\"><%= msgProps[1] || msgProps[0] %></option>\n          <% }); %>\n        </select>\n      "
     },
     'comp_file': {
       label: 'File',
       classes: 'custom-file',
       useTag: 'div',
-      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"file\" class=\"custom-file-input\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.accept_attr ? 'accept=\"' + it.accept_attr + '\"' : '' %> <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        <label for=\"<%=it.name_attr%>\" class=\"custom-file-label\"><%=it.label_attr%></label>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"file\" class=\"custom-file-input\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\" <%= it.accept_attr ? 'accept=\"' + it.accept_attr + '\"' : '' %> <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n        <label for=\"<%=it.name_attr%>\" class=\"custom-file-label\"><%=it.label_attr%></label>\n      "
     },
     'comp_textarea': {
       label: 'Textarea',
       classes: 'form-group',
       useTag: 'div',
-      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>class=\"form-control\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\"><%=it.label_attr%></label>\n        <textarea <%= it.required_attr ? 'required ' : '' %><%= it.rows_attr ? 'rows=\"' + it.rows_attr + '\" ' : '' %><%= it.rows_attr ? 'cols=\"' + it.rows_attr + '\" ' : '' %>class=\"form-control\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" placeholder=\"<%=it.placeholder_attr || ''%>\"><%= it.value_attr || '' %></textarea>\n      "
     },
     'comp_checkbox': {
       label: 'Checkbox',
       classes: 'form-check',
       useTag: 'div',
-      template: "\n        <label for=\"<%=it.name_attr%>\" class=\"form-check-label\">\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\" name=\"<%=it.name_attr%>\" class=\"form-check-input\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n          <%=it.label_attr%>\n        </label>\n      "
+      template: "\n        <label for=\"<%=it.name_attr%>\" class=\"form-check-label\">\n          <input <%= it.required_attr ? 'required ' : '' %>type=\"checkbox\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" class=\"form-check-input\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n          <%=it.label_attr%>\n        </label>\n      "
     },
     'comp_hidden': {
       label: 'Hidden Input',
       useTag: 'div',
-      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
+      template: "\n        <input <%= it.required_attr ? 'required ' : '' %>type=\"hidden\" id=\"<%=it.name_attr%>\" name=\"<%=it.name_attr%>\" <%= it.value_attr ? 'value=\"' + it.value_attr + '\"' : '' %>/>\n      "
     },
     'comp_submit': {
       label: 'Submit Button',
@@ -3181,9 +3181,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       label: 'Payment',
       classes: 'form-group',
       template: "\n        <script src=\"https://js.stripe.com/v3/\"></script>\n        <div id=\"stripeElement\" data-key=\"<%= it.publickey_attr || '' %>\" data-hide-postal=\"<%= it.hidepostal_attr || 'false' %>\">&nbsp;</div>\n      "
-    } // provide defaults
-
-  };
+    }
+  }; // provide defaults
 
   for (var k in default_comps) {
     var x = default_comps[k];
@@ -3530,7 +3529,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
@@ -3630,9 +3629,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     {
       name: 'Color Picker',
       value: 'color'
-    }] // advanced traits
+    }]
+  }; // advanced traits
 
-  };
   tm.addType('option_attr', {
     events: {
       'onchange': 'onChange'
