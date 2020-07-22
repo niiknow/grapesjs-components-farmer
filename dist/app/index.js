@@ -2,7 +2,7 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  * 
- * @version v0.5.0
+ * @version v0.5.1
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
@@ -116,8 +116,8 @@ return /******/ (function(modules) { // webpackBootstrap
 __webpack_require__.r(__webpack_exports__);
 var config = {
   canvas: {
-    styles: ['https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js']
+    styles: ['https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css'],
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js']
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = (config);
@@ -393,7 +393,7 @@ __webpack_require__.r(__webpack_exports__);
 var config = {
   canvas: {
     styles: ['https://cdn.jsdelivr.net/npm/foundation-sites@6.6.2/dist/css/foundation.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.2/js/foundation.min.js']
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.2/js/foundation.min.js']
   },
   comps: {
     'comp_input': {
@@ -483,7 +483,7 @@ __webpack_require__.r(__webpack_exports__);
 var config = {
   canvas: {
     styles: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js']
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js']
   },
   comps: {
     'comp_input': {
@@ -3659,7 +3659,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   });
   var myDefaultModel = defaultModel.extend({
-    defaults: _objectSpread({}, defaultModel.prototype.defaults, {
+    defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
       draggable: true,
       droppable: true,
       copyable: false,
@@ -3765,7 +3765,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   dc.addType('comp_input', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -3787,7 +3787,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   dc.addType('comp_select', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -3822,7 +3822,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_textarea', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, defaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -3868,7 +3868,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_file', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, defaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -3907,7 +3907,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_checkbox', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -3932,7 +3932,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_hidden', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -3956,7 +3956,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_submit', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -3980,7 +3980,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_row', {
     model: defaultModel.extend({
-      defaults: _objectSpread({}, defaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
         tagName: 'comp_row',
         // Can be dropped inside other elements
         draggable: true,
@@ -3994,7 +3994,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_col', {
     model: defaultModel.extend({
-      defaults: _objectSpread({}, defaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
         tagName: 'comp_col',
         // Can be dropped only inside `row` elements
         draggable: 'comp_row',
@@ -4008,7 +4008,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_recaptcha', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -4038,7 +4038,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   });
   dc.addType('comp_stripe', {
     model: myDefaultModel.extend({
-      defaults: _objectSpread({}, myDefaultModel.prototype.defaults, {
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -4075,7 +4075,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/tomnoogen/Desktop/work/niiknow/grapesjs-components-farmer/example/index.js */"./example/index.js");
+module.exports = __webpack_require__(/*! /Users/techsupport/Desktop/work/niiknow/grapesjs-components-farmer/example/index.js */"./example/index.js");
 
 
 /***/ }),

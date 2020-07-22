@@ -4,7 +4,7 @@ const config = {
      'https://cdn.jsdelivr.net/npm/foundation-sites@6.6.2/dist/css/foundation.min.css'
     ],
     scripts: [
-      'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js',
       'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.2/js/foundation.min.js'
     ]
   },
