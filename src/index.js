@@ -176,8 +176,8 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
 
   /** Prevent Input Default Actions **/
   const preventInputDefaults = () => {
-    const el     = editor.Canvas.getBody()
-    const win    = el.ownerWindow
+    const el   = editor.Canvas.getBody()
+    const win  = el.ownerWindow
     const body = $(el)
 
     body.click((e) => {
@@ -225,9 +225,6 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       const doc  = editor.Canvas.getDocument()
       const head = doc.head || doc.getElementsByTagName('head')[0]
       var css    = `
-body {
-  padding: 10px;
-}
 
 comp_recaptcha,
 comp_row,
@@ -266,6 +263,6 @@ comp_hidden, comp_recaptcha, comp_stripe {
 
       head.appendChild(style)
       preventInputDefaults()
-    }, 10)
+    }, 0)
   })
 })

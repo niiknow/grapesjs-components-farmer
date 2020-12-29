@@ -2,7 +2,7 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  * 
- * @version v0.5.1
+ * @version v0.5.2
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
@@ -116,7 +116,7 @@ return /******/ (function(modules) { // webpackBootstrap
 __webpack_require__.r(__webpack_exports__);
 var config = {
   canvas: {
-    styles: ['https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css'],
+    styles: ['https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css'],
     scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js']
   }
 };
@@ -3284,7 +3284,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setTimeout(function () {
       var doc = editor.Canvas.getDocument();
       var head = doc.head || doc.getElementsByTagName('head')[0];
-      var css = "\nbody {\n  padding: 10px;\n}\n\ncomp_recaptcha,\ncomp_row,\ncomp_col,\ncomp_hidden {\n  min-height: 2rem !important;\n}\n\ncomp_row {\n  display: block;\n  width: 100%;\n  margin-left: 15px;\n  margin-right: 15px;\n}\n\ncomp_col {\n  min-width: 100px;\n}\n\ncomp_hidden, comp_recaptcha, comp_stripe {\n  display: block;\n  width: 100%;\n  min-width: 100%;\n}\n";
+      var css = "\n\ncomp_recaptcha,\ncomp_row,\ncomp_col,\ncomp_hidden {\n  min-height: 2rem !important;\n}\n\ncomp_row {\n  display: block;\n  width: 100%;\n  margin-left: 15px;\n  margin-right: 15px;\n}\n\ncomp_col {\n  min-width: 100px;\n}\n\ncomp_hidden, comp_recaptcha, comp_stripe {\n  display: block;\n  width: 100%;\n  min-width: 100%;\n}\n";
       var style = doc.createElement('style');
       style.type = 'text/css';
 
@@ -3297,7 +3297,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       head.appendChild(style);
       preventInputDefaults();
-    }, 10);
+    }, 0);
   });
 }));
 
@@ -4075,7 +4075,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/techsupport/Desktop/work/niiknow/grapesjs-components-farmer/example/index.js */"./example/index.js");
+module.exports = __webpack_require__(/*! /Volumes/Extra/work/niiknow/grapesjs-components-farmer/example/index.js */"./example/index.js");
 
 
 /***/ }),
