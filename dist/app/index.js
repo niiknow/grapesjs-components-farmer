@@ -1908,12 +1908,11 @@ function _defineProperty(obj, key, value) {
         droppable: false,
         copyable: false,
         tagName: 'comp_recaptcha',
-        sitekey_attr: 'sitekey',
         traits: defaultModel.prototype.defaults.traits.concat([{
           type: 'text',
           name: 'sitekey_attr',
           label: 'Site key',
-          placeholder: 'e.g. sitekey'
+          placeholder: 'V2 checkbox key'
         }]),
         classes: ['comp_recaptcha'].concat(opts.comps.comp_recaptcha.classes)
       }),

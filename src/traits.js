@@ -502,13 +502,12 @@ export default (editor, opts = {}) => {
         droppable: false,
         copyable: false,
         tagName: 'comp_recaptcha',
-        sitekey_attr: '6LcxsBoaAAAAAOlYdPCESXQMvmXtJgNhe5-QSLCW',
         traits: defaultModel.prototype.defaults.traits.concat([
           {
             type: 'text',
             name: 'sitekey_attr',
             label: 'Site key',
-            placeholder: 'e.g. sitekey'
+            placeholder: 'V2 checkbox key'
           }
         ]),
         classes: ['comp_recaptcha'].concat(opts.comps.comp_recaptcha.classes)
