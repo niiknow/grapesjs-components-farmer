@@ -25,31 +25,14 @@ const rst = {
       enforce: 'pre',
       test: /\.(jsx,js)$/,
       exclude: /(node_modules|bower_components)/,
-      loader: 'eslint-loader',
-      options: {
-        fix: false,
-        cache: false,
-        formatter: require('eslint-friendly-formatter')
-      }
-    },
-    {
-      test: /\.(js|jsx)$/,
-      loader: 'babel-loader',
-      exclude: /(node_modules|bower_components)/,
-      query: {
-        cacheDirectory: true,
-        plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/plugin-transform-runtime', '@babel/plugin-syntax-dynamic-import'],
-        presets: ['@babel/preset-env']
-      },
+      use: 'eslint-loader'
     }, {
       test: /\.css$/,
-      use: [
-        'css-loader',
-      ],
+      use: 'css-loader',
       exclude: /(node_modules|bower_components)/
     }, {
       test: /\.(png|jpg|gif)$/,
-      loader: 'url-loader?limit=10240',
+      use: 'url-loader?limit=10240',
       exclude: /(node_modules|bower_components)/
     }]
   },
