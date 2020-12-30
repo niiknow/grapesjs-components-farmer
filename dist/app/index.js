@@ -529,7 +529,16 @@ __webpack_require__.r(__webpack_exports__);
     autorender: 1,
     allowScripts: 1,
     storageManager: {
-      type: 'none'
+      id: 'gjs-',
+      // Prefix identifier that will be used on parameters
+      type: 'local',
+      // Type of the storage
+      autosave: true,
+      // Store data automatically
+      autoload: true,
+      // Autoload stored data on init
+      stepsBeforeSave: 1 // If autosave enabled, indicates how many changes are necessary before store method is triggered
+
     },
     forceClass: 0,
     avoidInlineStyle: 1,
