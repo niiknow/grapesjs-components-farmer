@@ -502,7 +502,7 @@ export default (editor, opts = {}) => {
         droppable: false,
         copyable: false,
         tagName: 'comp_recaptcha',
-        sitekey_attr: 'sitekey',
+        sitekey_attr: '6LcxsBoaAAAAAOlYdPCESXQMvmXtJgNhe5-QSLCW',
         traits: defaultModel.prototype.defaults.traits.concat([
           {
             type: 'text',
