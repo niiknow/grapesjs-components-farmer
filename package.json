@@ -26,15 +26,17 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 8"
+    "not ie <= 11"
   ],
   "peerDependencies": {
     "grapesjs": "0.16.12",
     "jquery": ">=1.9.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
     "babel-eslint": "^10.0.3",
+    "babel-loader": "^8.2.2",
     "browser-sync": "^2.26.7",
     "browser-sync-webpack-plugin": "^2.0.1",
     "cross-env": "^7.0.3",

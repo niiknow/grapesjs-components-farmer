@@ -109,8 +109,9 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
       label: 'reCaptcha',
       classes: 'form-group',
       template: `
-        <script src="https://www.google.com/recaptcha/api.js?render=<%= it.sitekey_attr %>"></script>
-        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response" data-sitekey="<%= it.sitekey_attr || '' %>" data-action="<%= it.action_attr || '' %>" />
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+        <div class="g-recaptcha" data-sitekey="<%= it.sitekey_attr || '' %>"></div><br />
       `
     },
     'comp_stripe': {

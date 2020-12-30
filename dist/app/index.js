@@ -634,11 +634,54 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
 
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -658,7 +701,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_col1').set(_objectSpread({
     label: c.comp_col1.label,
     attributes: {
-      "class": 'gjs-fonts gjs-f-b1'
+      class: 'gjs-fonts gjs-f-b1'
     },
     content: {
       type: 'comp_row',
@@ -671,7 +714,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_col2').set(_objectSpread({
     label: c.comp_col2.label,
     attributes: {
-      "class": 'gjs-fonts gjs-f-b2'
+      class: 'gjs-fonts gjs-f-b2'
     },
     content: {
       type: 'comp_row',
@@ -687,7 +730,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_col3').set(_objectSpread({
     label: c.comp_col3.label,
     attributes: {
-      "class": 'gjs-fonts gjs-f-b3'
+      class: 'gjs-fonts gjs-f-b3'
     },
     content: {
       type: 'comp_row',
@@ -730,7 +773,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_file', _objectSpread({
     label: c.comp_file.label,
     attributes: {
-      "class": 'fa fa-file'
+      class: 'fa fa-file'
     },
     content: {
       type: 'comp_file'
@@ -739,7 +782,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_checkbox', _objectSpread({
     label: c.comp_checkbox.label,
     attributes: {
-      "class": 'fa fa-check-square'
+      class: 'fa fa-check-square'
     },
     content: {
       type: 'comp_checkbox'
@@ -754,7 +797,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_text', _objectSpread({
     label: c.comp_text.label,
     attributes: {
-      "class": 'gjs-fonts gjs-f-text'
+      class: 'gjs-fonts gjs-f-text'
     },
     content: {
       type: 'text',
@@ -768,7 +811,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_image', _objectSpread({
     label: c.comp_image.label,
     attributes: {
-      "class": 'gjs-fonts gjs-f-image'
+      class: 'gjs-fonts gjs-f-image'
     },
     content: {
       style: {
@@ -781,7 +824,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_map', _objectSpread({
     label: c.comp_map.label,
     attributes: {
-      "class": 'fa fa-map-o'
+      class: 'fa fa-map-o'
     },
     content: {
       type: 'map',
@@ -799,7 +842,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   bm.add('comp_stripe', _objectSpread({
     label: c.comp_stripe.label,
     attributes: {
-      "class": 'fa fa-cc-stripe'
+      class: 'fa fa-cc-stripe'
     },
     content: {
       type: 'comp_stripe'
@@ -844,11 +887,54 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_template__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_template__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! grapesjs */ "grapesjs");
 /* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(grapesjs__WEBPACK_IMPORTED_MODULE_2__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
 
 
 
@@ -934,7 +1020,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     'comp_recaptcha': {
       label: 'reCaptcha',
       classes: 'form-group',
-      template: "\n        <script src=\"https://www.google.com/recaptcha/api.js?render=<%= it.sitekey_attr %>\"></script>\n        <input type=\"hidden\" name=\"g-recaptcha-response\" id=\"g-recaptcha-response\" data-sitekey=\"<%= it.sitekey_attr || '' %>\" data-action=\"<%= it.action_attr || '' %>\" />\n      "
+      template: "\n        <script src=\"https://www.google.com/recaptcha/api.js\" async defer></script>\n        <input type=\"hidden\" name=\"g-recaptcha-response\" id=\"g-recaptcha-response\">\n        <div class=\"g-recaptcha\" data-sitekey=\"<%= it.sitekey_attr || '' %>\"></div><br />\n      "
     },
     'comp_stripe': {
       label: 'Payment',
@@ -1284,11 +1370,54 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "jquery");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+    if (enumerableOnly) symbols = symbols.filter(function (sym) {
+      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+    });
+    keys.push.apply(keys, symbols);
+  }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+  return keys;
+}
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
 
 
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
@@ -1771,17 +1900,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         copyable: false,
         tagName: 'comp_recaptcha',
         sitekey_attr: 'sitekey',
-        action_attr: 'submit',
         traits: defaultModel.prototype.defaults.traits.concat([{
           type: 'text',
           name: 'sitekey_attr',
           label: 'Site key',
           placeholder: 'e.g. sitekey'
-        }, {
-          type: 'text',
-          name: 'action_attr',
-          label: 'Action',
-          placeholder: 'recaptcha action name'
         }]),
         classes: ['comp_recaptcha'].concat(opts.comps.comp_recaptcha.classes)
       }),

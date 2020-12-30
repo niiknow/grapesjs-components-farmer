@@ -25,13 +25,18 @@ const config = {
       {
         enforce: 'pre',
         test: /\.(jsx,js)$/,
-        exclude: /(node_modules|bower_components)/,
+        exclude: /(node_modules|bower_components|dist)/,
         loader: 'eslint-loader',
         options: {
           fix: false,
           cache: false,
           formatter: require('eslint-friendly-formatter')
         }
+      },
+      {
+        test: /\.(js)$/,
+        exclude: /(node_modules|bower_components|dist)/,
+        use: ['babel-loader']
       }
     ]
   },

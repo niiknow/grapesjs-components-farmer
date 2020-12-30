@@ -503,19 +503,12 @@ export default (editor, opts = {}) => {
         copyable: false,
         tagName: 'comp_recaptcha',
         sitekey_attr: 'sitekey',
-        action_attr: 'submit',
         traits: defaultModel.prototype.defaults.traits.concat([
           {
             type: 'text',
             name: 'sitekey_attr',
             label: 'Site key',
             placeholder: 'e.g. sitekey'
-          },
-          {
-            type: 'text',
-            name: 'action_attr',
-            label: 'Action',
-            placeholder: 'recaptcha action name'
           }
         ]),
         classes: ['comp_recaptcha'].concat(opts.comps.comp_recaptcha.classes)
