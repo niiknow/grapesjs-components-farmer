@@ -894,6 +894,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var lodash_template__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash_template__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! grapesjs */ "grapesjs");
 /* harmony import */ var grapesjs__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(grapesjs__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.esm.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -942,6 +943,7 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
+
 
 
 
@@ -1085,6 +1087,24 @@ function _defineProperty(obj, key, value) {
       }
     });
   };
+  /** Prevent Input Default Actions **/
+
+
+  var preventInputDefaults = function preventInputDefaults() {
+    var el = editor.Canvas.getBody();
+    var win = el.ownerWindow;
+    var body = (0,cash_dom__WEBPACK_IMPORTED_MODULE_2__.default)(el);
+    body.on('click', function (e) {
+      var event = e || win.event;
+      var target = event.target || event.srcElement;
+      var tagName = (target.tagName + '').toLowerCase();
+
+      if (tagName === 'input') {
+        event.preventDefault();
+        return false;
+      }
+    });
+  };
 
   commands.add('get-usable-html', {
     run: function run() {
@@ -1129,6 +1149,7 @@ function _defineProperty(obj, key, value) {
       }
 
       head.appendChild(style);
+      preventInputDefaults();
     }, 0);
   });
 }));
@@ -1354,6 +1375,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var cash_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.esm.js");
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -1402,6 +1424,7 @@ function _defineProperty(obj, key, value) {
 
   return obj;
 }
+
 
 /* harmony default export */ __webpack_exports__["default"] = (function (editor) {
   var opts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
@@ -1601,7 +1624,7 @@ function _defineProperty(obj, key, value) {
     },
     generateHtml: function generateHtml(el, k) {
       var model = this;
-      var $el = el || model.view.el;
+      var $el = (0,cash_dom__WEBPACK_IMPORTED_MODULE_0__.default)(el || model.view.el);
       var attrs = model.getTraitValues();
       var $k = $k || model.get('tagName');
 
@@ -1610,9 +1633,9 @@ function _defineProperty(obj, key, value) {
 
         if (typeof templateFn === 'function') {
           if (!model.ensureNameAttr(attrs)) {
-            $el.innerHTML = templateFn({
+            $el.html(templateFn({
               it: attrs || {}
-            });
+            }));
           }
         }
       }

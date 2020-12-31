@@ -1,3 +1,5 @@
+import cashdom from 'cash-dom'
+
 export default (editor, opts = {}) => {
   const tm = editor.TraitManager
   const dc = editor.DomComponents
@@ -183,7 +185,7 @@ export default (editor, opts = {}) => {
     },
     generateHtml(el, k) {
       const model = this
-      const $el   = el || model.view.el
+      const $el   = cashdom(el || model.view.el)
       const attrs = model.getTraitValues()
       const $k    = $k || model.get('tagName')
 
@@ -192,7 +194,7 @@ export default (editor, opts = {}) => {
 
         if (typeof(templateFn) === 'function') {
           if (!model.ensureNameAttr(attrs)) {
-            $el.innerHTML = templateFn({ it: attrs || {} })
+            $el.html(templateFn({ it: attrs || {} }))
           }
         }
       }
