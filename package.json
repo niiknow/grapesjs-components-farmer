@@ -1,7 +1,7 @@
 {
   "name": "grapesjs-components-farmer",
   "description": "grapesjs plugin to build components for different css framework",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "author": "friends@niiknow.org",
   "license": "MIT",
   "main": "dist/index.js",
@@ -26,7 +26,7 @@
   "browserslist": [
     "> 1%",
     "last 2 versions",
-    "not ie <= 11"
+    "not ie < 11"
   ],
   "peerDependencies": {
     "grapesjs": "0.16.12",

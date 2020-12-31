@@ -12,7 +12,7 @@ class GcfClient {
     this._name = 'GcfClient'
     this.win   = opts.win || myRoot
     this.opts  = opts
-    this.dom   = this.win.jQuery
+    this.dom   = this.win.jQuery || this.win.$
     this.ajax  = this.dom.ajax
     this.doc   = this.win.document || {}
     this.errs  = []

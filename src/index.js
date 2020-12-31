@@ -1,4 +1,3 @@
-import $ from 'jquery'
 import _template from 'lodash.template'
 import grapesjs from 'grapesjs'
 
@@ -175,23 +174,6 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
     })
   }
 
-  /** Prevent Input Default Actions **/
-  const preventInputDefaults = () => {
-    const el   = editor.Canvas.getBody()
-    const win  = el.ownerWindow
-    const body = $(el)
-
-    body.click((e) => {
-      const event  = e || win.event
-      const target = event.target || event.srcElement
-      const tagName = (target.tagName + '').toLowerCase()
-      if (tagName === 'input') {
-        event.preventDefault()
-        return false
-      }
-    })
-  }
-
   commands.add('get-usable-html', {
     run() {
       // get the builder xml
@@ -267,8 +249,6 @@ comp_recaptcha {
       }
 
       head.appendChild(style)
-
-      preventInputDefaults()
     }, 0)
   })
 })

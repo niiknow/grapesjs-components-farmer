@@ -5,7 +5,7 @@ import {
   cmdClear
 } from './consts'
 
-import $ from 'jquery'
+import cashdom from 'cash-dom'
 
 export default (editor, opts) => {
   const cmds    = editor.Commands
@@ -153,7 +153,7 @@ export default (editor, opts) => {
 
   editor.on('load', () => {
     const pn       = editor.Panels
-    const editorEl = $(editor.getEl())
+    const editorEl = cashdom(editor.getEl())
 
     // Load and show settings and style manager
     const openTmBtn = pn.getButton('views', 'open-tm')
@@ -162,14 +162,14 @@ export default (editor, opts) => {
     openSm && openSm.set('active', 1)
 
     // Add Settings Sector
-    const traitsSector = $(`<div class="gjs-sm-sector no-select">
+    const traitsSector = cashdom(`<div class="gjs-sm-sector no-select">
 <div class="gjs-sm-title"><span class="icon-settings fa fa-cog"></span> Settings</div>
 <div class="gjs-sm-properties"></div></div>`)
     const traitsProps  = traitsSector.find('.gjs-sm-properties')
 
     // copy from settings tab into traits sector and then hide settings tab
     traitsProps.append(editorEl.find('.gjs-trt-traits'))
-    editorEl.find('.gjs-pn-views .fa-cog').hide()
+    editorEl.find('.gjs-pn-views .fa-cog').get(0).style.display = 'none'
     editorEl.find('.gjs-sm-sectors').before(traitsSector)
 
     traitsSector.find('.gjs-sm-title').on('click', () => {
