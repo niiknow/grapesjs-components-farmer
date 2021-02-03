@@ -2,7 +2,7 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  *
- * @version v0.6.2
+ * @version v0.6.3
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
