@@ -2,21 +2,21 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  *
- * @version v0.6.4
+ * @version v0.6.5
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("grapesjs"), require("jQuery"));
+		module.exports = factory(require("grapesjs"));
 	else if(typeof define === 'function' && define.amd)
-		define("grapesjs-components-farmer", ["grapesjs", "jQuery"], factory);
+		define("grapesjs-components-farmer", ["grapesjs"], factory);
 	else if(typeof exports === 'object')
-		exports["grapesjs-components-farmer"] = factory(require("grapesjs"), require("jQuery"));
+		exports["grapesjs-components-farmer"] = factory(require("grapesjs"));
 	else
-		root["grapesjs-components-farmer"] = factory(root["grapesjs"], root["jQuery"]);
-})(self, function(__WEBPACK_EXTERNAL_MODULE_grapesjs__, __WEBPACK_EXTERNAL_MODULE_jquery__) {
+		root["grapesjs-components-farmer"] = factory(root["grapesjs"]);
+})(self, function(__WEBPACK_EXTERNAL_MODULE_grapesjs__) {
 return /******/ (function() { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -77,7 +77,7 @@ exports["default"] = void 0;
 var config = {
   canvas: {
     styles: ['https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js']
+    scripts: []
   }
 };
 var _default = config;
@@ -364,8 +364,8 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var config = {
   canvas: {
-    styles: ['https://cdn.jsdelivr.net/npm/foundation-sites@6.6.2/dist/css/foundation.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.2/js/foundation.min.js']
+    styles: ['https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css'],
+    scripts: []
   },
   comps: {
     'comp_input': {
@@ -460,7 +460,7 @@ exports["default"] = void 0;
 var config = {
   canvas: {
     styles: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'],
-    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js']
+    scripts: []
   },
   comps: {
     'comp_input': {
@@ -557,8 +557,6 @@ exports["default"] = void 0;
 var _src = _interopRequireDefault(__webpack_require__(/*! ../src */ "./src/index.js"));
 
 var _grapesjs = _interopRequireDefault(__webpack_require__(/*! grapesjs */ "grapesjs"));
-
-var _jquery = _interopRequireDefault(__webpack_require__(/*! jquery */ "jquery"));
 
 var _customBlocks = _interopRequireDefault(__webpack_require__(/*! ./custom-blocks.js */ "./example/custom-blocks.js"));
 
@@ -9709,17 +9707,6 @@ module.exports = templateSettings;
 
 "use strict";
 module.exports = __WEBPACK_EXTERNAL_MODULE_grapesjs__;
-
-/***/ }),
-
-/***/ "jquery":
-/*!*************************!*\
-  !*** external "jQuery" ***!
-  \*************************/
-/***/ (function(module) {
-
-"use strict";
-module.exports = __WEBPACK_EXTERNAL_MODULE_jquery__;
 
 /***/ })
 

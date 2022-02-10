@@ -1,6 +1,5 @@
 import pluginFarmer from '../src'
 import grapesjs from 'grapesjs'
-import $ from 'jquery'
 import customBlocks from './custom-blocks.js'
 
 export default (opts = {}) => {
