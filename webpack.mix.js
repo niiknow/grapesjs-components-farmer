@@ -50,9 +50,6 @@ const config = {
     quiet: false
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      Promise: 'es6-promise'
-    }),
     new webpack.BannerPlugin(banner)
   ],
   devtool: 'source-map'

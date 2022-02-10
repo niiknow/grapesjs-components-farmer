@@ -1,7 +1,7 @@
 {
   "name": "grapesjs-components-farmer",
   "description": "grapesjs plugin to build components for different css framework",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "author": "friends@niiknow.org",
   "license": "MIT",
   "main": "dist/index.js",
@@ -14,14 +14,12 @@
   },
   "homepage": "https://niiknow.github.io/grapesjs-components-farmer/",
   "scripts": {
-    "client": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --config=webpack.client.js",
+    "client": "NODE_ENV=development node_modules/webpack/bin/webpack.js --config=webpack.client.js",
     "watch": "mix watch",
-    "watch-poll": "mix watch -- --watch-options-poll=1000",
     "build": "mix --production",
     "production": "mix --production",
     "lint": "eslint --ext .js,.jsx src/ example/",
-    "lint-fix": "eslint --fix --ext .js,.jsx src/ example/",
-    "check-outdated": "npm outdated"
+    "lint-fix": "eslint --fix --ext .js,.jsx src/ example/"
   },
   "browserslist": [
     "> 1%",
@@ -29,29 +27,29 @@
     "not ie < 11"
   ],
   "peerDependencies": {
-    "grapesjs": "0.16.12",
+    "grapesjs": "^0.18.2",
     "jquery": ">=1.9.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.13",
-    "@babel/preset-env": "^7.12.13",
+    "@babel/core": "^7.17.2",
+    "@babel/preset-env": "^7.16.11",
     "babel-eslint": "^10.0.3",
-    "babel-loader": "^8.2.2",
-    "browser-sync": "^2.26.14",
+    "babel-loader": "^8.2.3",
+    "browser-sync": "^2.27.7",
     "browser-sync-webpack-plugin": "^2.3.0",
-    "cross-env": "^7.0.3",
-    "css-loader": "^5.0.1",
-    "eslint": "^7.19.0",
-    "eslint-config-prettier": "^7.2.0",
+    "cash-dom": "^8.1.0",
+    "core-js": "^3.21.0",
+    "css-loader": "^6.6.0",
+    "eslint": "^8.8.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-friendly-formatter": "^4.0.1",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-vue": "^7.5.0",
-    "eslint-webpack-plugin": "^2.4.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-vue": "^8.4.1",
+    "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
-    "laravel-mix": "^6.0.11",
+    "laravel-mix": "^6.0.41",
     "lodash.template": "^4.5.0",
-    "resolve-url-loader": "^3.1.2",
-    "vue-template-compiler": "^2.6.12",
-    "webpack": "^5.20.1"
+    "resolve-url-loader": "^5.0.0",
+    "webpack": "^5.68.0"
   }
 }

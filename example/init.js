@@ -24,33 +24,13 @@ export default (opts = {}) => {
     fromElement: 1,
     canvas: opts.canvas,
     plugins: [
-      'grapesjs-components-farmer',
-      'gjs-plugin-ckeditor',
+      'grapesjs-components-farmer'
     ],
     pluginsOpts: {
       'grapesjs-components-farmer': {
         formNextId: 1,
         panel: 1,
         comps: opts.comps
-      },
-      'gjs-plugin-ckeditor': {
-        position: 'center',
-        options: {
-          startupFocus: true,
-          // Allows any class and any inline style
-          extraAllowedContent: '*(*);*{*}',
-          // Disable auto-formatting, class removing, etc.
-          allowedContent: true,
-          enterMode: CKEDITOR.ENTER_BR,
-          extraPlugins: 'sharedspace,justify,colorbutton,panelbutton,font',
-          toolbar: [
-            { name: 'styles', items: ['Font', 'FontSize' ] },
-            ['Bold', 'Italic', 'Underline', 'Strike'],
-            { name: 'paragraph', items : [ 'NumberedList', 'BulletedList'] },
-            { name: 'links', items: ['Link', 'Unlink'] },
-            { name: 'colors', items: [ 'TextColor', 'BGColor' ] }
-          ]
-        }
       }
     }
   }
