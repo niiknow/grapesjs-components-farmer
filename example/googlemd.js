@@ -1,7 +1,7 @@
 const config = {
   canvas: {
     styles: [
-      'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'
+      'https://cdn.jsdelivr.net/npm/materialize-css@1.0.0/dist/css/materialize.min.css'
     ],
     scripts: []
   },

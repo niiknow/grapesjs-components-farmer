@@ -459,7 +459,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var config = {
   canvas: {
-    styles: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'],
+    styles: ['https://cdn.jsdelivr.net/npm/materialize-css@1.0.0/dist/css/materialize.min.css'],
     scripts: []
   },
   comps: {
