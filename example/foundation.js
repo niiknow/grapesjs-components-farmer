@@ -1,7 +1,7 @@
 const config = {
   canvas: {
     styles: [
-     'https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css'
+     'https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css'
     ],
     scripts: []
   },
