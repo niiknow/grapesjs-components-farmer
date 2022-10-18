@@ -2,7 +2,7 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  *
- * @version v0.6.6
+ * @version v0.7.0
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
@@ -600,6 +600,14 @@ var _default = function _default() {
   var codeViewer = editor.CodeManager.getViewer('CodeMirror').clone();
   var pnm = editor.Panels;
   var container = document.createElement('div');
+
+  // issue with storage autoload working with custom component
+  // so we have to manually force UI to refresh
+  editor.on('storage:end:load', function (obj) {
+    setTimeout(function () {
+      editor.runCommand('get-usable-html');
+    }, 200);
+  });
   codeViewer.set({
     codeName: 'htmlmixed',
     readOnly: 0,
@@ -1386,6 +1394,7 @@ __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptor.js
 __webpack_require__(/*! core-js/modules/web.dom-collections.for-each.js */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 __webpack_require__(/*! core-js/modules/es.object.get-own-property-descriptors.js */ "./node_modules/core-js/modules/es.object.get-own-property-descriptors.js");
 __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
+__webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
 __webpack_require__(/*! core-js/modules/es.object.keys.js */ "./node_modules/core-js/modules/es.object.keys.js");
 __webpack_require__(/*! core-js/modules/es.symbol.js */ "./node_modules/core-js/modules/es.symbol.js");
 __webpack_require__(/*! core-js/modules/es.array.filter.js */ "./node_modules/core-js/modules/es.array.filter.js");
@@ -1400,6 +1409,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js"));
 __webpack_require__(/*! core-js/modules/es.array.concat.js */ "./node_modules/core-js/modules/es.array.concat.js");
+__webpack_require__(/*! core-js/modules/es.object.assign.js */ "./node_modules/core-js/modules/es.object.assign.js");
 var _cashDom = _interopRequireDefault(__webpack_require__(/*! cash-dom */ "./node_modules/cash-dom/dist/cash.js"));
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
@@ -1548,7 +1558,7 @@ var _default = function _default(editor) {
       this.target.set('option_attr', this.model.get('value'));
     }
   });
-  var myDefaultModel = defaultModel.extend({
+  var myDefaultModel = {
     defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
       draggable: true,
       droppable: true,
@@ -1628,7 +1638,13 @@ var _default = function _default(editor) {
       }
       return $el;
     }
-  });
+  };
+  function createNewDefaultObject(myTemplate) {
+    var dup = Object.assign({}, myDefaultModel);
+    var result = Object.assign(dup, myTemplate);
+    result.init = myTemplate.init;
+    return result;
+  }
 
   // override default view to generate html
   var myDefaultView = defaultView.extend({
@@ -1642,8 +1658,8 @@ var _default = function _default(editor) {
 
   // BEGIN: components
   dc.addType('comp_input', {
-    model: myDefaultModel.extend({
-      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
+    model: createNewDefaultObject({
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -1665,8 +1681,8 @@ var _default = function _default(editor) {
 
   // Select Box
   dc.addType('comp_select', {
-    model: myDefaultModel.extend({
-      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
+    model: createNewDefaultObject({
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -1700,7 +1716,7 @@ var _default = function _default(editor) {
     view: myDefaultView
   });
   dc.addType('comp_textarea', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
@@ -1746,7 +1762,7 @@ var _default = function _default(editor) {
     view: myDefaultView
   });
   dc.addType('comp_file', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
         draggable: true,
         droppable: false,
@@ -1785,8 +1801,8 @@ var _default = function _default(editor) {
     view: myDefaultView
   });
   dc.addType('comp_checkbox', {
-    model: myDefaultModel.extend({
-      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
+    model: createNewDefaultObject({
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -1810,8 +1826,8 @@ var _default = function _default(editor) {
     view: myDefaultView
   });
   dc.addType('comp_hidden', {
-    model: myDefaultModel.extend({
-      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
+    model: createNewDefaultObject({
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -1834,8 +1850,8 @@ var _default = function _default(editor) {
     view: myDefaultView
   });
   dc.addType('comp_submit', {
-    model: myDefaultModel.extend({
-      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
+    model: createNewDefaultObject({
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -1858,7 +1874,7 @@ var _default = function _default(editor) {
     view: myDefaultView
   });
   dc.addType('comp_row', {
-    model: defaultModel.extend({
+    model: {
       defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
         tagName: 'comp_row',
         // Can be dropped inside other elements
@@ -1868,11 +1884,11 @@ var _default = function _default(editor) {
         droppable: 'comp_col',
         classes: ['comp_row'].concat(opts.comps.comp_row.classes)
       })
-    }),
+    },
     view: defaultView
   });
   dc.addType('comp_col', {
-    model: defaultModel.extend({
+    model: {
       defaults: _objectSpread(_objectSpread({}, defaultModel.prototype.defaults), {}, {
         tagName: 'comp_col',
         // Can be dropped only inside `row` elements
@@ -1882,12 +1898,12 @@ var _default = function _default(editor) {
         copyable: false,
         classes: ['comp_col'].concat(opts.comps.comp_col.classes)
       })
-    }),
+    },
     view: defaultView
   });
   dc.addType('comp_recaptcha', {
-    model: myDefaultModel.extend({
-      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
+    model: createNewDefaultObject({
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -1909,8 +1925,8 @@ var _default = function _default(editor) {
     view: myDefaultView
   });
   dc.addType('comp_stripe', {
-    model: myDefaultModel.extend({
-      defaults: _objectSpread(_objectSpread({}, myDefaultModel.prototype.defaults), {}, {
+    model: createNewDefaultObject({
+      defaults: _objectSpread(_objectSpread({}, myDefaultModel.defaults), {}, {
         draggable: true,
         droppable: false,
         copyable: false,
@@ -5103,6 +5119,74 @@ module.exports = Math.trunc || function trunc(x) {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/internals/object-assign.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/core-js/internals/object-assign.js ***!
+  \*********************************************************/
+/***/ (function(module, __unused_webpack_exports, __webpack_require__) {
+
+"use strict";
+
+var DESCRIPTORS = __webpack_require__(/*! ../internals/descriptors */ "./node_modules/core-js/internals/descriptors.js");
+var uncurryThis = __webpack_require__(/*! ../internals/function-uncurry-this */ "./node_modules/core-js/internals/function-uncurry-this.js");
+var call = __webpack_require__(/*! ../internals/function-call */ "./node_modules/core-js/internals/function-call.js");
+var fails = __webpack_require__(/*! ../internals/fails */ "./node_modules/core-js/internals/fails.js");
+var objectKeys = __webpack_require__(/*! ../internals/object-keys */ "./node_modules/core-js/internals/object-keys.js");
+var getOwnPropertySymbolsModule = __webpack_require__(/*! ../internals/object-get-own-property-symbols */ "./node_modules/core-js/internals/object-get-own-property-symbols.js");
+var propertyIsEnumerableModule = __webpack_require__(/*! ../internals/object-property-is-enumerable */ "./node_modules/core-js/internals/object-property-is-enumerable.js");
+var toObject = __webpack_require__(/*! ../internals/to-object */ "./node_modules/core-js/internals/to-object.js");
+var IndexedObject = __webpack_require__(/*! ../internals/indexed-object */ "./node_modules/core-js/internals/indexed-object.js");
+
+// eslint-disable-next-line es/no-object-assign -- safe
+var $assign = Object.assign;
+// eslint-disable-next-line es/no-object-defineproperty -- required for testing
+var defineProperty = Object.defineProperty;
+var concat = uncurryThis([].concat);
+
+// `Object.assign` method
+// https://tc39.es/ecma262/#sec-object.assign
+module.exports = !$assign || fails(function () {
+  // should have correct order of operations (Edge bug)
+  if (DESCRIPTORS && $assign({ b: 1 }, $assign(defineProperty({}, 'a', {
+    enumerable: true,
+    get: function () {
+      defineProperty(this, 'b', {
+        value: 3,
+        enumerable: false
+      });
+    }
+  }), { b: 2 })).b !== 1) return true;
+  // should work with symbols and should have deterministic property order (V8 bug)
+  var A = {};
+  var B = {};
+  // eslint-disable-next-line es/no-symbol -- safe
+  var symbol = Symbol();
+  var alphabet = 'abcdefghijklmnopqrst';
+  A[symbol] = 7;
+  alphabet.split('').forEach(function (chr) { B[chr] = chr; });
+  return $assign({}, A)[symbol] != 7 || objectKeys($assign({}, B)).join('') != alphabet;
+}) ? function assign(target, source) { // eslint-disable-line no-unused-vars -- required for `.length`
+  var T = toObject(target);
+  var argumentsLength = arguments.length;
+  var index = 1;
+  var getOwnPropertySymbols = getOwnPropertySymbolsModule.f;
+  var propertyIsEnumerable = propertyIsEnumerableModule.f;
+  while (argumentsLength > index) {
+    var S = IndexedObject(arguments[index++]);
+    var keys = getOwnPropertySymbols ? concat(objectKeys(S), getOwnPropertySymbols(S)) : objectKeys(S);
+    var length = keys.length;
+    var j = 0;
+    var key;
+    while (length > j) {
+      key = keys[j++];
+      if (!DESCRIPTORS || call(propertyIsEnumerable, S, key)) T[key] = S[key];
+    }
+  } return T;
+} : $assign;
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/internals/object-create.js":
 /*!*********************************************************!*\
   !*** ./node_modules/core-js/internals/object-create.js ***!
@@ -6687,6 +6771,25 @@ if ($stringify) {
     }
   });
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/core-js/modules/es.object.assign.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/core-js/modules/es.object.assign.js ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var assign = __webpack_require__(/*! ../internals/object-assign */ "./node_modules/core-js/internals/object-assign.js");
+
+// `Object.assign` method
+// https://tc39.es/ecma262/#sec-object.assign
+// eslint-disable-next-line es/no-object-assign -- required for testing
+$({ target: 'Object', stat: true, arity: 2, forced: Object.assign !== assign }, {
+  assign: assign
+});
 
 
 /***/ }),

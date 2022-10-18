@@ -114,7 +114,7 @@ export default (editor, opts = {}) => {
     }
   })
 
-  const myDefaultModel = defaultModel.extend({
+  const myDefaultModel = {
     defaults: {
       ...defaultModel.prototype.defaults,
       draggable: true,
@@ -201,7 +201,14 @@ export default (editor, opts = {}) => {
 
       return $el
     }
-  })
+  }
+
+  function createNewDefaultObject(myTemplate) {
+    const dup = Object.assign({}, myDefaultModel);
+    const result = Object.assign(dup, myTemplate);
+    result.init = myTemplate.init;
+    return result;
+  }
 
   // override default view to generate html
   const myDefaultView = defaultView.extend({
@@ -216,9 +223,9 @@ export default (editor, opts = {}) => {
 
   // BEGIN: components
   dc.addType('comp_input', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
-        ...myDefaultModel.prototype.defaults,
+        ...myDefaultModel.defaults,
         draggable: true,
         droppable: false,
         copyable: false,
@@ -241,9 +248,9 @@ export default (editor, opts = {}) => {
 
   // Select Box
   dc.addType('comp_select', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
-        ...myDefaultModel.prototype.defaults,
+        ...myDefaultModel.defaults,
         draggable: true,
         droppable: false,
         copyable: false,
@@ -281,7 +288,7 @@ export default (editor, opts = {}) => {
   })
 
   dc.addType('comp_textarea', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
         ...defaultModel.prototype.defaults,
         draggable: true,
@@ -332,7 +339,7 @@ export default (editor, opts = {}) => {
   })
 
   dc.addType('comp_file', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
         ...defaultModel.prototype.defaults,
         draggable: true,
@@ -376,9 +383,9 @@ export default (editor, opts = {}) => {
   })
 
   dc.addType('comp_checkbox', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
-        ...myDefaultModel.prototype.defaults,
+        ...myDefaultModel.defaults,
         draggable: true,
         droppable: false,
         copyable: false,
@@ -406,9 +413,9 @@ export default (editor, opts = {}) => {
   })
 
   dc.addType('comp_hidden', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
-        ...myDefaultModel.prototype.defaults,
+        ...myDefaultModel.defaults,
         draggable: true,
         droppable: false,
         copyable: false,
@@ -433,9 +440,9 @@ export default (editor, opts = {}) => {
   })
 
   dc.addType('comp_submit', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
-        ...myDefaultModel.prototype.defaults,
+        ...myDefaultModel.defaults,
         draggable: true,
         droppable: false,
         copyable: false,
@@ -462,7 +469,7 @@ export default (editor, opts = {}) => {
   })
 
   dc.addType('comp_row', {
-    model: defaultModel.extend({
+    model: {
       defaults: {
         ...defaultModel.prototype.defaults,
         tagName: 'comp_row',
@@ -473,12 +480,12 @@ export default (editor, opts = {}) => {
         droppable: 'comp_col',
         classes: ['comp_row'].concat(opts.comps.comp_row.classes)
       }
-    }),
+    },
     view: defaultView
   })
 
   dc.addType('comp_col', {
-    model: defaultModel.extend({
+    model: {
       defaults: {
         ...defaultModel.prototype.defaults,
         tagName: 'comp_col',
@@ -489,14 +496,14 @@ export default (editor, opts = {}) => {
         copyable: false,
         classes: ['comp_col'].concat(opts.comps.comp_col.classes)
       }
-    }),
+    },
     view: defaultView
   })
 
   dc.addType('comp_recaptcha', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
-        ...myDefaultModel.prototype.defaults,
+        ...myDefaultModel.defaults,
         draggable: true,
         droppable: false,
         copyable: false,
@@ -522,9 +529,9 @@ export default (editor, opts = {}) => {
   })
 
   dc.addType('comp_stripe', {
-    model: myDefaultModel.extend({
+    model: createNewDefaultObject({
       defaults: {
-        ...myDefaultModel.prototype.defaults,
+        ...myDefaultModel.defaults,
         draggable: true,
         droppable: false,
         copyable: false,

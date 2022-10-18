@@ -44,6 +44,14 @@ export default (opts = {}) => {
   let pnm        = editor.Panels
   let container  = document.createElement('div')
 
+  // issue with storage autoload working with custom component
+  // so we have to manually force UI to refresh
+  editor.on('storage:end:load', obj => {
+    setTimeout(() => {
+      editor.runCommand('get-usable-html')
+    }, 200)
+  });
+
   codeViewer.set({
     codeName: 'htmlmixed',
     readOnly: 0,
