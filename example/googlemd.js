@@ -1,9 +1,11 @@
 const config = {
   canvas: {
     styles: [
-      'https://cdn.jsdelivr.net/npm/materialize-css@1.0.0/dist/css/materialize.min.css'
+      'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'
     ],
-    scripts: []
+    scripts: [
+      'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js'
+    ]
   },
   comps: {
     'comp_input': {
@@ -61,9 +63,9 @@ const config = {
     },
     'comp_submit': {
       label: 'Submit Button',
-      classes: 'btn waves-effect waves-light',
-      useTag: 'button',
-      template: '<%= it.label_attr %>'
+      classes: 'col s12',
+      useTag: 'div',
+      template: '<button class="btn waves-effect waves-light" style="width: 100%" type="submit" name="action"><%= it.label_attr %></button>'
     },
     'comp_row': {
       label: 'Row',

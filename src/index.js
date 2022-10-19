@@ -70,7 +70,7 @@ export default grapesjs.plugins.add('grapesjs-components-farmer', (editor, opts 
     },
     'comp_submit': {
       label: 'Submit Button',
-      classes: 'btn btn-primary btn-block',
+      classes: 'btn btn-primary w-100',
       useTag: 'button',
       template: '<%= it.label_attr %>'
     },

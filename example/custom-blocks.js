@@ -14,6 +14,7 @@ export default (editor, opts = {}) => {
         { type: 'comp_input', label_attr: 'Name', name_attr: 'name', placeholder_attr: 'Name' },
         { type: 'comp_input', label_attr: 'Email', name_attr: 'email', placeholder_attr: 'Email', type_attr: 'email' },
         { type: 'comp_textarea', name_attr: 'message', placeholder_attr: 'Message', label_attr: 'Message' },
+        { type: 'comp_hidden', name_attr: 'honeypot' },
         { type: 'comp_submit' }
       ]
     }

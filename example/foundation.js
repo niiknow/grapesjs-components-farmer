@@ -62,7 +62,7 @@ const config = {
     },
     'comp_submit': {
       label: 'Submit Button',
-      classes: 'button',
+      classes: 'button expanded',
       useTag: 'button',
       template: '<%= it.label_attr %>'
     },

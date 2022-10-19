@@ -2,7 +2,7 @@
  * grapesjs-components-farmer
  * grapesjs plugin to build components for different css framework
  *
- * @version v0.7.0
+ * @version v0.7.1
  * @author friends@niiknow.org
  * @homepage https://niiknow.github.io/grapesjs-components-farmer/
  * @repository https://github.com/niiknow/grapesjs-components-farmer.git
@@ -76,7 +76,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var config = {
   canvas: {
-    styles: ['https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'],
+    styles: ['https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css'],
     scripts: []
   }
 };
@@ -121,6 +121,9 @@ var _default = function _default(editor) {
         name_attr: 'message',
         placeholder_attr: 'Message',
         label_attr: 'Message'
+      }, {
+        type: 'comp_hidden',
+        name_attr: 'honeypot'
       }, {
         type: 'comp_submit'
       }]
@@ -362,7 +365,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var config = {
   canvas: {
-    styles: ['https://cdn.jsdelivr.net/npm/foundation-sites@6.7.4/dist/css/foundation.min.css'],
+    styles: ['https://cdn.jsdelivr.net/npm/foundation-sites@6.7.5/dist/css/foundation.min.css'],
     scripts: []
   },
   comps: {
@@ -397,7 +400,7 @@ var config = {
     },
     'comp_submit': {
       label: 'Submit Button',
-      classes: 'button',
+      classes: 'button expanded',
       useTag: 'button',
       template: '<%= it.label_attr %>'
     },
@@ -457,8 +460,8 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var config = {
   canvas: {
-    styles: ['https://cdn.jsdelivr.net/npm/materialize-css@1.0.0/dist/css/materialize.min.css'],
-    scripts: []
+    styles: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css'],
+    scripts: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js']
   },
   comps: {
     'comp_input': {
@@ -492,9 +495,9 @@ var config = {
     },
     'comp_submit': {
       label: 'Submit Button',
-      classes: 'btn waves-effect waves-light',
-      useTag: 'button',
-      template: '<%= it.label_attr %>'
+      classes: 'col s12',
+      useTag: 'div',
+      template: '<button class="btn waves-effect waves-light" style="width: 100%" type="submit" name="action"><%= it.label_attr %></button>'
     },
     'comp_row': {
       label: 'Row',
@@ -1000,7 +1003,7 @@ var _default = _grapesjs.default.plugins.add('grapesjs-components-farmer', funct
     },
     'comp_submit': {
       label: 'Submit Button',
-      classes: 'btn btn-primary btn-block',
+      classes: 'btn btn-primary w-100',
       useTag: 'button',
       template: '<%= it.label_attr %>'
     },
